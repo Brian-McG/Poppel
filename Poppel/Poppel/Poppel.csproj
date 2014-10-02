@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\PoppelDatabase.cs" />
+    <Compile Include="Email\EmailController.cs" />
     <Compile Include="PresentationLayer\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
