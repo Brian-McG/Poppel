@@ -46,12 +46,19 @@
   <ItemGroup>
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\PoppelDatabase.cs" />
+    <Compile Include="Domain\Person.cs" />
     <Compile Include="Email\EmailController.cs" />
     <Compile Include="PresentationLayer\CreateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\CreateCustomer.Designer.cs">
       <DependentUpon>CreateCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\CustomerManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\CustomerManagement.Designer.cs">
+      <DependentUpon>CustomerManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Login.cs">
       <SubType>Form</SubType>
@@ -69,6 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PresentationLayer\CreateCustomer.resx">
       <DependentUpon>CreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\CustomerManagement.resx">
+      <DependentUpon>CustomerManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
