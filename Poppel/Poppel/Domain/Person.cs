@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Brian Mc George
+//MCGBRI004
+//03-10-2014
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace Poppel.Domain
 {
-    abstract class Person
+    public abstract class Person
     {
         private string name;
         private string surname;
         private string id;
-        private string cellNumber;
+        private string phoneNumber;
+        private string email;
         private string[] address;
 
         #region Properties
@@ -48,15 +53,26 @@ namespace Poppel.Domain
                 id = value;
             }
         }
-        public string CellNumber
+        public string PhoneNumber
         {
             get
             {
-                return cellNumber;
+                return phoneNumber;
             }
             set
             {
-                cellNumber = value;
+                phoneNumber = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
             }
         }
         public string[] Address
@@ -89,6 +105,23 @@ namespace Poppel.Domain
                 tempAddress += address[i];
             }
             return tempAddress;
+        }
+
+        public static string phoneNumberFormatter(string number)
+        {
+            if (number == null || number.Length != 10)
+            {
+                return null;
+            }
+            return "("+number.Substring(0,3)+") "+number.Substring(3,3)+"-"+number.Substring(6);
+        }
+        public static string unFormatPhoneNumber(string number)
+        {
+            if(number==null || number.Length!=14)
+            {
+                return null;
+            }
+            return number.Substring(1, 3) + number.Substring(6, 3) + number.Substring(10, 4);
         }
 
         /// <summary>

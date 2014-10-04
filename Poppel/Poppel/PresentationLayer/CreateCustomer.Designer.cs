@@ -59,9 +59,14 @@
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.createCustomerButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.creditLimit = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.addressGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sloganLabel
@@ -107,7 +112,7 @@
             this.addressGroupBox.Controls.Add(this.suburbLabel);
             this.addressGroupBox.Controls.Add(this.streetAddressLabel);
             this.addressGroupBox.Controls.Add(this.streetAddressTextBox);
-            this.addressGroupBox.Location = new System.Drawing.Point(12, 304);
+            this.addressGroupBox.Location = new System.Drawing.Point(12, 250);
             this.addressGroupBox.Name = "addressGroupBox";
             this.addressGroupBox.Size = new System.Drawing.Size(674, 142);
             this.addressGroupBox.TabIndex = 25;
@@ -237,7 +242,7 @@
             this.personalDetailsGroupBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.personalDetailsGroupBox.Location = new System.Drawing.Point(12, 115);
             this.personalDetailsGroupBox.Name = "personalDetailsGroupBox";
-            this.personalDetailsGroupBox.Size = new System.Drawing.Size(674, 183);
+            this.personalDetailsGroupBox.Size = new System.Drawing.Size(674, 129);
             this.personalDetailsGroupBox.TabIndex = 26;
             this.personalDetailsGroupBox.TabStop = false;
             this.personalDetailsGroupBox.Text = "Personal Details";
@@ -364,11 +369,51 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(26, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Credit Limit:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(209, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "<Error Label>";
+            this.label5.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.creditLimit);
+            this.groupBox1.Location = new System.Drawing.Point(12, 398);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(674, 74);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Credit";
+            // 
+            // creditLimit
+            // 
+            this.creditLimit.Location = new System.Drawing.Point(93, 24);
+            this.creditLimit.Name = "creditLimit";
+            this.creditLimit.Size = new System.Drawing.Size(110, 20);
+            this.creditLimit.TabIndex = 25;
+            this.creditLimit.Text = "1500";
+            // 
             // CreateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 588);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.createCustomerButton);
             this.Controls.Add(this.personalDetailsGroupBox);
@@ -384,6 +429,8 @@
             this.addressGroupBox.PerformLayout();
             this.personalDetailsGroupBox.ResumeLayout(false);
             this.personalDetailsGroupBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,5 +469,9 @@
         private System.Windows.Forms.Label streetErrorMessageLabel;
         private System.Windows.Forms.Label emailErrorMessageLabel;
         private System.Windows.Forms.Label phoneNumberErrorMessageLabel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox creditLimit;
     }
 }

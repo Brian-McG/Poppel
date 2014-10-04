@@ -20,8 +20,8 @@ namespace Poppel.Database
     public class Database
     {
         //UPDATE THIS
-      //  private string strConn = Settings.Default.EmployeesConnectionString;
-        private string strConn = "";
+        private string strConn = Settings.Default.PoppelDatabaseConnectionString;
+        //private string strConn = "";
         protected SqlConnection cnMain;
 
         //  protected string aSQLstring;

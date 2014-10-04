@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Brian Mc George
+//MCGBRI004
+//04-10-2014
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,12 +12,112 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
+using Poppel.Domain;
 
 
 namespace Poppel.Database
 {
-    public class EmployeeDB : Database
+    public class PoppelDatabase : Database
     {
+        /// <summary>
+        /// Reads customers from database with argument telephone number.
+        /// </summary>
+        /// <param name="telephoneNumber">telephone number to check against</param>
+        /// <returns>collection of customers with specified telephone number</returns>
+         public Collection<Customer> readCustomersByTelephoneNumber(string telephoneNumber)
+        {
+             Collection<Customer> customers = new Collection<Customer>();
+             SqlDataReader reader;
+             SqlCommand command;
+             try
+             {
+                 command = new SqlCommand("SELECT * FROM Customers WHERE customer_telephoneNumber = "+telephoneNumber, cnMain);
+                 cnMain.Open();             //open the connection
+                 command.CommandType = CommandType.Text;
+                 reader = command.ExecuteReader();                        //Read from table
+                 if (reader.HasRows)
+                 {
+                     while (reader.Read())
+                     {
+                         customers.Add(createCustomer(reader));             //add to the collection
+                     }
+                 }
+                 reader.Close();   //close the reader 
+                 cnMain.Close();  //close the connection
+                 return customers;
+             }
+             catch (Exception ex)
+             {
+                 //ADD EVENT IF EXCEPTION OCCURS?
+                 cnMain.Close();
+                 Console.Write(ex.ToString());
+                 return null;
+             }
+        }
+
+         /// <summary>
+         /// Reads customers from database with argument customer number.
+         /// </summary>
+         /// <param name="id">customer number to check against.</param>
+         /// <returns>Customer with specified customer number.</returns>
+         public Customer readCustomersByCustomerNumber(string id)
+         {
+             SqlDataReader reader;
+             SqlCommand command;
+             try
+             {
+                 Customer customer=null;
+                 command = new SqlCommand("SELECT * FROM Customer WHERE customer_id = '"+id+"'", cnMain);
+                 cnMain.Open();             //open the connection
+                 command.CommandType = CommandType.Text;
+                 reader = command.ExecuteReader();                        //Read from table
+                 if (reader.HasRows)
+                 {
+                     if(reader.Read())
+            {
+                        customer = createCustomer(reader);             
+                     }
+                     }
+                 reader.Close();   //close the reader 
+                 cnMain.Close();  //close the connection
+                 return customer;
+             }
+             catch (Exception ex)
+             {
+                 //ADD EVENT IF EXCEPTION OCCURS?
+                 cnMain.Close();
+                 Console.Write(ex.ToString());
+                 return null;
+             }
+         }
+
+
+         /// <summary>
+         /// Create customer from argument reader.
+         /// </summary>
+         /// <param name="reader">reads data from database</param>
+        private Customer createCustomer(SqlDataReader reader)
+         {
+            
+                Customer customer = new Customer();
+                customer.Id = reader.GetString(0).Trim();
+                customer.Name = reader.GetString(1).Trim();
+                customer.Surname = reader.GetString(2).Trim();
+                customer.PhoneNumber = reader.GetString(3).Trim();
+                customer.Email = reader.GetString(4).Trim();
+                customer.Credit = reader.GetDecimal(5);
+                customer.CreditLimit = reader.GetDecimal(6);
+                string[] address = new string[4];
+                address[0] = reader.GetString(7).Trim();
+                address[1] = reader.GetString(8).Trim();
+                address[2] = reader.GetString(9).Trim();
+                address[3] = reader.GetString(10).Trim();
+                customer.Address = address;
+                return customer;
+            
+             
+         }
+
 
         /*
         //Constructors
