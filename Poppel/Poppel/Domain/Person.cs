@@ -12,12 +12,18 @@ namespace Poppel.Domain
 {
     public abstract class Person
     {
+        public static readonly int ADDRESS_LENGTH = 5;
         private string name;
         private string surname;
         private string id;
         private string phoneNumber;
         private string email;
         private string[] address;
+
+        public Person()
+        {
+            address = new string[5];
+        }
 
         #region Properties
         public string Name

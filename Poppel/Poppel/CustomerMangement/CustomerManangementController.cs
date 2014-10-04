@@ -25,7 +25,9 @@ namespace Poppel.CustomerMangement
 
         public void editCustomer(Customer customer)
         {
-
+            database.editCustomer(customer);
         }
+
+
     }
 }
