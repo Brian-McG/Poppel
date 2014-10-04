@@ -69,6 +69,9 @@
             this.townErrorMessageLabel = new System.Windows.Forms.Label();
             this.zipCodeErrorMessageLabel = new System.Windows.Forms.Label();
             this.addressGroupBox = new System.Windows.Forms.GroupBox();
+            this.cityErrorMessageLabel = new System.Windows.Forms.Label();
+            this.cityTextBox = new System.Windows.Forms.TextBox();
+            this.cityLabel = new System.Windows.Forms.Label();
             this.customersGroupBox = new System.Windows.Forms.GroupBox();
             this.customerListView = new System.Windows.Forms.ListView();
             this.creditGroupBox = new System.Windows.Forms.GroupBox();
@@ -78,9 +81,7 @@
             this.currentCreditTextBox = new System.Windows.Forms.TextBox();
             this.currentCreditLabel = new System.Windows.Forms.Label();
             this.editErrorLabel = new System.Windows.Forms.Label();
-            this.cityErrorMessageLabel = new System.Windows.Forms.Label();
-            this.cityTextBox = new System.Windows.Forms.TextBox();
-            this.cityLabel = new System.Windows.Forms.Label();
+            this.customerClickInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.customerInputGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
@@ -150,9 +151,9 @@
             this.formatLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.formatLabel.Location = new System.Drawing.Point(326, 71);
             this.formatLabel.Name = "formatLabel";
-            this.formatLabel.Size = new System.Drawing.Size(189, 13);
+            this.formatLabel.Size = new System.Drawing.Size(172, 13);
             this.formatLabel.TabIndex = 22;
-            this.formatLabel.Text = "Example Customer Code: XYZRTZ001";
+            this.formatLabel.Text = "Example Customer Code: xyzrtz001";
             // 
             // inputTextBox
             // 
@@ -161,6 +162,7 @@
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.Size = new System.Drawing.Size(227, 20);
             this.inputTextBox.TabIndex = 2;
+            this.inputTextBox.Leave += new System.EventHandler(this.inputTextBox_Leave);
             // 
             // userNotFoundErrorLabel
             // 
@@ -530,13 +532,42 @@
             this.addressGroupBox.Text = "Address";
             this.addressGroupBox.Visible = false;
             // 
+            // cityErrorMessageLabel
+            // 
+            this.cityErrorMessageLabel.AutoSize = true;
+            this.cityErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.cityErrorMessageLabel.Location = new System.Drawing.Point(466, 104);
+            this.cityErrorMessageLabel.Name = "cityErrorMessageLabel";
+            this.cityErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
+            this.cityErrorMessageLabel.TabIndex = 38;
+            this.cityErrorMessageLabel.Text = "<Error Label>";
+            this.cityErrorMessageLabel.Visible = false;
+            // 
+            // cityTextBox
+            // 
+            this.cityTextBox.Location = new System.Drawing.Point(119, 101);
+            this.cityTextBox.Name = "cityTextBox";
+            this.cityTextBox.ReadOnly = true;
+            this.cityTextBox.Size = new System.Drawing.Size(341, 20);
+            this.cityTextBox.TabIndex = 37;
+            // 
+            // cityLabel
+            // 
+            this.cityLabel.AutoSize = true;
+            this.cityLabel.Location = new System.Drawing.Point(80, 104);
+            this.cityLabel.Name = "cityLabel";
+            this.cityLabel.Size = new System.Drawing.Size(27, 13);
+            this.cityLabel.TabIndex = 36;
+            this.cityLabel.Text = "City:";
+            // 
             // customersGroupBox
             // 
+            this.customersGroupBox.Controls.Add(this.customerClickInfoLabel);
             this.customersGroupBox.Controls.Add(this.customerListView);
             this.customersGroupBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customersGroupBox.Location = new System.Drawing.Point(11, 251);
             this.customersGroupBox.Name = "customersGroupBox";
-            this.customersGroupBox.Size = new System.Drawing.Size(674, 268);
+            this.customersGroupBox.Size = new System.Drawing.Size(674, 372);
             this.customersGroupBox.TabIndex = 3;
             this.customersGroupBox.TabStop = false;
             this.customersGroupBox.Text = "Customers";
@@ -544,11 +575,12 @@
             // 
             // customerListView
             // 
-            this.customerListView.Location = new System.Drawing.Point(7, 19);
+            this.customerListView.Location = new System.Drawing.Point(6, 32);
             this.customerListView.Name = "customerListView";
-            this.customerListView.Size = new System.Drawing.Size(661, 243);
+            this.customerListView.Size = new System.Drawing.Size(661, 334);
             this.customerListView.TabIndex = 0;
             this.customerListView.UseCompatibleStateImageBehavior = false;
+            this.customerListView.DoubleClick += new System.EventHandler(this.customerListView_DoubleClick);
             // 
             // creditGroupBox
             // 
@@ -625,33 +657,14 @@
             this.editErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.editErrorLabel.Visible = false;
             // 
-            // cityErrorMessageLabel
+            // customerClickInfoLabel
             // 
-            this.cityErrorMessageLabel.AutoSize = true;
-            this.cityErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
-            this.cityErrorMessageLabel.Location = new System.Drawing.Point(466, 104);
-            this.cityErrorMessageLabel.Name = "cityErrorMessageLabel";
-            this.cityErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
-            this.cityErrorMessageLabel.TabIndex = 38;
-            this.cityErrorMessageLabel.Text = "<Error Label>";
-            this.cityErrorMessageLabel.Visible = false;
-            // 
-            // cityTextBox
-            // 
-            this.cityTextBox.Location = new System.Drawing.Point(119, 101);
-            this.cityTextBox.Name = "cityTextBox";
-            this.cityTextBox.ReadOnly = true;
-            this.cityTextBox.Size = new System.Drawing.Size(341, 20);
-            this.cityTextBox.TabIndex = 37;
-            // 
-            // cityLabel
-            // 
-            this.cityLabel.AutoSize = true;
-            this.cityLabel.Location = new System.Drawing.Point(80, 104);
-            this.cityLabel.Name = "cityLabel";
-            this.cityLabel.Size = new System.Drawing.Size(27, 13);
-            this.cityLabel.TabIndex = 36;
-            this.cityLabel.Text = "City:";
+            this.customerClickInfoLabel.AutoSize = true;
+            this.customerClickInfoLabel.Location = new System.Drawing.Point(7, 16);
+            this.customerClickInfoLabel.Name = "customerClickInfoLabel";
+            this.customerClickInfoLabel.Size = new System.Drawing.Size(360, 13);
+            this.customerClickInfoLabel.TabIndex = 1;
+            this.customerClickInfoLabel.Text = "Double click on customer code to get detailed information on the customer.";
             // 
             // CustomerManagement
             // 
@@ -659,18 +672,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(697, 678);
             this.Controls.Add(this.editErrorLabel);
-            this.Controls.Add(this.addressGroupBox);
             this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.placeOrderButton);
-            this.Controls.Add(this.personalDetailsGroupBox);
             this.Controls.Add(this.editCustomerButton);
-            this.Controls.Add(this.creditGroupBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.customerInputGroupBox);
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.logoPictureBox);
             this.Controls.Add(this.customersGroupBox);
+            this.Controls.Add(this.personalDetailsGroupBox);
+            this.Controls.Add(this.creditGroupBox);
+            this.Controls.Add(this.addressGroupBox);
             this.Name = "CustomerManagement";
             this.Text = "Customer Hub";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
@@ -681,6 +694,7 @@
             this.addressGroupBox.ResumeLayout(false);
             this.addressGroupBox.PerformLayout();
             this.customersGroupBox.ResumeLayout(false);
+            this.customersGroupBox.PerformLayout();
             this.creditGroupBox.ResumeLayout(false);
             this.creditGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -743,5 +757,6 @@
         private System.Windows.Forms.Label cityErrorMessageLabel;
         private System.Windows.Forms.TextBox cityTextBox;
         private System.Windows.Forms.Label cityLabel;
+        private System.Windows.Forms.Label customerClickInfoLabel;
     }
 }

@@ -31,7 +31,7 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                command = new SqlCommand("SELECT * FROM Customers WHERE customer_telephoneNumber = " + telephoneNumber, cnMain);
+                command = new SqlCommand("SELECT * FROM Customer WHERE customer_telephoneNumber = " + telephoneNumber, cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table

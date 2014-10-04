@@ -105,10 +105,11 @@ namespace Poppel.Domain
             {
                 return null;
             }
-            string tempAddress = "";
-            for (int i = 0; i < address.Length; i++)
+            string tempAddress = address[0];
+
+            for (int i = 1; i < address.Length-1; i++)
             {
-                tempAddress += address[i];
+                tempAddress += ", "+address[i];
             }
             return tempAddress;
         }

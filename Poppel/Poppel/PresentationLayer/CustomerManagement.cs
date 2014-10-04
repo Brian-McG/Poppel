@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -20,6 +21,8 @@ namespace Poppel.PresentationLayer
     {
         private CustomerManangementController customerManagementController;
         private editCustomer editButtonState;
+        private radioButtonSelected radioButtonState;
+        private Collection<Customer> customerList;
 
         public enum radioButtonSelected
         {
@@ -39,6 +42,7 @@ namespace Poppel.PresentationLayer
             customerManagementController = new CustomerManangementController();
             inputTextBox.Select();
             editButtonState = editCustomer.editCustomer;
+            radioButtonState = radioButtonSelected.customerNumber;
 
         }
         #endregion
@@ -46,47 +50,31 @@ namespace Poppel.PresentationLayer
         #region ButtonClickEvents
         private void searchButton_Click(object sender, EventArgs e)
         {
-            userNotFoundErrorLabel.Visible = false;
             setLabelVisibility(false);
-            setButtonState(editCustomer.editCustomer);
-            if (customerNumberRadioButton.Checked)
+            if (!userNotFoundErrorLabel.Visible)
             {
-                Customer searchCustomer = customerManagementController.searchCustomerByCustomerNumber(inputTextBox.Text.ToLower());
-                if (searchCustomer == null)
-                {
-                    userNotFoundErrorLabel.Text = "The customer entered does not exist.";
-                    userNotFoundErrorLabel.Visible = true;
-                    editCustomerButton.Enabled = false;
 
-                    creditGroupBox.Visible = false;
-                    personalDetailsGroupBox.Visible = false;
-                    addressGroupBox.Visible = false;
+                setButtonState(editCustomer.editCustomer);
+                if (customerNumberRadioButton.Checked)
+                {
+                    Customer searchCustomer = customerManagementController.searchCustomerByCustomerNumber(inputTextBox.Text.ToLower());
+                    setCustomerDetails(searchCustomer);
                 }
                 else
                 {
-                    firstNameTestBox.Text = searchCustomer.Name;
-                    lastNameTextBox.Text = searchCustomer.Surname;
-                    phoneNumberMaskBox.Text = searchCustomer.PhoneNumber;
-                    emailAddressTextBox.Text = searchCustomer.Email;
-                    streetAddressTextBox.Text = searchCustomer.Address[0];
-                    suburbTextBox.Text = searchCustomer.Address[1];
-                    townTextBox.Text = searchCustomer.Address[2];
-                    cityTextBox.Text = searchCustomer.Address[3];
-                    zipCodeTextBox.Text = searchCustomer.Address[4];
-                    currentCreditTextBox.Text = string.Format("{0:0.00}", searchCustomer.Credit);
-                    creditLimitTextBox.Text = string.Format("{0:0.00}", searchCustomer.CreditLimit);
+                    customerList = customerManagementController.searchCustomerByPhoneNumber(inputTextBox.Text);
+                    if (customerList != null)
+                    {
+                        customerListView.View = View.Details;
+                        setUpEmployeeListView(customerList);
+                        customerListView.Focus();
+                    }
 
-                    creditGroupBox.Visible = true;
-                    personalDetailsGroupBox.Visible = true;
-                    addressGroupBox.Visible = true;
-                    editCustomerButton.Enabled = true;
                 }
             }
-            else
-            {
-                customerManagementController.searchCustomerByPhoneNumber(inputTextBox.Text);
-            }
+
         }
+
 
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
@@ -125,7 +113,78 @@ namespace Poppel.PresentationLayer
         }
         #endregion
 
+        #region ListView
+        public void setUpEmployeeListView(Collection<Customer> customerCollection)
+        {
+
+            ListViewItem customerDetails;
+
+            //Clear current List View Control
+            customerListView.Clear();
+
+            //Set Up Columns of List View
+            customerListView.Columns.Insert(0, "Customer Code", 85, HorizontalAlignment.Left);
+            customerListView.Columns.Insert(1, "Name", 115, HorizontalAlignment.Left);
+            customerListView.Columns.Insert(2, "Phone Number", 85, HorizontalAlignment.Left);
+            customerListView.Columns.Insert(3, "Email", 130, HorizontalAlignment.Left);
+            customerListView.Columns.Insert(4, "Address", 300, HorizontalAlignment.Left);
+
+
+            //Add employee details to each ListView item 
+
+            foreach (Customer customer in customerCollection)
+            {
+                customerDetails = new ListViewItem();
+                customerDetails.Text = customer.Id;
+                customerDetails.SubItems.Add(customer.nameSurnameToString());
+                customerDetails.SubItems.Add(Person.phoneNumberFormatter(customer.PhoneNumber));
+                customerDetails.SubItems.Add(customer.Email);
+                customerDetails.SubItems.Add(customer.addressToString());
+                customerListView.Items.Add(customerDetails);
+            }
+
+            customersGroupBox.Visible = true;
+            customerListView.Refresh();
+            customerListView.GridLines = true;
+
+        }
+        #endregion
+
         #region Utility
+        private void setCustomerDetails(Customer searchCustomer)
+        {
+            if (searchCustomer == null)
+            {
+                userNotFoundErrorLabel.Text = "The customer entered does not exist.";
+                userNotFoundErrorLabel.Visible = true;
+                editCustomerButton.Enabled = false;
+
+                creditGroupBox.Visible = false;
+                personalDetailsGroupBox.Visible = false;
+                addressGroupBox.Visible = false;
+            }
+            else
+            {
+                userNotFoundErrorLabel.Visible = false;
+                firstNameTestBox.Text = searchCustomer.Name;
+                lastNameTextBox.Text = searchCustomer.Surname;
+                phoneNumberMaskBox.Text = searchCustomer.PhoneNumber;
+                emailAddressTextBox.Text = searchCustomer.Email;
+                streetAddressTextBox.Text = searchCustomer.Address[0];
+                suburbTextBox.Text = searchCustomer.Address[1];
+                townTextBox.Text = searchCustomer.Address[2];
+                cityTextBox.Text = searchCustomer.Address[3];
+                zipCodeTextBox.Text = searchCustomer.Address[4];
+                currentCreditTextBox.Text = string.Format("{0:0.00}", searchCustomer.Credit);
+                creditLimitTextBox.Text = string.Format("{0:0.00}", searchCustomer.CreditLimit);
+
+                creditGroupBox.Visible = true;
+                personalDetailsGroupBox.Visible = true;
+                addressGroupBox.Visible = true;
+                editCustomerButton.Enabled = true;
+            }
+        }
+
         private bool createCustomer(Customer customer)
         {
             Boolean correct = true;
@@ -141,7 +200,7 @@ namespace Poppel.PresentationLayer
                 editErrorLabel.Text = "An error occured converting credit.";
                 editErrorLabel.Visible = true;
                 correct = false;
-                
+
             }
             else
             {
@@ -231,9 +290,13 @@ namespace Poppel.PresentationLayer
         {
             if (customerNumberRadioButton.Checked)
             {
+                userNotFoundErrorLabel.Visible = false;
                 inputTextBox.Text = null;
+
                 formatLabel.Text = "Example Customer Code: XYZRTZ001";
                 inputTextBox.Mask = "LLLLLL000";
+                inputTextBox.Select();
+                radioButtonState = radioButtonSelected.customerNumber;
             }
         }
 
@@ -241,9 +304,13 @@ namespace Poppel.PresentationLayer
         {
             if (telephoneRadioButton.Checked)
             {
+                userNotFoundErrorLabel.Visible = false;
                 inputTextBox.Text = null;
+
                 formatLabel.Text = "Example Telephone number: (021) 555-5555";
                 inputTextBox.Mask = "(999) 000-0000";
+                inputTextBox.Select();
+                radioButtonState = radioButtonSelected.phoneNumber;
             }
         }
         #endregion
@@ -520,6 +587,42 @@ namespace Poppel.PresentationLayer
 
 
         #endregion
+
+        private void inputTextBox_Leave(object sender, EventArgs e)
+        {
+            userNotFoundErrorLabel.Visible = false;
+            if (radioButtonState == radioButtonSelected.customerNumber)
+            {
+                if (inputTextBox.Text.Length != 9)
+                {
+                    userNotFoundErrorLabel.Text = "Customer code must contain 9 characters.";
+                    userNotFoundErrorLabel.Visible = true;
+                }
+            }
+            else if (radioButtonState == radioButtonSelected.phoneNumber)
+            {
+                if (Person.unFormatPhoneNumber(inputTextBox.Text) == null)
+                {
+                    userNotFoundErrorLabel.Text = "Phone number must contain 10 digits.";
+                    userNotFoundErrorLabel.Visible = true;
+                }
+            }
+        }
+
+        private void customerListView_DoubleClick(object sender, EventArgs e)
+        {
+            if (customerListView.SelectedItems.Count != 0)
+            {
+                customersGroupBox.Visible = false;
+                Customer temp = customerList[customerListView.FocusedItem.Index];
+                setCustomerDetails(temp);
+                telephoneRadioButton.Checked = false;
+                customerNumberRadioButton.Checked = true;
+                inputTextBox.Text = temp.Id;
+
+            }
+
+        }
 
 
 
