@@ -59,15 +59,5 @@ namespace Poppel.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap coke6Pack {
-            get {
-                object obj = ResourceManager.GetObject("coke6Pack", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

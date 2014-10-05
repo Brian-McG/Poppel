@@ -633,6 +633,7 @@ namespace Poppel.PresentationLayer
             if (customerListView.SelectedItems.Count != 0)
             {
                 customersGroupBox.Visible = false;
+
                 Customer temp = customerList[customerListView.FocusedItem.Index];
                 setCustomerDetails(temp);
                 telephoneRadioButton.Checked = false;

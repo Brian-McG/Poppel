@@ -42,6 +42,10 @@
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.removeFromOrderButton = new System.Windows.Forms.Button();
             this.removeFiltersButton = new System.Windows.Forms.Button();
+            this.totalCostLabel = new System.Windows.Forms.Label();
+            this.creditRemainingLabel = new System.Windows.Forms.Label();
+            this.totalCostTextBox = new System.Windows.Forms.TextBox();
+            this.creditRemainingTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +118,7 @@
             // 
             this.basketLabel.AutoSize = true;
             this.basketLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.basketLabel.Location = new System.Drawing.Point(752, 349);
+            this.basketLabel.Location = new System.Drawing.Point(748, 333);
             this.basketLabel.Name = "basketLabel";
             this.basketLabel.Size = new System.Drawing.Size(61, 20);
             this.basketLabel.TabIndex = 19;
@@ -122,11 +126,15 @@
             // 
             // basketListView
             // 
-            this.basketListView.Location = new System.Drawing.Point(672, 410);
+            this.basketListView.Location = new System.Drawing.Point(672, 470);
+            this.basketListView.MultiSelect = false;
             this.basketListView.Name = "basketListView";
-            this.basketListView.Size = new System.Drawing.Size(228, 484);
+            this.basketListView.Size = new System.Drawing.Size(228, 424);
             this.basketListView.TabIndex = 21;
             this.basketListView.UseCompatibleStateImageBehavior = false;
+            this.basketListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.basketListView_ItemSelectionChanged);
+            this.basketListView.Click += new System.EventHandler(this.basketListView_Click);
+            this.basketListView.Leave += new System.EventHandler(this.basketListView_Leave);
             // 
             // categoryLabel
             // 
@@ -159,12 +167,13 @@
             // removeFromOrderButton
             // 
             this.removeFromOrderButton.Enabled = false;
-            this.removeFromOrderButton.Location = new System.Drawing.Point(723, 381);
+            this.removeFromOrderButton.Location = new System.Drawing.Point(722, 441);
             this.removeFromOrderButton.Name = "removeFromOrderButton";
             this.removeFromOrderButton.Size = new System.Drawing.Size(123, 23);
             this.removeFromOrderButton.TabIndex = 25;
             this.removeFromOrderButton.Text = "Remove from order";
             this.removeFromOrderButton.UseVisualStyleBackColor = true;
+            this.removeFromOrderButton.Click += new System.EventHandler(this.removeFromOrderButton_Click);
             // 
             // removeFiltersButton
             // 
@@ -174,6 +183,42 @@
             this.removeFiltersButton.TabIndex = 26;
             this.removeFiltersButton.Text = "Remove Filters";
             this.removeFiltersButton.UseVisualStyleBackColor = true;
+            this.removeFiltersButton.Click += new System.EventHandler(this.removeFiltersButton_Click);
+            // 
+            // totalCostLabel
+            // 
+            this.totalCostLabel.AutoSize = true;
+            this.totalCostLabel.Location = new System.Drawing.Point(704, 370);
+            this.totalCostLabel.Name = "totalCostLabel";
+            this.totalCostLabel.Size = new System.Drawing.Size(58, 13);
+            this.totalCostLabel.TabIndex = 27;
+            this.totalCostLabel.Text = "Total Cost:";
+            // 
+            // creditRemainingLabel
+            // 
+            this.creditRemainingLabel.AutoSize = true;
+            this.creditRemainingLabel.Location = new System.Drawing.Point(672, 395);
+            this.creditRemainingLabel.Name = "creditRemainingLabel";
+            this.creditRemainingLabel.Size = new System.Drawing.Size(90, 13);
+            this.creditRemainingLabel.TabIndex = 28;
+            this.creditRemainingLabel.Text = "Credit Remaining:";
+            // 
+            // totalCostTextBox
+            // 
+            this.totalCostTextBox.Location = new System.Drawing.Point(765, 367);
+            this.totalCostTextBox.Name = "totalCostTextBox";
+            this.totalCostTextBox.ReadOnly = true;
+            this.totalCostTextBox.Size = new System.Drawing.Size(134, 20);
+            this.totalCostTextBox.TabIndex = 29;
+            this.totalCostTextBox.Text = "R 0.00";
+            // 
+            // creditRemainingTextBox
+            // 
+            this.creditRemainingTextBox.Location = new System.Drawing.Point(765, 395);
+            this.creditRemainingTextBox.Name = "creditRemainingTextBox";
+            this.creditRemainingTextBox.ReadOnly = true;
+            this.creditRemainingTextBox.Size = new System.Drawing.Size(134, 20);
+            this.creditRemainingTextBox.TabIndex = 30;
             // 
             // CreateOrder
             // 
@@ -181,6 +226,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(911, 906);
+            this.Controls.Add(this.creditRemainingTextBox);
+            this.Controls.Add(this.totalCostTextBox);
+            this.Controls.Add(this.creditRemainingLabel);
+            this.Controls.Add(this.totalCostLabel);
             this.Controls.Add(this.removeFiltersButton);
             this.Controls.Add(this.removeFromOrderButton);
             this.Controls.Add(this.categoryComboBox);
@@ -219,5 +268,9 @@
         private System.Windows.Forms.ComboBox categoryComboBox;
         private System.Windows.Forms.Button removeFromOrderButton;
         private System.Windows.Forms.Button removeFiltersButton;
+        private System.Windows.Forms.Label totalCostLabel;
+        private System.Windows.Forms.Label creditRemainingLabel;
+        private System.Windows.Forms.TextBox totalCostTextBox;
+        private System.Windows.Forms.TextBox creditRemainingTextBox;
     }
 }

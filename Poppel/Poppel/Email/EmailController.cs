@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Brian Mc George
+//05-10-2014
+//MCGBRI004
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -65,7 +65,10 @@
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\Employee.cs" />
     <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Product.cs" />
     <Compile Include="Email\EmailController.cs" />
+    <Compile Include="Order\OrderController.cs" />
+    <Compile Include="Order\OrderItem.cs" />
     <Compile Include="PoppelDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

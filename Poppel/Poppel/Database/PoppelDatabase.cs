@@ -13,6 +13,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
 using Poppel.Domain;
+using Poppel.Order;
 
 
 namespace Poppel.Database
@@ -128,6 +129,89 @@ namespace Poppel.Database
                 return null;
             }
         }
+        
+        public Collection<OrderItem> readProducts()
+        {
+            Collection<OrderItem> products = new Collection<OrderItem>();
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                command = new SqlCommand("SELECT * FROM Product", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();                        //Read from table
+                if (reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        OrderItem orderItem = new OrderItem();
+                        orderItem.Product = createProduct(reader);
+                        products.Add(orderItem);
+
+                    }
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                foreach (OrderItem product in products)
+                {
+                    setStockCount(product.Product);
+                }
+                return products;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+                return null;
+            }
+         
+
+
+        }
+         
+        
+        private Product createProduct(SqlDataReader reader)
+        {
+            Product product = new Product();
+            product.Id = reader.GetInt32(0);
+            product.Description = reader.GetString(1).Trim();
+            product.Price = reader.GetDecimal(2);
+            product.ProductCode = reader.GetString(3).Trim();
+            return product;
+        }
+         
+
+        private void setStockCount(Product product)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                command = new SqlCommand("SELECT SUM(stockItem_numberInStock) AS number_in_stock FROM StockItem WHERE product_ref = " + product.Id, cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();                        //Read from table
+                if (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        product.NumberInStock = reader.GetInt32(0);
+                    }
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+        }
+
+
         public void editCustomer(Customer customer)
         {
             string sqlString = "";
