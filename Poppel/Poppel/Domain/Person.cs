@@ -109,7 +109,11 @@ namespace Poppel.Domain
 
             for (int i = 1; i < address.Length-1; i++)
             {
-                tempAddress += ", "+address[i];
+                if(address[i]!=null && !address[i].Equals(""))
+                {
+                    tempAddress += ", " + address[i];
+                }
+             
             }
             return tempAddress;
         }

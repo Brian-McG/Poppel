@@ -50,7 +50,7 @@
             this.phoneNumberLabel = new System.Windows.Forms.Label();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.lastNameLabel = new System.Windows.Forms.Label();
-            this.firstNameTestBox = new System.Windows.Forms.TextBox();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.editCustomerButton = new System.Windows.Forms.Button();
@@ -73,6 +73,7 @@
             this.cityTextBox = new System.Windows.Forms.TextBox();
             this.cityLabel = new System.Windows.Forms.Label();
             this.customersGroupBox = new System.Windows.Forms.GroupBox();
+            this.customerClickInfoLabel = new System.Windows.Forms.Label();
             this.customerListView = new System.Windows.Forms.ListView();
             this.creditGroupBox = new System.Windows.Forms.GroupBox();
             this.creditLimitErrorLabel = new System.Windows.Forms.Label();
@@ -81,7 +82,6 @@
             this.currentCreditTextBox = new System.Windows.Forms.TextBox();
             this.currentCreditLabel = new System.Windows.Forms.Label();
             this.editErrorLabel = new System.Windows.Forms.Label();
-            this.customerClickInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.customerInputGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
@@ -222,7 +222,7 @@
             this.personalDetailsGroupBox.Controls.Add(this.phoneNumberLabel);
             this.personalDetailsGroupBox.Controls.Add(this.lastNameTextBox);
             this.personalDetailsGroupBox.Controls.Add(this.lastNameLabel);
-            this.personalDetailsGroupBox.Controls.Add(this.firstNameTestBox);
+            this.personalDetailsGroupBox.Controls.Add(this.firstNameTextBox);
             this.personalDetailsGroupBox.Controls.Add(this.firstNameLabel);
             this.personalDetailsGroupBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.personalDetailsGroupBox.Location = new System.Drawing.Point(11, 251);
@@ -333,15 +333,15 @@
             this.lastNameLabel.TabIndex = 18;
             this.lastNameLabel.Text = "Last Name:";
             // 
-            // firstNameTestBox
+            // firstNameTextBox
             // 
-            this.firstNameTestBox.Location = new System.Drawing.Point(119, 25);
-            this.firstNameTestBox.Name = "firstNameTestBox";
-            this.firstNameTestBox.ReadOnly = true;
-            this.firstNameTestBox.Size = new System.Drawing.Size(341, 20);
-            this.firstNameTestBox.TabIndex = 11;
-            this.firstNameTestBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstNameTestBox_KeyPress);
-            this.firstNameTestBox.Leave += new System.EventHandler(this.firstNameTestBox_Leave);
+            this.firstNameTextBox.Location = new System.Drawing.Point(119, 25);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.ReadOnly = true;
+            this.firstNameTextBox.Size = new System.Drawing.Size(341, 20);
+            this.firstNameTextBox.TabIndex = 11;
+            this.firstNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstNameTestBox_KeyPress);
+            this.firstNameTextBox.Leave += new System.EventHandler(this.firstNameTestBox_Leave);
             // 
             // firstNameLabel
             // 
@@ -399,6 +399,7 @@
             this.streetAddressTextBox.ReadOnly = true;
             this.streetAddressTextBox.Size = new System.Drawing.Size(341, 20);
             this.streetAddressTextBox.TabIndex = 25;
+            this.streetAddressTextBox.Leave += new System.EventHandler(this.streetAddressTextBox_Leave);
             // 
             // streetAddressLabel
             // 
@@ -425,6 +426,7 @@
             this.suburbTextBox.ReadOnly = true;
             this.suburbTextBox.Size = new System.Drawing.Size(341, 20);
             this.suburbTextBox.TabIndex = 28;
+            this.suburbTextBox.Leave += new System.EventHandler(this.suburbTextBox_Leave);
             // 
             // townLabel
             // 
@@ -442,6 +444,7 @@
             this.townTextBox.ReadOnly = true;
             this.townTextBox.Size = new System.Drawing.Size(341, 20);
             this.townTextBox.TabIndex = 30;
+            this.townTextBox.Leave += new System.EventHandler(this.townTextBox_Leave);
             // 
             // zipCodeLabel
             // 
@@ -550,6 +553,7 @@
             this.cityTextBox.ReadOnly = true;
             this.cityTextBox.Size = new System.Drawing.Size(341, 20);
             this.cityTextBox.TabIndex = 37;
+            this.cityTextBox.Leave += new System.EventHandler(this.cityTextBox_Leave);
             // 
             // cityLabel
             // 
@@ -572,6 +576,15 @@
             this.customersGroupBox.TabStop = false;
             this.customersGroupBox.Text = "Customers";
             this.customersGroupBox.Visible = false;
+            // 
+            // customerClickInfoLabel
+            // 
+            this.customerClickInfoLabel.AutoSize = true;
+            this.customerClickInfoLabel.Location = new System.Drawing.Point(7, 16);
+            this.customerClickInfoLabel.Name = "customerClickInfoLabel";
+            this.customerClickInfoLabel.Size = new System.Drawing.Size(360, 13);
+            this.customerClickInfoLabel.TabIndex = 1;
+            this.customerClickInfoLabel.Text = "Double click on customer code to get detailed information on the customer.";
             // 
             // customerListView
             // 
@@ -657,15 +670,6 @@
             this.editErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.editErrorLabel.Visible = false;
             // 
-            // customerClickInfoLabel
-            // 
-            this.customerClickInfoLabel.AutoSize = true;
-            this.customerClickInfoLabel.Location = new System.Drawing.Point(7, 16);
-            this.customerClickInfoLabel.Name = "customerClickInfoLabel";
-            this.customerClickInfoLabel.Size = new System.Drawing.Size(360, 13);
-            this.customerClickInfoLabel.TabIndex = 1;
-            this.customerClickInfoLabel.Text = "Double click on customer code to get detailed information on the customer.";
-            // 
             // CustomerManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -680,10 +684,10 @@
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.logoPictureBox);
-            this.Controls.Add(this.customersGroupBox);
             this.Controls.Add(this.personalDetailsGroupBox);
             this.Controls.Add(this.creditGroupBox);
             this.Controls.Add(this.addressGroupBox);
+            this.Controls.Add(this.customersGroupBox);
             this.Name = "CustomerManagement";
             this.Text = "Customer Hub";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
@@ -721,7 +725,7 @@
         private System.Windows.Forms.Label phoneNumberLabel;
         private System.Windows.Forms.TextBox lastNameTextBox;
         private System.Windows.Forms.Label lastNameLabel;
-        private System.Windows.Forms.TextBox firstNameTestBox;
+        private System.Windows.Forms.TextBox firstNameTextBox;
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button editCustomerButton;

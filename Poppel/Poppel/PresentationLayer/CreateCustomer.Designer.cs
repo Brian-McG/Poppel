@@ -32,11 +32,14 @@
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.addressGroupBox = new System.Windows.Forms.GroupBox();
+            this.townErrorMessageLabel = new System.Windows.Forms.Label();
+            this.townTextBox = new System.Windows.Forms.TextBox();
+            this.townLabel = new System.Windows.Forms.Label();
+            this.zipCodeTextBox = new System.Windows.Forms.TextBox();
             this.zipCodeErrorMessageLabel = new System.Windows.Forms.Label();
             this.cityErrorMessageLabel = new System.Windows.Forms.Label();
             this.suburbErrorMessageLabel = new System.Windows.Forms.Label();
             this.streetErrorMessageLabel = new System.Windows.Forms.Label();
-            this.zipCodeTextBox = new System.Windows.Forms.TextBox();
             this.zipCodeLabel = new System.Windows.Forms.Label();
             this.cityTextBox = new System.Windows.Forms.TextBox();
             this.cityLabel = new System.Windows.Forms.Label();
@@ -45,24 +48,26 @@
             this.streetAddressLabel = new System.Windows.Forms.Label();
             this.streetAddressTextBox = new System.Windows.Forms.TextBox();
             this.personalDetailsGroupBox = new System.Windows.Forms.GroupBox();
+            this.emailAddressTextBox = new System.Windows.Forms.TextBox();
+            this.phoneNumberMaskBox = new System.Windows.Forms.MaskedTextBox();
             this.emailErrorMessageLabel = new System.Windows.Forms.Label();
-            this.phoneNumberErrorMessageLabel = new System.Windows.Forms.Label();
+            this.phoneErrorLabel = new System.Windows.Forms.Label();
             this.lastNameErrorMessageLabel = new System.Windows.Forms.Label();
             this.firstNameErrorMessageLabel = new System.Windows.Forms.Label();
-            this.emailAddressTextBox = new System.Windows.Forms.TextBox();
-            this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
             this.emailAddressLabel = new System.Windows.Forms.Label();
             this.phoneNumberLabel = new System.Windows.Forms.Label();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.lastNameLabel = new System.Windows.Forms.Label();
-            this.firstNameTestBox = new System.Windows.Forms.TextBox();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.createCustomerButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.createCustomerErrorLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.creditLimit = new System.Windows.Forms.TextBox();
+            this.modifyCreditLimitCheckBox = new System.Windows.Forms.CheckBox();
+            this.creditLimitTextBox = new System.Windows.Forms.TextBox();
+            this.creditLimitErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.addressGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
@@ -92,7 +97,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(218, 33);
+            this.label1.Location = new System.Drawing.Point(258, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(214, 29);
             this.label1.TabIndex = 11;
@@ -100,11 +105,14 @@
             // 
             // addressGroupBox
             // 
+            this.addressGroupBox.Controls.Add(this.townErrorMessageLabel);
+            this.addressGroupBox.Controls.Add(this.townTextBox);
+            this.addressGroupBox.Controls.Add(this.townLabel);
+            this.addressGroupBox.Controls.Add(this.zipCodeTextBox);
             this.addressGroupBox.Controls.Add(this.zipCodeErrorMessageLabel);
             this.addressGroupBox.Controls.Add(this.cityErrorMessageLabel);
             this.addressGroupBox.Controls.Add(this.suburbErrorMessageLabel);
             this.addressGroupBox.Controls.Add(this.streetErrorMessageLabel);
-            this.addressGroupBox.Controls.Add(this.zipCodeTextBox);
             this.addressGroupBox.Controls.Add(this.zipCodeLabel);
             this.addressGroupBox.Controls.Add(this.cityTextBox);
             this.addressGroupBox.Controls.Add(this.cityLabel);
@@ -114,15 +122,52 @@
             this.addressGroupBox.Controls.Add(this.streetAddressTextBox);
             this.addressGroupBox.Location = new System.Drawing.Point(12, 250);
             this.addressGroupBox.Name = "addressGroupBox";
-            this.addressGroupBox.Size = new System.Drawing.Size(674, 142);
+            this.addressGroupBox.Size = new System.Drawing.Size(674, 163);
             this.addressGroupBox.TabIndex = 25;
             this.addressGroupBox.TabStop = false;
             this.addressGroupBox.Text = "Address";
             // 
+            // townErrorMessageLabel
+            // 
+            this.townErrorMessageLabel.AutoSize = true;
+            this.townErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.townErrorMessageLabel.Location = new System.Drawing.Point(466, 76);
+            this.townErrorMessageLabel.Name = "townErrorMessageLabel";
+            this.townErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
+            this.townErrorMessageLabel.TabIndex = 41;
+            this.townErrorMessageLabel.Text = "<Error Label>";
+            this.townErrorMessageLabel.Visible = false;
+            // 
+            // townTextBox
+            // 
+            this.townTextBox.Location = new System.Drawing.Point(93, 76);
+            this.townTextBox.Name = "townTextBox";
+            this.townTextBox.Size = new System.Drawing.Size(367, 20);
+            this.townTextBox.TabIndex = 40;
+            this.townTextBox.Leave += new System.EventHandler(this.townTextBox_Leave);
+            // 
+            // townLabel
+            // 
+            this.townLabel.AutoSize = true;
+            this.townLabel.Location = new System.Drawing.Point(50, 79);
+            this.townLabel.Name = "townLabel";
+            this.townLabel.Size = new System.Drawing.Size(37, 13);
+            this.townLabel.TabIndex = 39;
+            this.townLabel.Text = "Town:";
+            // 
+            // zipCodeTextBox
+            // 
+            this.zipCodeTextBox.Location = new System.Drawing.Point(92, 128);
+            this.zipCodeTextBox.Name = "zipCodeTextBox";
+            this.zipCodeTextBox.Size = new System.Drawing.Size(111, 20);
+            this.zipCodeTextBox.TabIndex = 38;
+            this.zipCodeTextBox.Leave += new System.EventHandler(this.zipCodeTextBox_Leave);
+            // 
             // zipCodeErrorMessageLabel
             // 
             this.zipCodeErrorMessageLabel.AutoSize = true;
-            this.zipCodeErrorMessageLabel.Location = new System.Drawing.Point(209, 105);
+            this.zipCodeErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.zipCodeErrorMessageLabel.Location = new System.Drawing.Point(209, 128);
             this.zipCodeErrorMessageLabel.Name = "zipCodeErrorMessageLabel";
             this.zipCodeErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.zipCodeErrorMessageLabel.TabIndex = 35;
@@ -132,7 +177,8 @@
             // cityErrorMessageLabel
             // 
             this.cityErrorMessageLabel.AutoSize = true;
-            this.cityErrorMessageLabel.Location = new System.Drawing.Point(466, 79);
+            this.cityErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.cityErrorMessageLabel.Location = new System.Drawing.Point(466, 105);
             this.cityErrorMessageLabel.Name = "cityErrorMessageLabel";
             this.cityErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.cityErrorMessageLabel.TabIndex = 34;
@@ -142,7 +188,8 @@
             // suburbErrorMessageLabel
             // 
             this.suburbErrorMessageLabel.AutoSize = true;
-            this.suburbErrorMessageLabel.Location = new System.Drawing.Point(466, 53);
+            this.suburbErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.suburbErrorMessageLabel.Location = new System.Drawing.Point(466, 50);
             this.suburbErrorMessageLabel.Name = "suburbErrorMessageLabel";
             this.suburbErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.suburbErrorMessageLabel.TabIndex = 33;
@@ -152,25 +199,18 @@
             // streetErrorMessageLabel
             // 
             this.streetErrorMessageLabel.AutoSize = true;
-            this.streetErrorMessageLabel.Location = new System.Drawing.Point(466, 27);
+            this.streetErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.streetErrorMessageLabel.Location = new System.Drawing.Point(466, 24);
             this.streetErrorMessageLabel.Name = "streetErrorMessageLabel";
             this.streetErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.streetErrorMessageLabel.TabIndex = 28;
             this.streetErrorMessageLabel.Text = "<Error Label>";
             this.streetErrorMessageLabel.Visible = false;
             // 
-            // zipCodeTextBox
-            // 
-            this.zipCodeTextBox.Location = new System.Drawing.Point(93, 102);
-            this.zipCodeTextBox.Name = "zipCodeTextBox";
-            this.zipCodeTextBox.Size = new System.Drawing.Size(110, 20);
-            this.zipCodeTextBox.TabIndex = 32;
-            this.zipCodeTextBox.UseWaitCursor = true;
-            // 
             // zipCodeLabel
             // 
             this.zipCodeLabel.AutoSize = true;
-            this.zipCodeLabel.Location = new System.Drawing.Point(34, 105);
+            this.zipCodeLabel.Location = new System.Drawing.Point(33, 131);
             this.zipCodeLabel.Name = "zipCodeLabel";
             this.zipCodeLabel.Size = new System.Drawing.Size(53, 13);
             this.zipCodeLabel.TabIndex = 31;
@@ -179,15 +219,16 @@
             // 
             // cityTextBox
             // 
-            this.cityTextBox.Location = new System.Drawing.Point(93, 76);
+            this.cityTextBox.Location = new System.Drawing.Point(93, 102);
             this.cityTextBox.Name = "cityTextBox";
             this.cityTextBox.Size = new System.Drawing.Size(367, 20);
             this.cityTextBox.TabIndex = 30;
+            this.cityTextBox.Leave += new System.EventHandler(this.cityTextBox_Leave);
             // 
             // cityLabel
             // 
             this.cityLabel.AutoSize = true;
-            this.cityLabel.Location = new System.Drawing.Point(60, 79);
+            this.cityLabel.Location = new System.Drawing.Point(60, 105);
             this.cityLabel.Name = "cityLabel";
             this.cityLabel.Size = new System.Drawing.Size(27, 13);
             this.cityLabel.TabIndex = 29;
@@ -199,6 +240,7 @@
             this.suburbTextBox.Name = "suburbTextBox";
             this.suburbTextBox.Size = new System.Drawing.Size(367, 20);
             this.suburbTextBox.TabIndex = 28;
+            this.suburbTextBox.Leave += new System.EventHandler(this.suburbTextBox_Leave);
             // 
             // suburbLabel
             // 
@@ -224,20 +266,21 @@
             this.streetAddressTextBox.Name = "streetAddressTextBox";
             this.streetAddressTextBox.Size = new System.Drawing.Size(367, 20);
             this.streetAddressTextBox.TabIndex = 25;
+            this.streetAddressTextBox.Leave += new System.EventHandler(this.streetAddressTextBox_Leave);
             // 
             // personalDetailsGroupBox
             // 
+            this.personalDetailsGroupBox.Controls.Add(this.emailAddressTextBox);
+            this.personalDetailsGroupBox.Controls.Add(this.phoneNumberMaskBox);
             this.personalDetailsGroupBox.Controls.Add(this.emailErrorMessageLabel);
-            this.personalDetailsGroupBox.Controls.Add(this.phoneNumberErrorMessageLabel);
+            this.personalDetailsGroupBox.Controls.Add(this.phoneErrorLabel);
             this.personalDetailsGroupBox.Controls.Add(this.lastNameErrorMessageLabel);
             this.personalDetailsGroupBox.Controls.Add(this.firstNameErrorMessageLabel);
-            this.personalDetailsGroupBox.Controls.Add(this.emailAddressTextBox);
-            this.personalDetailsGroupBox.Controls.Add(this.phoneNumberTextBox);
             this.personalDetailsGroupBox.Controls.Add(this.emailAddressLabel);
             this.personalDetailsGroupBox.Controls.Add(this.phoneNumberLabel);
             this.personalDetailsGroupBox.Controls.Add(this.lastNameTextBox);
             this.personalDetailsGroupBox.Controls.Add(this.lastNameLabel);
-            this.personalDetailsGroupBox.Controls.Add(this.firstNameTestBox);
+            this.personalDetailsGroupBox.Controls.Add(this.firstNameTextBox);
             this.personalDetailsGroupBox.Controls.Add(this.firstNameLabel);
             this.personalDetailsGroupBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.personalDetailsGroupBox.Location = new System.Drawing.Point(12, 115);
@@ -247,30 +290,50 @@
             this.personalDetailsGroupBox.TabStop = false;
             this.personalDetailsGroupBox.Text = "Personal Details";
             // 
+            // emailAddressTextBox
+            // 
+            this.emailAddressTextBox.Location = new System.Drawing.Point(93, 103);
+            this.emailAddressTextBox.Name = "emailAddressTextBox";
+            this.emailAddressTextBox.Size = new System.Drawing.Size(367, 20);
+            this.emailAddressTextBox.TabIndex = 37;
+            this.emailAddressTextBox.Leave += new System.EventHandler(this.emailAddressTextBox_Leave);
+            // 
+            // phoneNumberMaskBox
+            // 
+            this.phoneNumberMaskBox.Location = new System.Drawing.Point(93, 77);
+            this.phoneNumberMaskBox.Mask = "(000) 000-0000";
+            this.phoneNumberMaskBox.Name = "phoneNumberMaskBox";
+            this.phoneNumberMaskBox.Size = new System.Drawing.Size(367, 20);
+            this.phoneNumberMaskBox.TabIndex = 36;
+            this.phoneNumberMaskBox.Leave += new System.EventHandler(this.phoneNumberMaskBox_Leave);
+            // 
             // emailErrorMessageLabel
             // 
             this.emailErrorMessageLabel.AutoSize = true;
-            this.emailErrorMessageLabel.Location = new System.Drawing.Point(466, 106);
+            this.emailErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.emailErrorMessageLabel.Location = new System.Drawing.Point(466, 103);
             this.emailErrorMessageLabel.Name = "emailErrorMessageLabel";
             this.emailErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.emailErrorMessageLabel.TabIndex = 27;
             this.emailErrorMessageLabel.Text = "<Error Label>";
             this.emailErrorMessageLabel.Visible = false;
             // 
-            // phoneNumberErrorMessageLabel
+            // phoneErrorLabel
             // 
-            this.phoneNumberErrorMessageLabel.AutoSize = true;
-            this.phoneNumberErrorMessageLabel.Location = new System.Drawing.Point(466, 80);
-            this.phoneNumberErrorMessageLabel.Name = "phoneNumberErrorMessageLabel";
-            this.phoneNumberErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
-            this.phoneNumberErrorMessageLabel.TabIndex = 26;
-            this.phoneNumberErrorMessageLabel.Text = "<Error Label>";
-            this.phoneNumberErrorMessageLabel.Visible = false;
+            this.phoneErrorLabel.AutoSize = true;
+            this.phoneErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.phoneErrorLabel.Location = new System.Drawing.Point(466, 77);
+            this.phoneErrorLabel.Name = "phoneErrorLabel";
+            this.phoneErrorLabel.Size = new System.Drawing.Size(70, 13);
+            this.phoneErrorLabel.TabIndex = 26;
+            this.phoneErrorLabel.Text = "<Error Label>";
+            this.phoneErrorLabel.Visible = false;
             // 
             // lastNameErrorMessageLabel
             // 
             this.lastNameErrorMessageLabel.AutoSize = true;
-            this.lastNameErrorMessageLabel.Location = new System.Drawing.Point(466, 54);
+            this.lastNameErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.lastNameErrorMessageLabel.Location = new System.Drawing.Point(466, 51);
             this.lastNameErrorMessageLabel.Name = "lastNameErrorMessageLabel";
             this.lastNameErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.lastNameErrorMessageLabel.TabIndex = 25;
@@ -280,26 +343,13 @@
             // firstNameErrorMessageLabel
             // 
             this.firstNameErrorMessageLabel.AutoSize = true;
-            this.firstNameErrorMessageLabel.Location = new System.Drawing.Point(466, 28);
+            this.firstNameErrorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.firstNameErrorMessageLabel.Location = new System.Drawing.Point(466, 25);
             this.firstNameErrorMessageLabel.Name = "firstNameErrorMessageLabel";
             this.firstNameErrorMessageLabel.Size = new System.Drawing.Size(70, 13);
             this.firstNameErrorMessageLabel.TabIndex = 24;
             this.firstNameErrorMessageLabel.Text = "<Error Label>";
             this.firstNameErrorMessageLabel.Visible = false;
-            // 
-            // emailAddressTextBox
-            // 
-            this.emailAddressTextBox.Location = new System.Drawing.Point(93, 103);
-            this.emailAddressTextBox.Name = "emailAddressTextBox";
-            this.emailAddressTextBox.Size = new System.Drawing.Size(367, 20);
-            this.emailAddressTextBox.TabIndex = 23;
-            // 
-            // phoneNumberTextBox
-            // 
-            this.phoneNumberTextBox.Location = new System.Drawing.Point(93, 77);
-            this.phoneNumberTextBox.Name = "phoneNumberTextBox";
-            this.phoneNumberTextBox.Size = new System.Drawing.Size(367, 20);
-            this.phoneNumberTextBox.TabIndex = 22;
             // 
             // emailAddressLabel
             // 
@@ -325,6 +375,8 @@
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(367, 20);
             this.lastNameTextBox.TabIndex = 19;
+            this.lastNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lastNameTextBox_KeyPress);
+            this.lastNameTextBox.Leave += new System.EventHandler(this.lastNameTextBox_Leave);
             // 
             // lastNameLabel
             // 
@@ -335,12 +387,14 @@
             this.lastNameLabel.TabIndex = 18;
             this.lastNameLabel.Text = "Last Name:";
             // 
-            // firstNameTestBox
+            // firstNameTextBox
             // 
-            this.firstNameTestBox.Location = new System.Drawing.Point(93, 25);
-            this.firstNameTestBox.Name = "firstNameTestBox";
-            this.firstNameTestBox.Size = new System.Drawing.Size(367, 20);
-            this.firstNameTestBox.TabIndex = 17;
+            this.firstNameTextBox.Location = new System.Drawing.Point(93, 25);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(367, 20);
+            this.firstNameTextBox.TabIndex = 17;
+            this.firstNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstNameTestBox_KeyPress);
+            this.firstNameTextBox.Leave += new System.EventHandler(this.firstNameTestBox_Leave);
             // 
             // firstNameLabel
             // 
@@ -353,16 +407,17 @@
             // 
             // createCustomerButton
             // 
-            this.createCustomerButton.Location = new System.Drawing.Point(580, 478);
+            this.createCustomerButton.Location = new System.Drawing.Point(580, 519);
             this.createCustomerButton.Name = "createCustomerButton";
             this.createCustomerButton.Size = new System.Drawing.Size(106, 40);
             this.createCustomerButton.TabIndex = 27;
             this.createCustomerButton.Text = "Create Customer";
             this.createCustomerButton.UseVisualStyleBackColor = true;
+            this.createCustomerButton.Click += new System.EventHandler(this.createCustomerButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(493, 478);
+            this.cancelButton.Location = new System.Drawing.Point(493, 519);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(81, 40);
             this.cancelButton.TabIndex = 28;
@@ -372,41 +427,69 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(26, 27);
+            this.label9.Location = new System.Drawing.Point(26, 45);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 26;
             this.label9.Text = "Credit Limit:";
             // 
-            // label5
+            // createCustomerErrorLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(209, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "<Error Label>";
-            this.label5.Visible = false;
+            this.createCustomerErrorLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.createCustomerErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.createCustomerErrorLabel.Location = new System.Drawing.Point(11, 519);
+            this.createCustomerErrorLabel.Name = "createCustomerErrorLabel";
+            this.createCustomerErrorLabel.Size = new System.Drawing.Size(476, 60);
+            this.createCustomerErrorLabel.TabIndex = 28;
+            this.createCustomerErrorLabel.Text = "<Error Label>";
+            this.createCustomerErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.createCustomerErrorLabel.Visible = false;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.creditLimitErrorLabel);
+            this.groupBox1.Controls.Add(this.modifyCreditLimitCheckBox);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.creditLimit);
-            this.groupBox1.Location = new System.Drawing.Point(12, 398);
+            this.groupBox1.Controls.Add(this.creditLimitTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 419);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(674, 74);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Credit";
             // 
-            // creditLimit
+            // modifyCreditLimitCheckBox
             // 
-            this.creditLimit.Location = new System.Drawing.Point(93, 24);
-            this.creditLimit.Name = "creditLimit";
-            this.creditLimit.Size = new System.Drawing.Size(110, 20);
-            this.creditLimit.TabIndex = 25;
-            this.creditLimit.Text = "1500";
+            this.modifyCreditLimitCheckBox.AutoSize = true;
+            this.modifyCreditLimitCheckBox.Location = new System.Drawing.Point(93, 19);
+            this.modifyCreditLimitCheckBox.Name = "modifyCreditLimitCheckBox";
+            this.modifyCreditLimitCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.modifyCreditLimitCheckBox.TabIndex = 29;
+            this.modifyCreditLimitCheckBox.Text = "Modify Credit Limit";
+            this.modifyCreditLimitCheckBox.UseVisualStyleBackColor = true;
+            this.modifyCreditLimitCheckBox.CheckedChanged += new System.EventHandler(this.modifyCreditLimitCheckBox_CheckedChanged);
+            // 
+            // creditLimitTextBox
+            // 
+            this.creditLimitTextBox.Location = new System.Drawing.Point(93, 42);
+            this.creditLimitTextBox.Name = "creditLimitTextBox";
+            this.creditLimitTextBox.ReadOnly = true;
+            this.creditLimitTextBox.Size = new System.Drawing.Size(110, 20);
+            this.creditLimitTextBox.TabIndex = 25;
+            this.creditLimitTextBox.Text = "1500";
+            this.creditLimitTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.creditLimitTextBox_KeyPress);
+            this.creditLimitTextBox.Leave += new System.EventHandler(this.creditLimitTextBox_Leave);
+            // 
+            // creditLimitErrorLabel
+            // 
+            this.creditLimitErrorLabel.AutoSize = true;
+            this.creditLimitErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.creditLimitErrorLabel.Location = new System.Drawing.Point(209, 42);
+            this.creditLimitErrorLabel.Name = "creditLimitErrorLabel";
+            this.creditLimitErrorLabel.Size = new System.Drawing.Size(70, 13);
+            this.creditLimitErrorLabel.TabIndex = 30;
+            this.creditLimitErrorLabel.Text = "<Error Label>";
+            this.creditLimitErrorLabel.Visible = false;
             // 
             // CreateCustomer
             // 
@@ -415,6 +498,7 @@
             this.ClientSize = new System.Drawing.Size(768, 588);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.createCustomerErrorLabel);
             this.Controls.Add(this.createCustomerButton);
             this.Controls.Add(this.personalDetailsGroupBox);
             this.Controls.Add(this.addressGroupBox);
@@ -442,7 +526,6 @@
         private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox addressGroupBox;
-        private System.Windows.Forms.TextBox zipCodeTextBox;
         private System.Windows.Forms.Label zipCodeLabel;
         private System.Windows.Forms.TextBox cityTextBox;
         private System.Windows.Forms.Label cityLabel;
@@ -451,13 +534,11 @@
         private System.Windows.Forms.Label streetAddressLabel;
         private System.Windows.Forms.TextBox streetAddressTextBox;
         private System.Windows.Forms.GroupBox personalDetailsGroupBox;
-        private System.Windows.Forms.TextBox emailAddressTextBox;
-        private System.Windows.Forms.TextBox phoneNumberTextBox;
         private System.Windows.Forms.Label emailAddressLabel;
         private System.Windows.Forms.Label phoneNumberLabel;
         private System.Windows.Forms.TextBox lastNameTextBox;
         private System.Windows.Forms.Label lastNameLabel;
-        private System.Windows.Forms.TextBox firstNameTestBox;
+        private System.Windows.Forms.TextBox firstNameTextBox;
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Button createCustomerButton;
         private System.Windows.Forms.Button cancelButton;
@@ -468,10 +549,18 @@
         private System.Windows.Forms.Label suburbErrorMessageLabel;
         private System.Windows.Forms.Label streetErrorMessageLabel;
         private System.Windows.Forms.Label emailErrorMessageLabel;
-        private System.Windows.Forms.Label phoneNumberErrorMessageLabel;
+        private System.Windows.Forms.Label phoneErrorLabel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label createCustomerErrorLabel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox creditLimit;
+        private System.Windows.Forms.TextBox creditLimitTextBox;
+        private System.Windows.Forms.CheckBox modifyCreditLimitCheckBox;
+        private System.Windows.Forms.MaskedTextBox phoneNumberMaskBox;
+        private System.Windows.Forms.TextBox emailAddressTextBox;
+        private System.Windows.Forms.TextBox zipCodeTextBox;
+        private System.Windows.Forms.Label creditLimitErrorLabel;
+        private System.Windows.Forms.Label townErrorMessageLabel;
+        private System.Windows.Forms.TextBox townTextBox;
+        private System.Windows.Forms.Label townLabel;
     }
 }

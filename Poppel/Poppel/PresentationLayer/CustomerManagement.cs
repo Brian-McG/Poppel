@@ -51,6 +51,10 @@ namespace Poppel.PresentationLayer
         private void searchButton_Click(object sender, EventArgs e)
         {
             setLabelVisibility(false);
+            addressGroupBox.Visible = false;
+            creditGroupBox.Visible = false;
+            customersGroupBox.Visible = false;
+            personalDetailsGroupBox.Visible = false;
             if (!userNotFoundErrorLabel.Visible)
             {
 
@@ -84,7 +88,7 @@ namespace Poppel.PresentationLayer
 
                 setReadOnly(false);
                 setButtonState(editCustomer.saveCustomer);
-                firstNameTestBox.Select();
+                firstNameTextBox.Select();
                 editCustomerButton.Text = "Save Customer";
 
             }
@@ -166,7 +170,7 @@ namespace Poppel.PresentationLayer
             else
             {
                 userNotFoundErrorLabel.Visible = false;
-                firstNameTestBox.Text = searchCustomer.Name;
+                firstNameTextBox.Text = searchCustomer.Name;
                 lastNameTextBox.Text = searchCustomer.Surname;
                 phoneNumberMaskBox.Text = searchCustomer.PhoneNumber;
                 emailAddressTextBox.Text = searchCustomer.Email;
@@ -189,7 +193,7 @@ namespace Poppel.PresentationLayer
         {
             Boolean correct = true;
             customer.Id = inputTextBox.Text.Trim();
-            customer.Name = firstNameTestBox.Text.Trim();
+            customer.Name = firstNameTextBox.Text.Trim();
             customer.Surname = lastNameTextBox.Text.Trim();
             customer.PhoneNumber = Person.unFormatPhoneNumber(phoneNumberMaskBox.Text);
             customer.Email = emailAddressTextBox.Text;
@@ -272,7 +276,7 @@ namespace Poppel.PresentationLayer
 
         private void setReadOnly(bool set)
         {
-            firstNameTestBox.ReadOnly = set;
+            firstNameTextBox.ReadOnly = set;
             lastNameTextBox.ReadOnly = set;
             phoneNumberMaskBox.ReadOnly = set;
             emailAddressTextBox.ReadOnly = set;
@@ -324,7 +328,7 @@ namespace Poppel.PresentationLayer
                 firstNameErrorMessageLabel.Text = "Numbers are not allowed in a name.";
                 firstNameErrorMessageLabel.Visible = true;
             }
-            else if (firstNameTestBox.Text.Length >= 60 && !char.IsControl(e.KeyChar))
+            else if (firstNameTextBox.Text.Length >= 60 && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 firstNameErrorMessageLabel.Text = "Name length has been exceeded.\nNames can only be up to 60 characters.";
@@ -366,6 +370,11 @@ namespace Poppel.PresentationLayer
                 phoneErrorLabel.Text = "Phone number must contain 10 digits.";
                 phoneErrorLabel.Visible = true;
             }
+            else if (phoneNumberMaskBox.Text.Equals("(   )    -") && emailAddressTextBox.Text.Length == 0)
+            {
+                phoneErrorLabel.Text = "Phone number or email address is required";
+                phoneErrorLabel.Visible = true;
+            }
             else
             {
                 phoneErrorLabel.Visible = false;
@@ -376,15 +385,26 @@ namespace Poppel.PresentationLayer
         {
             //http://www.codeproject.com/Questions/447172/Email-Mask-for-csharp-masktextbox
             //Checks if email address is in correct format.
-            if (!System.Text.RegularExpressions.Regex.IsMatch(((TextBox)sender).Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(((TextBox)sender).Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$") && emailAddressTextBox.Text.Length != 0)
             {
                 emailErrorMessageLabel.Text = "Email address should be in the format:\nxyz@abc.com";
                 emailErrorMessageLabel.Visible = true;
+            }
+            else if (phoneNumberMaskBox.Text.Equals("(   )    -") && emailAddressTextBox.Text.Length == 0)
+            {
+                phoneErrorLabel.Text = "Phone number or email address is required";
+                phoneErrorLabel.Visible = true;
+            }
+            else if (emailAddressTextBox.Text.Length >= 60)
+            {
+                emailErrorMessageLabel.Text = "Email length has been exceeded.\nEmails can only be up to 60 characters.";
+               emailErrorMessageLabel.Visible = true;
             }
             else
             {
                 emailErrorMessageLabel.Visible = false;
             }
+
         }
 
         private void firstNameTestBox_Leave(object sender, EventArgs e)
@@ -392,15 +412,15 @@ namespace Poppel.PresentationLayer
             int i = 0;
             bool stop = false;
 
-            if (firstNameTestBox.Text.Length >= 60)
+            if (firstNameTextBox.Text.Length >= 60)
             {
                 firstNameErrorMessageLabel.Text = "Name length has been exceeded.\nNames can only be up to 60 characters.";
                 firstNameErrorMessageLabel.Visible = true;
                 stop = true;
             }
-            while (i < firstNameTestBox.Text.Length && !stop)
+            while (i < firstNameTextBox.Text.Length && !stop)
             {
-                if (char.IsNumber(firstNameTestBox.Text[i]))
+                if (char.IsNumber(firstNameTextBox.Text[i]))
                 {
                     firstNameErrorMessageLabel.Text = "Numbers are not allowed in a name.";
                     firstNameErrorMessageLabel.Visible = true;
@@ -483,7 +503,6 @@ namespace Poppel.PresentationLayer
                 creditLimitErrorLabel.Visible = true;
                 stop = true;
             }
-
             if (!stop)
             {
                 creditLimitErrorLabel.Visible = false;
@@ -622,6 +641,58 @@ namespace Poppel.PresentationLayer
 
             }
 
+        }
+
+        private void streetAddressTextBox_Leave(object sender, EventArgs e)
+        {
+            if (streetAddressTextBox.Text.Length >= 60)
+            {
+                streetErrorMessageLabel.Text = "Street length has been exceeded.\nStreets can only be up to 60 characters.";
+                streetErrorMessageLabel.Visible = true;
+            }
+            else
+            {
+                streetErrorMessageLabel.Visible = false;
+            }
+        }
+
+        private void suburbTextBox_Leave(object sender, EventArgs e)
+        {
+            if (suburbTextBox.Text.Length >= 60)
+            {
+                suburbErrorMessageLabel.Text = "Suburb length has been exceeded.\nSuburbs can only be up to 60 characters.";
+                suburbErrorMessageLabel.Visible = true;
+            }
+            else
+            {
+                suburbErrorMessageLabel.Visible = false;
+            }
+        }
+
+        private void townTextBox_Leave(object sender, EventArgs e)
+        {
+            if (townTextBox.Text.Length >= 60)
+            {
+                townErrorMessageLabel.Text = "Town length has been exceeded.\nTown name can only be up to 60 characters.";
+                townErrorMessageLabel.Visible = true;
+            }
+            else
+            {
+                townErrorMessageLabel.Visible = false;
+            }
+        }
+
+        private void cityTextBox_Leave(object sender, EventArgs e)
+        {
+            if (cityTextBox.Text.Length >= 60)
+            {
+                cityErrorMessageLabel.Text = "City length has been exceeded.\nCity can only be up to 60 characters.";
+                cityErrorMessageLabel.Visible = true;
+            }
+            else
+            {
+                cityErrorMessageLabel.Visible = false;
+            }
         }
 
 

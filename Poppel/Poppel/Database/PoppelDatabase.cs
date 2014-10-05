@@ -19,6 +19,44 @@ namespace Poppel.Database
 {
     public class PoppelDatabase : Database
     {
+        public bool doesKeyExist(string id)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+            bool exists = false;
+            try
+            {
+                command = new SqlCommand("SELECT TOP 1 customer_id FROM Customer WHERE customer_id = '" + id+"'", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();                        //Read from table
+                if (reader.HasRows)
+                {
+                    exists = true;
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                return exists;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+                return true;
+            }
+
+        }
+
+        public void addCustomer(Customer customer)
+        {
+            string sqlString = "";
+            sqlString = "INSERT INTO Customer(customer_id,customer_name,customer_surname,customer_telephoneNumber,customer_email,customer_credit,customer_creditLimit,customer_street,customer_suburb,customer_town,customer_city,customer_zipCode) VALUES ('"+customer.Id.Trim()+"','"+customer.Name.Trim()+"','"+customer.Surname.Trim()+"','"+customer.PhoneNumber.Trim()+"','"+customer.Email.Trim()+"',"+customer.Credit.ToString()+","+customer.CreditLimit.ToString() + ",'"+customer.Address[0].Trim() + "','" + customer.Address[1] + "','" + customer.Address[2] + "','" + customer.Address[3] + "','" + customer.Address[4]+"')";
+
+            UpdateDataSource(new SqlCommand(sqlString, cnMain));
+        }
+
+
         /// <summary>
         /// Reads customers from database with argument telephone number.
         /// </summary>
@@ -31,7 +69,7 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                command = new SqlCommand("SELECT * FROM Customer WHERE customer_telephoneNumber = " + telephoneNumber, cnMain);
+                command = new SqlCommand("SELECT * FROM Customer WHERE customer_telephoneNumber = '" + telephoneNumber+"'", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table
@@ -109,16 +147,38 @@ namespace Poppel.Database
             customer.Id = reader.GetString(0).Trim();
             customer.Name = reader.GetString(1).Trim();
             customer.Surname = reader.GetString(2).Trim();
-            customer.PhoneNumber = reader.GetString(3).Trim();
-            customer.Email = reader.GetString(4).Trim();
+            if(!reader.IsDBNull(3))
+            {
+                customer.PhoneNumber = reader.GetString(3).Trim();
+            }
+            if (!reader.IsDBNull(4))
+            {
+                customer.Email = reader.GetString(4).Trim();
+            }
             customer.Credit = reader.GetDecimal(5);
             customer.CreditLimit = reader.GetDecimal(6);
             string[] address = new string[5];
-            address[0] = reader.GetString(7).Trim();
-            address[1] = reader.GetString(8).Trim();
-            address[2] = reader.GetString(9).Trim();
-            address[3] = reader.GetString(10).Trim();
-            address[4] = reader.GetString(11).Trim();
+
+            if (!reader.IsDBNull(7))
+            {
+                address[0] = reader.GetString(7).Trim();
+            }
+            if (!reader.IsDBNull(8))
+            {
+                address[1] = reader.GetString(8).Trim();
+            }
+            if (!reader.IsDBNull(9))
+            {
+                address[2] = reader.GetString(9).Trim();
+            }
+            if (!reader.IsDBNull(10))
+            {
+                address[3] = reader.GetString(10).Trim();
+            }
+            if (!reader.IsDBNull(11))
+            {
+                address[4] = reader.GetString(11).Trim();
+            }
             for (int i = 0; i < address.Length;i++ )
             {
                 if(address[i]==null)
