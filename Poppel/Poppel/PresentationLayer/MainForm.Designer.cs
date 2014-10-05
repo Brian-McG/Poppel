@@ -30,12 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatePickingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateExpiredProductsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,10 +55,18 @@
             // customersToolStripMenuItem
             // 
             this.customersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewCustomerToolStripMenuItem,
             this.manageCustomerToolStripMenuItem});
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
+            // 
+            // manageCustomerToolStripMenuItem
+            // 
+            this.manageCustomerToolStripMenuItem.Name = "manageCustomerToolStripMenuItem";
+            this.manageCustomerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.manageCustomerToolStripMenuItem.Text = "Manage Customer";
+            this.manageCustomerToolStripMenuItem.Click += new System.EventHandler(this.manageCustomerToolStripMenuItem_Click);
             // 
             // reportToolStripMenuItem
             // 
@@ -67,26 +76,6 @@
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.reportToolStripMenuItem.Text = "Report";
-            // 
-            // manageCustomerToolStripMenuItem
-            // 
-            this.manageCustomerToolStripMenuItem.Name = "manageCustomerToolStripMenuItem";
-            this.manageCustomerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.manageCustomerToolStripMenuItem.Text = "Manage Customer";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.getHelpToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // getHelpToolStripMenuItem
-            // 
-            this.getHelpToolStripMenuItem.Name = "getHelpToolStripMenuItem";
-            this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.getHelpToolStripMenuItem.Text = "Get Help";
             // 
             // generatePickingListToolStripMenuItem
             // 
@@ -99,6 +88,28 @@
             this.generateExpiredProductsReportToolStripMenuItem.Name = "generateExpiredProductsReportToolStripMenuItem";
             this.generateExpiredProductsReportToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.generateExpiredProductsReportToolStripMenuItem.Text = "Generate Expired Products Report";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getHelpToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // getHelpToolStripMenuItem
+            // 
+            this.getHelpToolStripMenuItem.Name = "getHelpToolStripMenuItem";
+            this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.getHelpToolStripMenuItem.Text = "Get Help";
+            // 
+            // addNewCustomerToolStripMenuItem
+            // 
+            this.addNewCustomerToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addNewCustomerToolStripMenuItem.Name = "addNewCustomerToolStripMenuItem";
+            this.addNewCustomerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.addNewCustomerToolStripMenuItem.Text = "Add New Customer";
+            this.addNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.addNewCustomerToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -126,6 +137,7 @@
         private System.Windows.Forms.ToolStripMenuItem generateExpiredProductsReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addNewCustomerToolStripMenuItem;
     }
 }
 

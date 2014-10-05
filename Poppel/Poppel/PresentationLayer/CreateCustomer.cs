@@ -18,11 +18,12 @@ namespace Poppel.PresentationLayer
 {
     public partial class CreateCustomer : Form
     {
-        private CustomerManangementController customerManagementController = new CustomerManangementController();
+        private CustomerManangementController customerManagementController;
 
-        public CreateCustomer()
+        public CreateCustomer(CustomerManangementController custController)
         {
             InitializeComponent();
+            customerManagementController = custController;
         }
 
         private void modifyCreditLimitCheckBox_CheckedChanged(object sender, EventArgs e)

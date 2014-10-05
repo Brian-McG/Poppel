@@ -36,10 +36,10 @@ namespace Poppel.PresentationLayer
         }
 
         #region Constructors
-        public CustomerManagement()
+        public CustomerManagement(CustomerManangementController custController)
         {
             InitializeComponent();
-            customerManagementController = new CustomerManangementController();
+            customerManagementController = custController;
             inputTextBox.Select();
             editButtonState = editCustomer.editCustomer;
             radioButtonState = radioButtonSelected.customerNumber;
