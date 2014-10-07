@@ -8,23 +8,8 @@ namespace Poppel.Report
 {
     public class Report
     {
-        protected String id;
-        protected String createdBy;
-        protected DateTime date;
-        protected String title;
-        public Report(String createdBy, DateTime date, String title, String ID)
-        {
-            this.id = ID;
-            this.date = date;
-            this.createdBy = createdBy;
-            this.title = title;
-        }
-
-        public Report()
-        {
-        }
         #region Properties
-        public String ID
+        public String id
         {
             get
             {
@@ -36,7 +21,7 @@ namespace Poppel.Report
             }
         }
 
-        public String CreatedBy
+        public String createdBy
         {
             get
             {
@@ -48,7 +33,7 @@ namespace Poppel.Report
             }
         }
 
-        public DateTime Date
+        public DateTime date
         {
             get
             {
@@ -60,7 +45,7 @@ namespace Poppel.Report
             }
         }
 
-        public String Title
+        public String title
         {
             get
             {
@@ -72,5 +57,17 @@ namespace Poppel.Report
             }
         }
         #endregion
+        public Report(String createdBy, DateTime date, String title, String ID)
+        {
+            this.id = ID;
+            this.date = date;
+            this.createdBy = createdBy;
+            this.title = title;
+        }
+
+        public Report()
+        {
+        }
+       
     }
 }

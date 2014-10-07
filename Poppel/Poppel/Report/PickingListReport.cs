@@ -10,21 +10,25 @@ namespace Poppel.Report
 {
     public class PickingListReport
    {
-        private Collection<Product> productToBePicked;
+        #region Properties
+        private Collection<Product> productToBePicked
+        {
+            get
+            {
+                return productToBePicked;
+            }
+            set
+            {
+                productToBePicked = value;
+            }
+        }
+        #endregion
         public PickingListReport(Collection<Product> productToBePicked)
             : base()
         {
             this.productToBePicked = productToBePicked;
         }
 
-       #region Properties
-        private Collection<Product> ProductToBePicked
-        {
-            get
-            {
-                return productToBePicked;
-            }
-        }
-       #endregion
+
    }
 }

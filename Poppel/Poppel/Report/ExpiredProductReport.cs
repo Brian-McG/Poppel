@@ -10,20 +10,24 @@ namespace Poppel.Report
 {
     public class ExpiredProductReport : Report
     {
-        private Collection<Product> expiredProducts;
-        public ExpiredProductReport(Collection<Product> expiredProducts): base()
-        {
-            this.expiredProducts = expiredProducts;
-        }
-
         #region Properties
-        private Collection<Product> ExpiredProduct
+        private Collection<Product> expiredProducts
         {
             get
             {
                 return expiredProducts;
             }
+            set
+            {
+                expiredProducts = value;
+            }
         }
         #endregion
+        public ExpiredProductReport(Collection<Product> expiredProducts): base()
+        {
+            this.expiredProducts = expiredProducts;
+        }
+
+    
     }
 }
