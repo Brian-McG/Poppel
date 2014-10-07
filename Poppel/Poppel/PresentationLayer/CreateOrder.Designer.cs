@@ -214,6 +214,7 @@
             // 
             // creditRemainingTextBox
             // 
+            this.creditRemainingTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.creditRemainingTextBox.Location = new System.Drawing.Point(765, 395);
             this.creditRemainingTextBox.Name = "creditRemainingTextBox";
             this.creditRemainingTextBox.ReadOnly = true;

@@ -156,7 +156,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\coke6Pack.png" />
+    <Content Include="bin\Debug\Assets\coke6Pack.png" />
     <Content Include="PoppelDatabase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
