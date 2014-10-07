@@ -67,6 +67,10 @@ namespace Poppel.Report
 
         public Report()
         {
+            this.id = "";
+            this.date = DateTime.Now;// The current date
+            this.createdBy = "";
+            this.title = "";
         }
        
     }
