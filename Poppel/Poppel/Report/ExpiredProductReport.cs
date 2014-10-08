@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Poppel.Domain;
+using Poppel.Order;
 using System.Collections.ObjectModel;
 
 namespace Poppel.Report
@@ -11,7 +11,7 @@ namespace Poppel.Report
     public class ExpiredProductReport : Report
     {
         #region Properties
-        private Collection<Product> expiredProducts
+        private Collection<OrderItem> expiredProducts
         {
             get
             {
@@ -23,9 +23,9 @@ namespace Poppel.Report
             }
         }
         #endregion
-        public ExpiredProductReport(Collection<Product> expiredProducts): base()
+        public ExpiredProductReport(): base()
         {
-            this.expiredProducts = expiredProducts;
+            expiredProducts = new Collection<OrderItem>();
         }
 
     

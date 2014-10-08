@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Poppel.Domain;
 using System.Collections.ObjectModel;
+using Poppel.Order;
 
 namespace Poppel.Report
 {
     public class PickingListReport
    {
         #region Properties
-        private Collection<Product> productToBePicked
+        OrderController orderController = new OrderController();
+        public Collection<OrderItem> productToBePicked
         {
             get
             {
@@ -23,10 +25,9 @@ namespace Poppel.Report
             }
         }
         #endregion
-        public PickingListReport(Collection<Product> productToBePicked)
-            : base()
+        public PickingListReport(): base()
         {
-            this.productToBePicked = productToBePicked;
+            this.productToBePicked = orderController.getProducts();
         }
 
 
