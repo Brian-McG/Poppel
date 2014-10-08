@@ -131,9 +131,26 @@ namespace Poppel.PresentationLayer
             {
                 addToOrder(orderController.getProduct(id));
                OrderItemForm clickedForm = OrderController.getClickedForm(id, displayedProducts);
-               clickedForm.PlaceOrderButton.Enabled = false;
+               clickedForm.PlaceOrderButton.Text = "Remove";
+               clickedForm.PlaceOrderButton.Click -= addButton_Click;
+             clickedForm.PlaceOrderButton.Click+=removeButton_Click;
+             clickedForm.OrderQuantityNumericUpDown.Enabled = false;
             }
 
+        }
+
+        private void removeButton_Click(object sender , EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            int id = -1;
+            if (int.TryParse(clickedButton.Tag.ToString(), out id))
+            {
+                removeFromOrder(id);
+                OrderItemForm clickedForm = OrderController.getClickedForm(id, displayedProducts);
+                clickedForm.PlaceOrderButton.Text = "Add";
+                clickedForm.PlaceOrderButton.Click -= removeButton_Click;
+                clickedForm.PlaceOrderButton.Click += addButton_Click;
+            }
         }
 
         private void flowLayoutPanel_MouseEnter(object sender, EventArgs e)
@@ -224,17 +241,7 @@ namespace Poppel.PresentationLayer
                 int parseInt = -1;
                 if (int.TryParse(basketListView.SelectedItems[0].SubItems[0].Tag.ToString(), out parseInt))
                 {
-                    OrderItem removalItem = orderController.getProduct(parseInt);
-                    orderItems.Remove(removalItem);
-                    basketListView.Items.Remove(basketListView.SelectedItems[0]);
-                    orderController.OrderTotal -= (removalItem.Product.Price * removalItem.Quantity);
-                    totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
-                    OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, displayedProducts);
-                    clickedForm.PlaceOrderButton.Enabled = true;
-                    if(orderItems.Count==0)
-                    {
-                        checkOutButton.Enabled = false;
-                    }
+                    removeFromOrder(parseInt);
                 }
                 
             }
@@ -247,6 +254,33 @@ namespace Poppel.PresentationLayer
              
            
             
+        }
+        private void removeFromOrder(int parseInt)
+        {
+            OrderItem removalItem = orderController.getProduct(parseInt);
+            OrderItemForm removeForm = OrderController.getClickedForm(parseInt,displayedProducts);
+            orderItems.Remove(removalItem);
+            int index = 0;
+            for (int i=0; i < basketListView.Items.Count;i++ )
+            {
+                if (int.TryParse(basketListView.Items[i].SubItems[0].Tag.ToString(), out index))
+                {
+                    if(index==parseInt)
+                    {
+                        basketListView.Items.Remove(basketListView.Items[i]);
+                        break;
+                    }
+                }
+            }
+            orderController.OrderTotal -= (removalItem.Product.Price * removalItem.Quantity);
+            totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
+            OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, displayedProducts);
+            clickedForm.PlaceOrderButton.Enabled = true;
+            if (orderItems.Count == 0)
+            {
+                checkOutButton.Enabled = false;
+            }
+            removeForm.OrderQuantityNumericUpDown.Enabled = true;
         }
     }
 }
