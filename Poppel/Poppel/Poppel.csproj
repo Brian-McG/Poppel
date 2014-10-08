@@ -67,7 +67,6 @@
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Email\EmailController.cs" />
-    <Compile Include="Order\Order.cs" />
     <Compile Include="Order\OrderController.cs" />
     <Compile Include="Order\OrderItem.cs" />
     <Compile Include="PoppelDatabaseDataSet.Designer.cs">
