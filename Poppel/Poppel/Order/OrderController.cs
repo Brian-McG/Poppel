@@ -40,6 +40,23 @@ namespace Poppel.Order
             setProducts();
             return products;
         }
+        public static OrderItemForm getClickedForm(int id,Collection<OrderItemForm> orderItemForms)
+        {
+            OrderItemForm returnForm = null;
+            bool stop = false;
+            int i = 0;
+            while (stop != true && i < orderItemForms.Count)
+            {
+                if (orderItemForms[i].Id == id)
+                {
+                    returnForm = orderItemForms[i];
+                    stop = true;
+                }
+                i++;
+                
+            }
+            return returnForm;
+        }
 
         private void setProducts()
         {
