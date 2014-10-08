@@ -22,7 +22,6 @@ namespace Poppel.PresentationLayer
         private OrderController orderController;
         private Collection<OrderItem> products;
         private Collection<OrderItem> orderItems;
-        private Collection<OrderItemForm> displayedProducts;
         
 
 
@@ -33,7 +32,6 @@ namespace Poppel.PresentationLayer
 
             products = orderController.getProducts();
             orderItems = new Collection<OrderItem>();
-            displayedProducts = new Collection<OrderItemForm>();
             setUpEmployeeListView();
             setUpOrderFlowPanel();
             basketListView.View = View.Details;
@@ -43,74 +41,69 @@ namespace Poppel.PresentationLayer
         {
             foreach (OrderItem orderItem in products)
             {
+                FlowLayoutPanel productPanel = new FlowLayoutPanel();
+                productPanel.Width = 200;
+                productPanel.Height = 270;
+                productPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
-                OrderItemForm orderItemForm = new OrderItemForm();
-
-                orderItemForm.Id = orderItem.Product.Id;
-
-                orderItemForm.ProductPanel.Width = 200;
-                orderItemForm.ProductPanel.Height = 270;
-                orderItemForm.ProductPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-
-                orderItemForm.PictureLabel.Width = 200;
-                orderItemForm.PictureLabel.Height = 150;
+                Label pictureLabel = new Label();
+                pictureLabel.Width = 200;
+                pictureLabel.Height = 150;
                 Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
-                orderItemForm.PictureLabel.Image = pictureBitmap;
-                orderItemForm.ProductPanel.Controls.Add(orderItemForm.PictureLabel);
-                
-            orderItemForm.ProductDescriptionLabel = new Label();
-            orderItemForm.ProductDescriptionLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.ProductDescriptionLabel.Text = orderItem.Product.Description;
-            orderItemForm.ProductDescriptionLabel.TextAlign = ContentAlignment.TopCenter;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.ProductDescriptionLabel);
+                pictureLabel.Image = pictureBitmap;
+                productPanel.Controls.Add(pictureLabel);
 
-                
-            orderItemForm.NumberInStockLabel.Text = "Quantity In Stock: " + orderItem.Product.NumberInStock;
-            orderItemForm.NumberInStockLabel.AutoSize = true;
-            orderItemForm.NumberInStockLabel.Width = orderItemForm.ProductPanel.Width;
+                Label productDescriptionLabel = new Label();
+                productDescriptionLabel.Width = productPanel.Width;
+                productDescriptionLabel.Text = orderItem.Product.Description;
+                productDescriptionLabel.TextAlign = ContentAlignment.TopCenter;
+                productPanel.Controls.Add(productDescriptionLabel);
 
+                Label numberInStockLabel = new Label();
+                numberInStockLabel.Text = "Quantity In Stock: " + orderItem.Product.NumberInStock;
+                numberInStockLabel.AutoSize = true;
+                numberInStockLabel.Width = productPanel.Width;
 
-            orderItemForm.SimilarFilterCheckBox.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.SimilarFilterCheckBox.Text = "Filter to alternatives";
+                CheckBox similarFilterCheckBox = new CheckBox();
+                similarFilterCheckBox.Width = productPanel.Width;
+                similarFilterCheckBox.Text = "Filter to alternatives";
 
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.NumberInStockLabel);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.SimilarFilterCheckBox);
+                productPanel.Controls.Add(numberInStockLabel);
+                productPanel.Controls.Add(similarFilterCheckBox);
 
+                Label costLabel = new Label();
+                costLabel.Text = "R " + string.Format("{0:0.00}", orderItem.Product.Price);
+                costLabel.Width = productPanel.Width;
+                costLabel.BackColor = Color.NavajoWhite;
+                costLabel.TextAlign = ContentAlignment.MiddleCenter;
+                costLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                costLabel.Width = productPanel.Width;
+                productPanel.Controls.Add(costLabel);
 
-            orderItemForm.CostLabel = new Label();
-            orderItemForm.CostLabel.Text = "R " + string.Format("{0:0.00}", orderItem.Product.Price);
-            orderItemForm.CostLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.CostLabel.BackColor = Color.NavajoWhite;
-            orderItemForm.CostLabel.TextAlign = ContentAlignment.MiddleCenter;
-            orderItemForm.CostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            orderItemForm.CostLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.CostLabel);
+                Label quantityLabel = new Label();
+                quantityLabel.Text = "Quantity:";
+                quantityLabel.TextAlign = ContentAlignment.MiddleCenter;
+                quantityLabel.Size = new System.Drawing.Size(49, 20);
+                productPanel.Controls.Add(quantityLabel);
 
-                
-            orderItemForm.QuantityLabel.Text = "Quantity:";
-            orderItemForm.QuantityLabel.TextAlign = ContentAlignment.MiddleCenter;
-            orderItemForm.QuantityLabel.Size = new System.Drawing.Size(49, 20);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.QuantityLabel);
+                NumericUpDown orderQuantityNumericUpDown = new NumericUpDown();
+                orderQuantityNumericUpDown.Minimum=1;
+                orderQuantityNumericUpDown.Width = 35;
+                orderQuantityNumericUpDown.Tag = orderItem.Product.Id;
+                orderQuantityNumericUpDown.Maximum = orderItem.Product.NumberInStock;
+                productPanel.Controls.Add(orderQuantityNumericUpDown);
+                orderQuantityNumericUpDown.ValueChanged += new EventHandler(orderQuantity_ValueChanged);
 
-                
-            orderItemForm.OrderQuantityNumericUpDown.Minimum = 1;
-            orderItemForm.OrderQuantityNumericUpDown.Width = 35;
-            orderItemForm.OrderQuantityNumericUpDown.Tag = orderItem.Product.Id;
-            orderItemForm.OrderQuantityNumericUpDown.Maximum = orderItem.Product.NumberInStock;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.OrderQuantityNumericUpDown);
-            orderItemForm.OrderQuantityNumericUpDown.ValueChanged += new EventHandler(orderQuantity_ValueChanged);
+                Button placeOrderButton = new Button();
+                placeOrderButton.Tag = orderItem.Product.Id;
+                placeOrderButton.Text = "Add";
+                placeOrderButton.Click += new EventHandler(this.addButton_Click);
 
-            orderItemForm.PlaceOrderButton.Tag = orderItem.Product.Id;
-            orderItemForm.PlaceOrderButton.Text = "Add";
-            orderItemForm.PlaceOrderButton.Click += new EventHandler(this.addButton_Click);
-
-            orderItemForm.SpacerLabel.Width = 15;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.SpacerLabel);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.PlaceOrderButton);
-
-                stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
-                displayedProducts.Add(orderItemForm);
+                Label spacerLabel = new Label();
+                spacerLabel.Width = 15;
+                productPanel.Controls.Add(spacerLabel);
+                productPanel.Controls.Add(placeOrderButton);
+                stockItemsFlowLayoutPanel.Controls.Add(productPanel);
             }
         }
         private void orderQuantity_ValueChanged(object sender, EventArgs e)
@@ -130,8 +123,6 @@ namespace Poppel.PresentationLayer
             if (int.TryParse(clickedButton.Tag.ToString(), out id))
             {
                 addToOrder(orderController.getProduct(id));
-               OrderItemForm clickedForm = OrderController.getClickedForm(id, displayedProducts);
-               clickedForm.PlaceOrderButton.Enabled = false;
             }
 
         }
@@ -229,8 +220,6 @@ namespace Poppel.PresentationLayer
                     basketListView.Items.Remove(basketListView.SelectedItems[0]);
                     orderController.OrderTotal -= (removalItem.Product.Price * removalItem.Quantity);
                     totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
-                    OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, displayedProducts);
-                    clickedForm.PlaceOrderButton.Enabled = true;
                     if(orderItems.Count==0)
                     {
                         checkOutButton.Enabled = false;
