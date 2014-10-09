@@ -75,6 +75,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PoppelDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\CancelOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\CancelOrder.Designer.cs">
+      <DependentUpon>CancelOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\CreateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     <Compile Include="Report\ExpiredProductReport.cs" />
     <Compile Include="Report\PickingListReport.cs" />
     <Compile Include="Report\Report.cs" />
+    <EmbeddedResource Include="PresentationLayer\CancelOrder.resx">
+      <DependentUpon>CancelOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\CreateCustomer.resx">
       <DependentUpon>CreateCustomer.cs</DependentUpon>
     </EmbeddedResource>

@@ -22,6 +22,7 @@ namespace Poppel.PresentationLayer
         public PickingList()
         {
             InitializeComponent();
+            products = pickReport.productToBePicked;
         }
         private void pickDateCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
@@ -40,8 +41,6 @@ namespace Poppel.PresentationLayer
 
         private void populateForm()
         {
-
-            products = pickReport.productToBePicked;
             ListViewItem itemDetails;
             
             foreach (OrderItem item in products)
@@ -52,7 +51,7 @@ namespace Poppel.PresentationLayer
                     itemDetails.SubItems.Add(item.Product.Id+"");
                     itemDetails.SubItems.Add(item.Product.Description);
                     itemDetails.SubItems.Add(item.Quantity+"");
-                    itemDetails.SubItems.Add(item.Product.Description);// need order number
+                    itemDetails.SubItems.Add(item.Product.NumberInStock+"");// need order number
                     itemDetails.SubItems.Add("");
 
                     productListView.Items.Add(itemDetails);
