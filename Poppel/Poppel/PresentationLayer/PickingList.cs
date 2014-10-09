@@ -52,7 +52,7 @@ namespace Poppel.PresentationLayer
                     itemDetails.SubItems.Add(item.Product.Id+"");
                     itemDetails.SubItems.Add(item.Product.Description);
                     itemDetails.SubItems.Add(item.Quantity+"");
-                    itemDetails.SubItems.Add((item.Product.Description);// need order number
+                    itemDetails.SubItems.Add(item.Product.Description);// need order number
                     itemDetails.SubItems.Add("");
 
                     productListView.Items.Add(itemDetails);
