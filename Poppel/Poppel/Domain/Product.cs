@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,17 @@ namespace Poppel.Domain
        private decimal price;
        private int numberInStock;
        private string productCode;
+       private Collection<Product> alternatives;
+
        
 
        #region Properties
+       public Collection<Product> Alternatives
+       {
+           get { return alternatives; }
+           set { alternatives = value; }
+       }
+
        public decimal Vat
        {
            get

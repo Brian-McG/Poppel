@@ -190,10 +190,10 @@
   <ItemGroup>
     <Content Include="bin\Debug\Assets\coke6Pack.png" />
     <Content Include="PoppelDatabase.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PoppelDatabase_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>PoppelDatabase.mdf</DependentUpon>
     </Content>
     <None Include="Resources\Coke6Pack.png" />

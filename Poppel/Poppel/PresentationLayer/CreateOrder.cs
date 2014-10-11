@@ -22,7 +22,7 @@ namespace Poppel.PresentationLayer
         private OrderController orderController;
         private Collection<OrderItem> products;
         private Collection<OrderItem> orderItems;
-        private Collection<OrderItemForm> displayedProducts;
+        
         
 
 
@@ -33,7 +33,7 @@ namespace Poppel.PresentationLayer
 
             products = orderController.getProducts();
             orderItems = new Collection<OrderItem>();
-            displayedProducts = new Collection<OrderItemForm>();
+            orderController.DisplayedProducts = new Collection<OrderItemForm>();
             setUpEmployeeListView();
             setUpOrderFlowPanel();
             basketListView.View = View.Details;
@@ -44,73 +44,13 @@ namespace Poppel.PresentationLayer
             foreach (OrderItem orderItem in products)
             {
 
-                OrderItemForm orderItemForm = new OrderItemForm();
-
-                orderItemForm.Id = orderItem.Product.Id;
-
-                orderItemForm.ProductPanel.Width = 200;
-                orderItemForm.ProductPanel.Height = 270;
-                orderItemForm.ProductPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-
-                orderItemForm.PictureLabel.Width = 200;
-                orderItemForm.PictureLabel.Height = 150;
-                Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
-                orderItemForm.PictureLabel.Image = pictureBitmap;
-                orderItemForm.ProductPanel.Controls.Add(orderItemForm.PictureLabel);
-                
-            orderItemForm.ProductDescriptionLabel = new Label();
-            orderItemForm.ProductDescriptionLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.ProductDescriptionLabel.Text = orderItem.Product.Description;
-            orderItemForm.ProductDescriptionLabel.TextAlign = ContentAlignment.TopCenter;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.ProductDescriptionLabel);
-
-                
-            orderItemForm.NumberInStockLabel.Text = "Quantity In Stock: " + orderItem.Product.NumberInStock;
-            orderItemForm.NumberInStockLabel.AutoSize = true;
-            orderItemForm.NumberInStockLabel.Width = orderItemForm.ProductPanel.Width;
-
-
-            orderItemForm.SimilarFilterCheckBox.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.SimilarFilterCheckBox.Text = "Filter to alternatives";
-
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.NumberInStockLabel);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.SimilarFilterCheckBox);
-
-
-            orderItemForm.CostLabel = new Label();
-            orderItemForm.CostLabel.Text = "R " + string.Format("{0:0.00}", orderItem.Product.Price);
-            orderItemForm.CostLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.CostLabel.BackColor = Color.NavajoWhite;
-            orderItemForm.CostLabel.TextAlign = ContentAlignment.MiddleCenter;
-            orderItemForm.CostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            orderItemForm.CostLabel.Width = orderItemForm.ProductPanel.Width;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.CostLabel);
-
-                
-            orderItemForm.QuantityLabel.Text = "Quantity:";
-            orderItemForm.QuantityLabel.TextAlign = ContentAlignment.MiddleCenter;
-            orderItemForm.QuantityLabel.Size = new System.Drawing.Size(49, 20);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.QuantityLabel);
-
-                
-            orderItemForm.OrderQuantityNumericUpDown.Minimum = 1;
-            orderItemForm.OrderQuantityNumericUpDown.Width = 35;
-            orderItemForm.OrderQuantityNumericUpDown.Tag = orderItem.Product.Id;
-            orderItemForm.OrderQuantityNumericUpDown.Maximum = orderItem.Product.NumberInStock;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.OrderQuantityNumericUpDown);
-            orderItemForm.OrderQuantityNumericUpDown.ValueChanged += new EventHandler(orderQuantity_ValueChanged);
-
-            orderItemForm.PlaceOrderButton.Tag = orderItem.Product.Id;
-            orderItemForm.PlaceOrderButton.Text = "Add";
-            orderItemForm.PlaceOrderButton.Click += new EventHandler(this.addButton_Click);
-
-            orderItemForm.SpacerLabel.Width = 15;
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.SpacerLabel);
-            orderItemForm.ProductPanel.Controls.Add(orderItemForm.PlaceOrderButton);
-
-                stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
-                displayedProducts.Add(orderItemForm);
+                OrderItemForm orderItemForm = new OrderItemForm(orderItem);
+                orderItemForm.SimilarFilterCheckBox.CheckedChanged += new EventHandler(setAlternativesCheckBox_Checked);
+                orderItemForm.OrderQuantityNumericUpDown.ValueChanged += new EventHandler(orderQuantity_ValueChanged);
+                orderItemForm.PlaceOrderButton.Click += new EventHandler(this.addButton_Click);
+               stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
+                orderController.DisplayedProducts.Add(orderItemForm);
+                orderController.AllProducts.Add(orderItemForm);
             }
         }
         private void orderQuantity_ValueChanged(object sender, EventArgs e)
@@ -119,7 +59,7 @@ namespace Poppel.PresentationLayer
               int id = -1;
               if (int.TryParse(quantityUpDown.Tag.ToString(), out id))
               {
-                  orderController.getProduct(id).Quantity = decimal.ToInt32(quantityUpDown.Value);
+                  OrderController.getProduct(id,products).Quantity = decimal.ToInt32(quantityUpDown.Value);
               }
         }
 
@@ -129,8 +69,8 @@ namespace Poppel.PresentationLayer
             int id = -1;
             if (int.TryParse(clickedButton.Tag.ToString(), out id))
             {
-                addToOrder(orderController.getProduct(id));
-               OrderItemForm clickedForm = OrderController.getClickedForm(id, displayedProducts);
+                addToOrder(OrderController.getProduct(id, products));
+                OrderItemForm clickedForm = OrderController.getClickedForm(id, orderController.DisplayedProducts);
                clickedForm.PlaceOrderButton.Text = "Remove";
                clickedForm.PlaceOrderButton.Click -= addButton_Click;
              clickedForm.PlaceOrderButton.Click+=removeButton_Click;
@@ -146,7 +86,7 @@ namespace Poppel.PresentationLayer
             if (int.TryParse(clickedButton.Tag.ToString(), out id))
             {
                 removeFromOrder(id);
-                OrderItemForm clickedForm = OrderController.getClickedForm(id, displayedProducts);
+                OrderItemForm clickedForm = OrderController.getClickedForm(id, orderController.DisplayedProducts);
                 clickedForm.PlaceOrderButton.Text = "Add";
                 clickedForm.PlaceOrderButton.Click -= removeButton_Click;
                 clickedForm.PlaceOrderButton.Click += addButton_Click;
@@ -257,8 +197,8 @@ namespace Poppel.PresentationLayer
         }
         private void removeFromOrder(int parseInt)
         {
-            OrderItem removalItem = orderController.getProduct(parseInt);
-            OrderItemForm removeForm = OrderController.getClickedForm(parseInt,displayedProducts);
+            OrderItem removalItem = OrderController.getProduct(parseInt, products);
+            OrderItemForm removeForm = OrderController.getClickedForm(parseInt, orderController.DisplayedProducts);
             orderItems.Remove(removalItem);
             int index = 0;
             for (int i=0; i < basketListView.Items.Count;i++ )
@@ -274,7 +214,7 @@ namespace Poppel.PresentationLayer
             }
             orderController.OrderTotal -= (removalItem.Product.Price * removalItem.Quantity);
             totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
-            OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, displayedProducts);
+            OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, orderController.DisplayedProducts);
             clickedForm.PlaceOrderButton.Enabled = true;
             if (orderItems.Count == 0)
             {
@@ -282,5 +222,49 @@ namespace Poppel.PresentationLayer
             }
             removeForm.OrderQuantityNumericUpDown.Enabled = true;
         }
+
+       private void setAlternativesCheckBox_Checked(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+           if(checkBox.Checked)
+           {
+                int id = -1;
+                if (int.TryParse(checkBox.Tag.ToString(), out id))
+                {
+                    orderController.setAlternatives(id);
+                    stockItemsFlowLayoutPanel.Controls.Clear();
+                    foreach(OrderItemForm orderItemForm in orderController.DisplayedProducts)
+                    {
+                        stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
+                    }
+                }
+           }
+           else
+           {
+                int id = -1;
+                if (int.TryParse(checkBox.Tag.ToString(), out id))
+                {
+                    orderController.unSetAlternatives(id);
+                    stockItemsFlowLayoutPanel.Controls.Clear();
+                    foreach (OrderItemForm orderItemForm in orderController.DisplayedProducts)
+                    {
+                        stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
+                    }
+                }
+           }
+        }
+
+       private void searchTextBox_TextChanged(object sender, EventArgs e)
+       {
+           stockItemsFlowLayoutPanel.Controls.Clear();
+           foreach(OrderItemForm orderItemForm in orderController.DisplayedProducts)
+           {
+               if(orderItemForm.ProductDescriptionLabel.Text.ToLower().Contains(searchTextBox.Text.ToLower()))
+               {
+                   stockItemsFlowLayoutPanel.Controls.Add(orderItemForm.ProductPanel);
+
+               }
+           }
+       }
     }
 }

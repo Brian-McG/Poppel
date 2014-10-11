@@ -113,6 +113,7 @@
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(135, 20);
             this.searchTextBox.TabIndex = 18;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // basketLabel
             // 

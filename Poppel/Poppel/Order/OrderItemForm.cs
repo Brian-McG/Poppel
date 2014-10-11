@@ -16,7 +16,13 @@ namespace Poppel.Order
     {
 
         private int id;
+        private OrderItem refOrderItem;
 
+        public OrderItem RefOrderItem
+        {
+            get { return refOrderItem; }
+            set { refOrderItem = value; }
+        }
         public int Id
         {
             get { return id; }
@@ -95,7 +101,7 @@ namespace Poppel.Order
             set { spacerLabel = value; }
         }
 
-        public OrderItemForm()
+        public OrderItemForm(OrderItem orderItem)
         {
             productPanel = new FlowLayoutPanel();
             pictureLabel = new Label();
@@ -107,6 +113,75 @@ namespace Poppel.Order
             orderQuantityNumericUpDown = new NumericUpDown();
             placeOrderButton = new Button();
             spacerLabel = new Label();
+
+            RefOrderItem = orderItem;
+            Id = orderItem.Product.Id;
+
+            ProductPanel.Width = 200;
+            ProductPanel.Height = 270;
+            ProductPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+
+
+            PictureLabel.Width = 200;
+            PictureLabel.Height = 150;
+            Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
+            PictureLabel.Image = pictureBitmap;
+            ProductPanel.Controls.Add(PictureLabel);
+
+            ProductDescriptionLabel = new Label();
+            ProductDescriptionLabel.Width = ProductPanel.Width;
+            ProductDescriptionLabel.Text = orderItem.Product.Description;
+            ProductDescriptionLabel.TextAlign = ContentAlignment.TopCenter;
+            ProductPanel.Controls.Add(ProductDescriptionLabel);
+
+
+            NumberInStockLabel.Text = "Quantity In Stock: " + orderItem.Product.NumberInStock;
+            NumberInStockLabel.AutoSize = true;
+            NumberInStockLabel.Width = ProductPanel.Width;
+
+
+            SimilarFilterCheckBox.Width = ProductPanel.Width;
+            SimilarFilterCheckBox.Text = "Filter to alternatives";
+            SimilarFilterCheckBox.Tag = orderItem.Product.Id;
+            
+
+
+            ProductPanel.Controls.Add(NumberInStockLabel);
+            ProductPanel.Controls.Add(SimilarFilterCheckBox);
+
+
+            CostLabel = new Label();
+            CostLabel.Text = "R " + string.Format("{0:0.00}", orderItem.Product.Price);
+            CostLabel.Width = ProductPanel.Width;
+            CostLabel.BackColor = Color.NavajoWhite;
+            CostLabel.TextAlign = ContentAlignment.MiddleCenter;
+            CostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            CostLabel.Width = ProductPanel.Width;
+            ProductPanel.Controls.Add(CostLabel);
+
+
+            QuantityLabel.Text = "Quantity:";
+            QuantityLabel.TextAlign = ContentAlignment.MiddleCenter;
+            QuantityLabel.Size = new System.Drawing.Size(49, 20);
+            ProductPanel.Controls.Add(QuantityLabel);
+
+
+            OrderQuantityNumericUpDown.Minimum = 1;
+            OrderQuantityNumericUpDown.Width = 35;
+            OrderQuantityNumericUpDown.Tag = orderItem.Product.Id;
+            OrderQuantityNumericUpDown.Maximum = orderItem.Product.NumberInStock;
+            ProductPanel.Controls.Add(OrderQuantityNumericUpDown);
+           
+
+            PlaceOrderButton.Tag = orderItem.Product.Id;
+            PlaceOrderButton.Text = "Add";
+            
+
+            SpacerLabel.Width = 15;
+            ProductPanel.Controls.Add(SpacerLabel);
+            ProductPanel.Controls.Add(PlaceOrderButton);
+
+           
         }
 
         #region Properties

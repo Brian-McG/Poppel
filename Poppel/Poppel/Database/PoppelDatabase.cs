@@ -129,6 +129,8 @@ namespace Poppel.Database
                 return null;
             }
         }
+
+       
         
         public Collection<OrderItem> readProducts()
         {
@@ -150,9 +152,12 @@ namespace Poppel.Database
                         products.Add(orderItem);
 
                     }
+
+
                 }
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
+                readAlternatives(products);
                 foreach (OrderItem product in products)
                 {
                     setStockCount(product.Product);
@@ -169,6 +174,42 @@ namespace Poppel.Database
          
 
 
+        }
+
+        private void readAlternatives(Collection<OrderItem> products)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                foreach(OrderItem product in products)
+                {
+                    command = new SqlCommand("SELECT alternative_product_id FROM Alternatives WHERE product_id="+product.Product.Id, cnMain);
+                    cnMain.Open();             //open the connection
+                    command.CommandType = CommandType.Text;
+                    reader = command.ExecuteReader();   
+                    //Read from table
+                    if (reader.HasRows)
+                    {
+                        product.Product.Alternatives = new Collection<Product>();
+                        while (reader.Read())
+                        {
+                            OrderItem alternative = OrderController.getProduct(reader.GetInt32(0), products);
+                            Product alternativeProduct = alternative.Product;
+                            product.Product.Alternatives.Add(alternativeProduct) ;
+                        }
+                    }
+                    reader.Close();   //close the reader 
+                    cnMain.Close();  //close the connection
+
+                }
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
         }
          
         
