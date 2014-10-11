@@ -20,6 +20,7 @@ namespace Poppel.Database
 {
     public class PoppelDatabase : Database
     {
+        private Collection<Category> categories;
         public bool doesKeyExist(string id)
         {
             SqlDataReader reader;
@@ -158,10 +159,12 @@ namespace Poppel.Database
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
                 readAlternatives(products);
+                readCategories(products);
                 foreach (OrderItem product in products)
                 {
                     setStockCount(product.Product);
                 }
+                
                 return products;
             }
             catch (Exception ex)
@@ -211,7 +214,55 @@ namespace Poppel.Database
                 Console.Write(ex.ToString());
             }
         }
-         
+
+        private void readCategories(Collection<OrderItem> products)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                if(categories==null)
+                {
+                    readCategories();
+                }
+                foreach (OrderItem product in products)
+                {
+                    command = new SqlCommand("SELECT category_id FROM ProductCategory WHERE product_id=" + product.Product.Id, cnMain);
+                    cnMain.Open();             //open the connection
+                    command.CommandType = CommandType.Text;
+                    reader = command.ExecuteReader();
+                    //Read from table
+                    if (reader.HasRows)
+                    {
+                        product.Product.Categories = new Collection<Category>();
+                        while (reader.Read())
+                        {
+                            int category_id = reader.GetInt32(0);
+                            Boolean added=false;
+                            int index=0;
+                            while(!added&&index<categories.Count)
+                            {
+                                if(categories[index].Category_id==category_id)
+                                {
+                                    product.Product.Categories.Add(categories[index]);
+                                    added = true;
+                                }
+                                index++;
+                            }
+                        }
+                    }
+                    reader.Close();   //close the reader 
+                    cnMain.Close();  //close the connection
+
+                }
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+        }
         
         private Product createProduct(SqlDataReader reader)
         {
@@ -313,8 +364,43 @@ namespace Poppel.Database
             }
                 customer.Address = address;
             return customer;
+        }
 
-
+        public Collection<Category> readCategories()
+        {
+             SqlDataReader reader;
+            SqlCommand command;
+            Collection<Category> categories;
+            try
+            {
+                    command = new SqlCommand("SELECT * FROM Category", cnMain);
+                    cnMain.Open();             //open the connection
+                    command.CommandType = CommandType.Text;
+                    reader = command.ExecuteReader();
+                    categories = new Collection<Category>();
+                    //Read from table
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            Category category = new Category();
+                            category.Category_id = reader.GetInt32(0);
+                            category.Category_description = reader.GetString(1);
+                            categories.Add(category);
+                        }
+                    }
+                    reader.Close();   //close the reader 
+                    cnMain.Close();  //close the connection
+                    this.categories = categories;
+                    return categories;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return null;
         }
 
 

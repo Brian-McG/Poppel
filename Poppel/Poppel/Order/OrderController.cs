@@ -20,6 +20,7 @@ namespace Poppel.Order
         private decimal orderTotal;
         private Collection<OrderItemForm> displayedProducts;
         private Collection<OrderItemForm> allProducts;
+        private Collection<Category> categories;
 
         public Collection<OrderItemForm> AllProducts
         {
@@ -36,6 +37,15 @@ namespace Poppel.Order
                 displayedProducts = value;
 
             }
+        }
+
+        public Collection<Category> getCategories()
+        {
+            if (categories==null||categories.Count==0)
+            {
+                categories = database.readCategories();
+            }
+            return categories;
         }
 
         public decimal OrderTotal
@@ -55,6 +65,7 @@ namespace Poppel.Order
             products = new Collection<OrderItem>();
             database = new PoppelDatabase();
             allProducts = new Collection<OrderItemForm>();
+            categories = new Collection<Category>();
             orderTotal = 0;
         }
 
@@ -162,6 +173,53 @@ namespace Poppel.Order
             }
 
             return returnProduct;
+
+        }
+
+        public void clearFilters()
+        {
+            displayedProducts.Clear();
+            foreach (OrderItemForm orderItemForm in allProducts)
+            {
+                orderItemForm.SimilarFilterCheckBox.Checked = false;
+                displayedProducts.Add(orderItemForm);
+            }
+        }
+
+        public void setCategory(string category)
+        {
+            displayedProducts.Clear();
+            foreach (OrderItemForm orderItemForm in allProducts)
+            {
+                displayedProducts.Add(orderItemForm);
+            }
+            if(!category.Equals("All")&&!category.Equals(""))
+            {
+                Collection<OrderItemForm> categoriesForm = new Collection<OrderItemForm>();
+                Collection<Product> alternatives;
+
+                foreach (OrderItemForm categoryForm in displayedProducts)
+                {
+                    int index = 0;
+                    bool added = false;
+                    while (!added && index < categoryForm.RefOrderItem.Product.Categories.Count)
+                    {
+                        if (categoryForm.RefOrderItem.Product.Categories[index].Category_description.Equals(category))
+                        {
+                            added = true;
+                            categoriesForm.Add(categoryForm);
+                        }
+                        index++;
+                    }
+
+
+                }
+
+                displayedProducts = categoriesForm;
+
+            }
+           
+
 
         }
 

@@ -19,10 +19,18 @@ namespace Poppel.Domain
        private int numberInStock;
        private string productCode;
        private Collection<Product> alternatives;
+       private Collection<Category> categories;
+
 
        
 
        #region Properties
+
+       public Collection<Category> Categories
+       {
+           get { return categories; }
+           set { categories = value; }
+       }
        public Collection<Product> Alternatives
        {
            get { return alternatives; }

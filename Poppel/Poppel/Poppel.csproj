@@ -62,6 +62,7 @@
     <Compile Include="CustomerMangement\CustomerManangementController.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\PoppelDatabase.cs" />
+    <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\Employee.cs" />
     <Compile Include="Domain\Person.cs" />
@@ -188,7 +189,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Assets\Asset Reference.txt" />
     <Content Include="bin\Debug\Assets\coke6Pack.png" />
+    <Content Include="bin\Debug\Assets\fanta6Pack.jpg" />
+    <Content Include="bin\Debug\Assets\fanta6Pack.png" />
+    <Content Include="bin\Debug\Assets\sprite6Pack.png" />
+    <Content Include="bin\Debug\Assets\sprite_6pk.jpg" />
     <Content Include="PoppelDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

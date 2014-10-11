@@ -46,7 +46,10 @@
             this.creditRemainingLabel = new System.Windows.Forms.Label();
             this.totalCostTextBox = new System.Windows.Forms.TextBox();
             this.creditRemainingTextBox = new System.Windows.Forms.TextBox();
+            this.poppelDatabaseDataSet1 = new Poppel.PoppelDatabaseDataSet();
+            this.cancelOrderButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poppelDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // stockItemsFlowLayoutPanel
@@ -63,7 +66,7 @@
             // 
             this.filterProductsLabel.AutoSize = true;
             this.filterProductsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterProductsLabel.Location = new System.Drawing.Point(727, 201);
+            this.filterProductsLabel.Location = new System.Drawing.Point(726, 120);
             this.filterProductsLabel.Name = "filterProductsLabel";
             this.filterProductsLabel.Size = new System.Drawing.Size(119, 20);
             this.filterProductsLabel.TabIndex = 1;
@@ -101,7 +104,7 @@
             // searchLabel
             // 
             this.searchLabel.AutoSize = true;
-            this.searchLabel.Location = new System.Drawing.Point(672, 243);
+            this.searchLabel.Location = new System.Drawing.Point(671, 156);
             this.searchLabel.Name = "searchLabel";
             this.searchLabel.Size = new System.Drawing.Size(87, 13);
             this.searchLabel.TabIndex = 0;
@@ -109,7 +112,7 @@
             // 
             // searchTextBox
             // 
-            this.searchTextBox.Location = new System.Drawing.Point(765, 240);
+            this.searchTextBox.Location = new System.Drawing.Point(764, 153);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(135, 20);
             this.searchTextBox.TabIndex = 18;
@@ -119,7 +122,7 @@
             // 
             this.basketLabel.AutoSize = true;
             this.basketLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.basketLabel.Location = new System.Drawing.Point(748, 333);
+            this.basketLabel.Location = new System.Drawing.Point(747, 246);
             this.basketLabel.Name = "basketLabel";
             this.basketLabel.Size = new System.Drawing.Size(61, 20);
             this.basketLabel.TabIndex = 19;
@@ -127,10 +130,10 @@
             // 
             // basketListView
             // 
-            this.basketListView.Location = new System.Drawing.Point(672, 470);
+            this.basketListView.Location = new System.Drawing.Point(671, 383);
             this.basketListView.MultiSelect = false;
             this.basketListView.Name = "basketListView";
-            this.basketListView.Size = new System.Drawing.Size(228, 424);
+            this.basketListView.Size = new System.Drawing.Size(228, 455);
             this.basketListView.TabIndex = 21;
             this.basketListView.UseCompatibleStateImageBehavior = false;
             this.basketListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.basketListView_ItemSelectionChanged);
@@ -140,7 +143,7 @@
             // categoryLabel
             // 
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(672, 274);
+            this.categoryLabel.Location = new System.Drawing.Point(671, 187);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(52, 13);
             this.categoryLabel.TabIndex = 22;
@@ -148,27 +151,30 @@
             // 
             // checkOutButton
             // 
+            this.checkOutButton.AutoSize = true;
             this.checkOutButton.Enabled = false;
             this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkOutButton.Location = new System.Drawing.Point(722, 120);
+            this.checkOutButton.Location = new System.Drawing.Point(793, 844);
             this.checkOutButton.Name = "checkOutButton";
-            this.checkOutButton.Size = new System.Drawing.Size(124, 51);
+            this.checkOutButton.Size = new System.Drawing.Size(106, 50);
             this.checkOutButton.TabIndex = 23;
             this.checkOutButton.Text = "Checkout";
             this.checkOutButton.UseVisualStyleBackColor = true;
             // 
             // categoryComboBox
             // 
+            this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(730, 271);
+            this.categoryComboBox.Location = new System.Drawing.Point(729, 184);
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(170, 21);
             this.categoryComboBox.TabIndex = 24;
+            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.categoryComboBox_SelectedIndexChanged);
             // 
             // removeFromOrderButton
             // 
             this.removeFromOrderButton.Enabled = false;
-            this.removeFromOrderButton.Location = new System.Drawing.Point(722, 441);
+            this.removeFromOrderButton.Location = new System.Drawing.Point(721, 354);
             this.removeFromOrderButton.Name = "removeFromOrderButton";
             this.removeFromOrderButton.Size = new System.Drawing.Size(123, 23);
             this.removeFromOrderButton.TabIndex = 25;
@@ -178,7 +184,7 @@
             // 
             // removeFiltersButton
             // 
-            this.removeFiltersButton.Location = new System.Drawing.Point(672, 298);
+            this.removeFiltersButton.Location = new System.Drawing.Point(671, 211);
             this.removeFiltersButton.Name = "removeFiltersButton";
             this.removeFiltersButton.Size = new System.Drawing.Size(95, 23);
             this.removeFiltersButton.TabIndex = 26;
@@ -189,7 +195,7 @@
             // totalCostLabel
             // 
             this.totalCostLabel.AutoSize = true;
-            this.totalCostLabel.Location = new System.Drawing.Point(704, 370);
+            this.totalCostLabel.Location = new System.Drawing.Point(703, 283);
             this.totalCostLabel.Name = "totalCostLabel";
             this.totalCostLabel.Size = new System.Drawing.Size(58, 13);
             this.totalCostLabel.TabIndex = 27;
@@ -198,7 +204,7 @@
             // creditRemainingLabel
             // 
             this.creditRemainingLabel.AutoSize = true;
-            this.creditRemainingLabel.Location = new System.Drawing.Point(672, 395);
+            this.creditRemainingLabel.Location = new System.Drawing.Point(671, 308);
             this.creditRemainingLabel.Name = "creditRemainingLabel";
             this.creditRemainingLabel.Size = new System.Drawing.Size(90, 13);
             this.creditRemainingLabel.TabIndex = 28;
@@ -206,7 +212,7 @@
             // 
             // totalCostTextBox
             // 
-            this.totalCostTextBox.Location = new System.Drawing.Point(765, 367);
+            this.totalCostTextBox.Location = new System.Drawing.Point(764, 280);
             this.totalCostTextBox.Name = "totalCostTextBox";
             this.totalCostTextBox.ReadOnly = true;
             this.totalCostTextBox.Size = new System.Drawing.Size(134, 20);
@@ -216,11 +222,27 @@
             // creditRemainingTextBox
             // 
             this.creditRemainingTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.creditRemainingTextBox.Location = new System.Drawing.Point(765, 395);
+            this.creditRemainingTextBox.Location = new System.Drawing.Point(764, 308);
             this.creditRemainingTextBox.Name = "creditRemainingTextBox";
             this.creditRemainingTextBox.ReadOnly = true;
             this.creditRemainingTextBox.Size = new System.Drawing.Size(134, 20);
             this.creditRemainingTextBox.TabIndex = 30;
+            // 
+            // poppelDatabaseDataSet1
+            // 
+            this.poppelDatabaseDataSet1.DataSetName = "PoppelDatabaseDataSet";
+            this.poppelDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // cancelOrderButton
+            // 
+            this.cancelOrderButton.AutoSize = true;
+            this.cancelOrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelOrderButton.Location = new System.Drawing.Point(672, 844);
+            this.cancelOrderButton.Name = "cancelOrderButton";
+            this.cancelOrderButton.Size = new System.Drawing.Size(113, 50);
+            this.cancelOrderButton.TabIndex = 31;
+            this.cancelOrderButton.Text = "Cancel";
+            this.cancelOrderButton.UseVisualStyleBackColor = true;
             // 
             // CreateOrder
             // 
@@ -228,6 +250,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(911, 906);
+            this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.creditRemainingTextBox);
             this.Controls.Add(this.totalCostTextBox);
             this.Controls.Add(this.creditRemainingLabel);
@@ -249,6 +272,7 @@
             this.Name = "CreateOrder";
             this.Text = "Create an Order";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poppelDatabaseDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,5 +298,7 @@
         private System.Windows.Forms.Label creditRemainingLabel;
         private System.Windows.Forms.TextBox totalCostTextBox;
         private System.Windows.Forms.TextBox creditRemainingTextBox;
+        private PoppelDatabaseDataSet poppelDatabaseDataSet1;
+        private System.Windows.Forms.Button cancelOrderButton;
     }
 }
