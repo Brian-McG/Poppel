@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poppel.PresentationLayer;
 using Poppel.CustomerMangement;
+using Poppel.Domain;
 
 namespace Poppel
 {
@@ -16,15 +17,23 @@ namespace Poppel
     {
         private CreateCustomer createCustomer;
         private CustomerManagement customerMangement;
-        private Login login;
         private CustomerManangementController customerManangementController;
+        private Employee employeeLoggedIn;
+        private bool loginClosed;
 
-        public MainForm()
+        public MainForm(Employee employee)
         {
             InitializeComponent();
             this.IsMdiContainer = true;
+           
             this.WindowState = FormWindowState.Maximized;
             customerManangementController = new CustomerManangementController();
+            employeeLoggedIn = employee;
+            loginClosed = false;
+            loggedInAsLabel.BackColor = menuStrip1.BackColor;
+            loggedInAsLabel.ForeColor = menuStrip1.ForeColor;
+            loggedInAsLabel.Text = "Logged In As: " + employee.Name + " " + employee.Surname;
+            customerManangementController.Employee = employee;
         }
 
         private void addNewCustomerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,6 +70,14 @@ namespace Poppel
                 customerMangement.MdiParent = this;
                 customerMangement.StartPosition = FormStartPosition.CenterScreen;
                 customerMangement.Show();
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!loginClosed)
+            {
+                Application.Exit();
             }
         }
     }

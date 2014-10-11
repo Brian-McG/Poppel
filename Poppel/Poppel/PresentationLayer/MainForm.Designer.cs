@@ -30,13 +30,14 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatePickingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateExpiredProductsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loggedInAsLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +61,14 @@
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
             this.customersToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.customersToolStripMenuItem.Text = "Customers";
+            // 
+            // addNewCustomerToolStripMenuItem
+            // 
+            this.addNewCustomerToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addNewCustomerToolStripMenuItem.Name = "addNewCustomerToolStripMenuItem";
+            this.addNewCustomerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.addNewCustomerToolStripMenuItem.Text = "Add New Customer";
+            this.addNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.addNewCustomerToolStripMenuItem_Click);
             // 
             // manageCustomerToolStripMenuItem
             // 
@@ -103,23 +112,29 @@
             this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.getHelpToolStripMenuItem.Text = "Get Help";
             // 
-            // addNewCustomerToolStripMenuItem
+            // loggedInAsLabel
             // 
-            this.addNewCustomerToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addNewCustomerToolStripMenuItem.Name = "addNewCustomerToolStripMenuItem";
-            this.addNewCustomerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.addNewCustomerToolStripMenuItem.Text = "Add New Customer";
-            this.addNewCustomerToolStripMenuItem.Click += new System.EventHandler(this.addNewCustomerToolStripMenuItem_Click);
+            this.loggedInAsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loggedInAsLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.loggedInAsLabel.Location = new System.Drawing.Point(727, 0);
+            this.loggedInAsLabel.Name = "loggedInAsLabel";
+            this.loggedInAsLabel.Size = new System.Drawing.Size(243, 24);
+            this.loggedInAsLabel.TabIndex = 1;
+            this.loggedInAsLabel.Text = "Logged In As:";
+            this.loggedInAsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 627);
+            this.Controls.Add(this.loggedInAsLabel);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Poppel";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -138,6 +153,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewCustomerToolStripMenuItem;
+        private System.Windows.Forms.Label loggedInAsLabel;
     }
 }
 

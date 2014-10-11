@@ -403,7 +403,90 @@ namespace Poppel.Database
             return null;
         }
 
+        public Employee login(string username, string password)
+        {
 
+            SqlDataReader reader;
+            SqlCommand command;
+           
+            try
+            {
+                Employee employee=null;
+                command = new SqlCommand("SELECT * FROM Employee WHERE employee_id = '" + username+"' AND employee_password ='"+password+"'", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();                        //Read from table
+                if (reader.HasRows)
+                {
+                   while(reader.Read())
+                   {
+                       employee = createEmployee(reader);   
+                   }
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+                return null;
+            }
+
+        
+        }
+
+        private Employee createEmployee(SqlDataReader reader)
+        {
+
+            Employee employee = new Employee();
+            employee.Id = reader.GetString(0).Trim();
+            employee.Name = reader.GetString(1).Trim();
+            employee.Surname = reader.GetString(2).Trim();
+            if (!reader.IsDBNull(3))
+            {
+                employee.PhoneNumber = reader.GetString(3).Trim();
+            }
+            if (!reader.IsDBNull(4))
+            {
+                employee.Email = reader.GetString(4).Trim();
+            }
+            string[] address = new string[5];
+
+            if (!reader.IsDBNull(5))
+            {
+                address[0] = reader.GetString(5).Trim();
+            }
+            if (!reader.IsDBNull(6))
+            {
+                address[1] = reader.GetString(6).Trim();
+            }
+            if (!reader.IsDBNull(7))
+            {
+                address[2] = reader.GetString(7).Trim();
+            }
+            if (!reader.IsDBNull(8))
+            {
+                address[3] = reader.GetString(8).Trim();
+            }
+            if (!reader.IsDBNull(9))
+            {
+                address[4] = reader.GetString(9).Trim();
+            }
+            for (int i = 0; i < address.Length; i++)
+            {
+                if (address[i] == null)
+                {
+                    address[i] = "";
+                }
+            }
+            employee.Address = address;
+            employee.Salary = reader.GetDecimal(11);
+            employee.Position = reader.GetString(12);
+            return employee;
+        }
         /*
         //Constructors
         public EmployeeDB()

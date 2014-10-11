@@ -12,7 +12,21 @@ namespace Poppel.CustomerMangement
 {
     public class CustomerManangementController
     {
-        PoppelDatabase database = new PoppelDatabase();
+        private PoppelDatabase database = new PoppelDatabase();
+        private Customer customer;
+        private Employee employee;
+
+        public Employee Employee
+        {
+            get { return employee; }
+            set { employee = value; }
+        }
+
+        public Customer Customer
+        {
+            get { return customer; }
+            set { customer = value; }
+        }
         public Customer searchCustomerByCustomerNumber(string id)
         {
             return database.readCustomersByCustomerNumber(id);
@@ -35,7 +49,40 @@ namespace Poppel.CustomerMangement
         public string generateId(string name, string surname)
         {
             bool generated = false;
-            string customerCode = name.Substring(0, 3) + "" + surname.Substring(0, 3);
+            string customerCode="";
+            Random random = new Random();
+            
+
+            if (surname.Length >= 3)
+            {
+                customerCode += surname.Substring(0, 3);
+            }
+            else
+            {
+                customerCode += surname.Substring(0, surname.Length);
+                for (int i = 0; i < 3 - surname.Length; i++)
+                {
+
+                    int num = random.Next(0, 26); // Zero to 25
+                    char character = (char)('a' + num);
+                    customerCode += character;
+                }
+            }
+            if (name.Length >= 3)
+            {
+                customerCode += name.Substring(0, 3);
+            }
+            else
+            {
+                customerCode += name.Substring(0, name.Length);
+                for (int i = 0; i < 3 - name.Length; i++)
+                {
+
+                    int num = random.Next(0, 26); // Zero to 25
+                    char character = (char)('a' + num);
+                    customerCode += character;
+                }
+            }
             int number = 0;
             while(!generated)
             {

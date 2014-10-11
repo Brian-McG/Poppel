@@ -12,7 +12,7 @@ using Poppel.Order;
 using Poppel.Domain;
 namespace Poppel.Order
 {
-    class OrderItemForm
+   public class OrderItemForm
     {
 
         private int id;

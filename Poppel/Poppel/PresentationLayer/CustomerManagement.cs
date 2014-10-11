@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poppel.CustomerMangement;
 using Poppel.Domain;
+using Poppel.Order;
 
 namespace Poppel.PresentationLayer
 {
@@ -23,6 +24,7 @@ namespace Poppel.PresentationLayer
         private editCustomer editButtonState;
         private radioButtonSelected radioButtonState;
         private Collection<Customer> customerList;
+
 
         public enum radioButtonSelected
         {
@@ -39,6 +41,7 @@ namespace Poppel.PresentationLayer
         public CustomerManagement(CustomerManangementController custController)
         {
             InitializeComponent();
+
             customerManagementController = custController;
             inputTextBox.Select();
             editButtonState = editCustomer.editCustomer;
@@ -55,6 +58,8 @@ namespace Poppel.PresentationLayer
             creditGroupBox.Visible = false;
             customersGroupBox.Visible = false;
             personalDetailsGroupBox.Visible = false;
+            placeOrderButton.Enabled = false;
+            cancelOrderButton.Enabled = false;
             if (!userNotFoundErrorLabel.Visible)
             {
 
@@ -75,6 +80,8 @@ namespace Poppel.PresentationLayer
                     }
 
                 }
+                placeOrderButton.Enabled=true;
+                cancelOrderButton.Enabled=true;
             }
 
         }
@@ -191,6 +198,7 @@ namespace Poppel.PresentationLayer
 
         private bool createCustomer(Customer customer)
         {
+            customerManagementController.Customer = customer;
             Boolean correct = true;
             customer.Id = inputTextBox.Text.Trim();
             customer.Name = firstNameTextBox.Text.Trim();
@@ -694,6 +702,15 @@ namespace Poppel.PresentationLayer
             {
                 cityErrorMessageLabel.Visible = false;
             }
+        }
+
+        private void placeOrderButton_Click(object sender, EventArgs e)
+        {
+            CreateOrder createOrder = new CreateOrder(new OrderController(customerManagementController.Customer, customerManagementController.Employee));
+            createOrder.MdiParent = this.MdiParent;
+            createOrder.StartPosition = FormStartPosition.CenterScreen;
+            createOrder.Show();
+            this.Dispose();
         }
 
 

@@ -381,6 +381,7 @@
             this.placeOrderButton.TabIndex = 4;
             this.placeOrderButton.Text = "Place Order";
             this.placeOrderButton.UseVisualStyleBackColor = true;
+            this.placeOrderButton.Click += new System.EventHandler(this.placeOrderButton_Click);
             // 
             // cancelOrderButton
             // 

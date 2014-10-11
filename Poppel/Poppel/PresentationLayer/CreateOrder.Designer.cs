@@ -160,6 +160,7 @@
             this.checkOutButton.TabIndex = 23;
             this.checkOutButton.Text = "Checkout";
             this.checkOutButton.UseVisualStyleBackColor = true;
+            this.checkOutButton.Click += new System.EventHandler(this.checkOutButton_Click);
             // 
             // categoryComboBox
             // 

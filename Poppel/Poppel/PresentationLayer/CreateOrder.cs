@@ -21,18 +21,24 @@ namespace Poppel.PresentationLayer
     {
         private OrderController orderController;
         private Collection<OrderItem> products;
-        private Collection<OrderItem> orderItems;
 
 
 
 
-        public CreateOrder()
+
+        public CreateOrder(OrderController orderController)
         {
             InitializeComponent();
-            orderController = new OrderController();
+            this.orderController = orderController;
+            setUpForm();
 
+           
+        }
+
+        private void setUpForm()
+        {
             products = orderController.getProducts();
-            orderItems = new Collection<OrderItem>();
+
             orderController.DisplayedProducts = new Collection<OrderItemForm>();
             setUpEmployeeListView();
             setUpOrderFlowPanel();
@@ -95,7 +101,7 @@ namespace Poppel.PresentationLayer
             orderItemDetails.SubItems[0].Tag = orderItem.Product.Id;
             basketListView.Items.Add(orderItemDetails);
 
-            orderItems.Add(orderItem);
+            orderController.OrderItems.Add(orderItem);
             checkOutButton.Enabled = true;
 
             orderController.OrderTotal += (orderItem.Quantity * orderItem.Product.Price);
@@ -239,7 +245,7 @@ namespace Poppel.PresentationLayer
         {
             OrderItem removalItem = OrderController.getProduct(parseInt, products);
             OrderItemForm removeForm = OrderController.getClickedForm(parseInt, orderController.DisplayedProducts);
-            orderItems.Remove(removalItem);
+            orderController.OrderItems.Remove(removalItem);
             int index = 0;
             for (int i = 0; i < basketListView.Items.Count; i++)
             {
@@ -256,7 +262,7 @@ namespace Poppel.PresentationLayer
             totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
             OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, orderController.DisplayedProducts);
             clickedForm.PlaceOrderButton.Enabled = true;
-            if (orderItems.Count == 0)
+            if (orderController.OrderItems.Count == 0)
             {
                 checkOutButton.Enabled = false;
             }
@@ -317,6 +323,11 @@ namespace Poppel.PresentationLayer
             }
         }
         #endregion
+
+        private void checkOutButton_Click(object sender, EventArgs e)
+        {
+            orderController.checkOut();
+        }
     }
 
 }

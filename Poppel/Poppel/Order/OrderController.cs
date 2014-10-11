@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using Poppel.Domain;
 using Poppel.Database;
 using System.Windows.Forms;
+using Poppel.PresentationLayer;
 
 namespace Poppel.Order
 {
-    class OrderController
+    public class OrderController
     {
         private Collection<OrderItem> products;
         private PoppelDatabase database;
@@ -21,6 +22,23 @@ namespace Poppel.Order
         private Collection<OrderItemForm> displayedProducts;
         private Collection<OrderItemForm> allProducts;
         private Collection<Category> categories;
+        private Order order;
+        private Collection<OrderItem> orderItems;
+        private Customer customer;
+        private Employee employee;
+
+
+        public Order Order
+        {
+            get { return order; }
+            set { order = value; }
+        }
+
+        public Collection<OrderItem> OrderItems
+        {
+            get { return orderItems; }
+            set { orderItems = value; }
+        }
 
         public Collection<OrderItemForm> AllProducts
         {
@@ -60,13 +78,22 @@ namespace Poppel.Order
             }
         }
 
-        public OrderController()
+        public OrderController(Customer customer, Employee employee)
         {
+
             products = new Collection<OrderItem>();
             database = new PoppelDatabase();
             allProducts = new Collection<OrderItemForm>();
             categories = new Collection<Category>();
+            order = new Order();
             orderTotal = 0;
+            orderItems = new Collection<OrderItem>();
+            this.employee = employee;
+            this.customer = customer;
+         //   CreateOrder orderForm = new CreateOrder();
+          //  orderForm.OrderController = this;
+           // orderForm.setUpForm();
+           // orderForm.Show();
         }
 
         public Collection<OrderItem> getProducts()
@@ -221,6 +248,16 @@ namespace Poppel.Order
            
 
 
+        }
+
+        public void checkOut()
+        {
+           order.OrderPrice = OrderTotal;
+           order.Products = OrderItems;
+           order.DateOrderPlaced = DateTime.Now;
+           order.CurrentOrderStatus = Order.OrderStatus.open;
+           order.Customer = customer;
+           order.Employee = employee;
         }
 
     }

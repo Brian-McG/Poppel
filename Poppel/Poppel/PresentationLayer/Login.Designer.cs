@@ -37,6 +37,7 @@
             this.usernameTexBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.sloganLabel = new System.Windows.Forms.Label();
+            this.loginErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +96,7 @@
             this.loginButton.TabIndex = 5;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // usernameTexBox
             // 
@@ -121,11 +123,23 @@
             this.sloganLabel.TabIndex = 8;
             this.sloganLabel.Text = "Adding sweetness to your life!";
             // 
+            // loginErrorLabel
+            // 
+            this.loginErrorLabel.AutoSize = true;
+            this.loginErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.loginErrorLabel.Location = new System.Drawing.Point(174, 266);
+            this.loginErrorLabel.Name = "loginErrorLabel";
+            this.loginErrorLabel.Size = new System.Drawing.Size(70, 13);
+            this.loginErrorLabel.TabIndex = 36;
+            this.loginErrorLabel.Text = "<Error Label>";
+            this.loginErrorLabel.Visible = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 361);
+            this.Controls.Add(this.loginErrorLabel);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTexBox);
@@ -137,6 +151,7 @@
             this.Controls.Add(this.logoPictureBox);
             this.Name = "Login";
             this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,5 +169,6 @@
         private System.Windows.Forms.TextBox usernameTexBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label sloganLabel;
+        private System.Windows.Forms.Label loginErrorLabel;
     }
 }

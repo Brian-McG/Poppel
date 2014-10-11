@@ -12,7 +12,7 @@ namespace Poppel.Report
     public class PickingListReport
    {
         #region Properties
-        OrderController orderController = new OrderController();
+        OrderController orderController = new OrderController(null,null);
         public Collection<OrderItem> productToBePicked
         {
             get
