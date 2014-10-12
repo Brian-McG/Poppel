@@ -57,7 +57,15 @@ namespace Poppel.PresentationLayer
                 if (createCustomer(customer))
                 {
                     customerManagementController.addCustomer(customer);
+                    customerManagementController.Customer = customer;
+                    CustomerCreated created = new CustomerCreated(customerManagementController);
+                    created.MdiParent = this.MdiParent;
+                    created.StartPosition = FormStartPosition.CenterParent;
+                    this.Hide();
+                    created.Show();
+                    this.Close();
                 }
+
             }
             else
             {
