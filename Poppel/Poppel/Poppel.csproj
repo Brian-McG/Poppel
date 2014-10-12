@@ -150,6 +150,7 @@
     <Compile Include="Report\ExpiredProductReport.cs" />
     <Compile Include="Report\PickingListReport.cs" />
     <Compile Include="Report\Report.cs" />
+    <Compile Include="Report\StockItem.cs" />
     <EmbeddedResource Include="PresentationLayer\CancelOrder.resx">
       <DependentUpon>CancelOrder.cs</DependentUpon>
     </EmbeddedResource>

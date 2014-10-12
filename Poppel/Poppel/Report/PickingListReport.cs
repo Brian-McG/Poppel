@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Poppel.Domain;
 using System.Collections.ObjectModel;
 using Poppel.Order;
+using Poppel.Database;
 
 namespace Poppel.Report
 {
@@ -25,11 +26,26 @@ namespace Poppel.Report
             }
         }
         #endregion
+        private PoppelDatabase pd;
         public PickingListReport(): base()
         {
             this.productToBePicked = orderController.getProducts();
+            pd = new PoppelDatabase();
         }
 
+        public String getRackNumber(int ID)
+        {
+            return pd.getRackNumber(ID);
+        }
 
+        public String getOrderNumber(int ID)
+        {
+            return pd.getOrderNumber(ID);
+        }
+
+        public DateTime getOrderDate(String ID)
+        {
+            return pd.getOrderDate(ID);
+        }
    }
 }

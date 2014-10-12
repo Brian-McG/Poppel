@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Poppel.Order;
 using System.Collections.ObjectModel;
+using Poppel.Database;
 
 namespace Poppel.Report
 {
     public class ExpiredProductReport : Report
     {
         #region Properties
-        private Collection<OrderItem> expiredProducts
+        public Collection<StockItem> expiredProducts
         {
             get
             {
@@ -25,9 +26,16 @@ namespace Poppel.Report
         #endregion
         public ExpiredProductReport(): base()
         {
-            expiredProducts = new Collection<OrderItem>();
+            expiredProducts = new Collection<StockItem>();
         }
 
-    
+        public Collection<StockItem> getStock()
+        {
+            String date = "";
+            PoppelDatabase pd = new PoppelDatabase();
+            date = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+            this.expiredProducts=pd.readStock(date);
+            return expiredProducts;
+        }
     }
 }

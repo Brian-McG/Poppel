@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Comments = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Order_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Product_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Product_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Rack_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.productListView = new System.Windows.Forms.ListView();
             this.dateLabel = new System.Windows.Forms.Label();
@@ -41,26 +36,6 @@
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Comments
-            // 
-            this.Comments.Text = "Comments";
-            // 
-            // Order_Number
-            // 
-            this.Order_Number.Text = "Order Number";
-            // 
-            // Product_Name
-            // 
-            this.Product_Name.Text = "Product Name";
-            // 
-            // Product_ID
-            // 
-            this.Product_ID.Text = "productID";
-            // 
-            // Rack_Number
-            // 
-            this.Rack_Number.Text = "Rack Number";
             // 
             // cancelButton
             // 
@@ -73,12 +48,6 @@
             // 
             // productListView
             // 
-            this.productListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Rack_Number,
-            this.Product_ID,
-            this.Product_Name,
-            this.Order_Number,
-            this.Comments});
             this.productListView.Location = new System.Drawing.Point(29, 107);
             this.productListView.Margin = new System.Windows.Forms.Padding(2);
             this.productListView.Name = "productListView";
@@ -146,11 +115,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ColumnHeader Comments;
-        private System.Windows.Forms.ColumnHeader Order_Number;
-        private System.Windows.Forms.ColumnHeader Product_Name;
-        private System.Windows.Forms.ColumnHeader Product_ID;
-        private System.Windows.Forms.ColumnHeader Rack_Number;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ListView productListView;
         private System.Windows.Forms.Label dateLabel;
