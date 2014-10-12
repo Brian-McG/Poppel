@@ -117,6 +117,24 @@ namespace Poppel.Domain
             }
             return tempAddress;
         }
+        public string addressToMulilineString()
+        {
+            if (address == null)
+            {
+                return null;
+            }
+            string tempAddress = address[0];
+
+            for (int i = 1; i < address.Length - 1; i++)
+            {
+                if (address[i] != null && !address[i].Equals(""))
+                {
+                    tempAddress += "\r\n" + address[i];
+                }
+
+            }
+            return tempAddress;
+        }
 
         public static string phoneNumberFormatter(string number)
         {

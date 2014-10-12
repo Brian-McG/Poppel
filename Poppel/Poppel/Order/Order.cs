@@ -21,6 +21,9 @@ namespace Poppel.Order
         private int orderId;
         private OrderStatus orderStatus;
         private decimal orderPrice;
+        private Delivery deliveryDetails;
+
+
         public enum OrderStatus
         {
             open = 0, awitingPayment = 1, awaitingDelivery = 2, delivered = 3, archived = 4
@@ -30,6 +33,11 @@ namespace Poppel.Order
 
         #region Properties
 
+        public Delivery DeliveryDetails
+        {
+            get { return deliveryDetails; }
+            set { deliveryDetails = value; }
+        }
         public decimal OrderPrice
         {
             get { return orderPrice; }

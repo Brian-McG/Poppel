@@ -113,5 +113,9 @@ namespace Poppel.Domain
        }
        #endregion
 
+       public static string getFormattedPrice(decimal amount)
+       {
+           return "R " + string.Format("{0:0.00}", (amount));
+       }
     }
 }

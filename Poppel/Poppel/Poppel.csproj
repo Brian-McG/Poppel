@@ -69,6 +69,7 @@
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Email\EmailController.cs" />
     <Compile Include="Login\LoginController.cs" />
+    <Compile Include="Order\Delivery.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\OrderController.cs" />
     <Compile Include="Order\OrderItem.cs" />
@@ -101,11 +102,11 @@
     <Compile Include="PresentationLayer\CustomerManagement.Designer.cs">
       <DependentUpon>CustomerManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Delivery.cs">
+    <Compile Include="PresentationLayer\CreateDelivery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Delivery.Designer.cs">
-      <DependentUpon>Delivery.cs</DependentUpon>
+    <Compile Include="PresentationLayer\CreateDelivery.Designer.cs">
+      <DependentUpon>CreateDelivery.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\ExpiredProducts.cs">
       <SubType>Form</SubType>
@@ -155,8 +156,8 @@
     <EmbeddedResource Include="PresentationLayer\CustomerManagement.resx">
       <DependentUpon>CustomerManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Delivery.resx">
-      <DependentUpon>Delivery.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\CreateDelivery.resx">
+      <DependentUpon>CreateDelivery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\ExpiredProducts.resx">
       <DependentUpon>ExpiredProducts.cs</DependentUpon>

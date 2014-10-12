@@ -9,24 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using Poppel.Domain;
+using Poppel.Order;
 
 namespace Poppel.Email
 {
-    class EmailController
+    public class EmailController
     {
-        /*
-        public void testEmail()
-        {
-            Customer test = new Customer();
-            test.Email = "mcgbri004@myuct.ac.za";
-            test.Name = "Brian Mc George";
-            test.Phone = "-";
-            test.ID = "123";
-            string message = "Dear " + test.Name + "\nOrder summary for order on <x>:\n\n" + "6 x Coke - R 123\n2 x Fanta 6 Pack - R77\n5 x Pack of 100 Jelly Tots - R44\n-------------------------------\nTotal: x\n\n Delivery Details:\nAddress:\n4 Test Road\nDurbanville\nCape Town\n7550";
-            sendEmail(test, "Order Summary", message);
-        }
-
-        public void sendEmail(Customer cust, string header, string sendMessage)
+        public static void sendEmail(Customer cust, string header, string sendMessage)
         {
             if (cust.Name != null)
             {
@@ -54,7 +44,34 @@ namespace Poppel.Email
                     smtp.Send(message);
             }
         }
-         */
+
+        public static string createEmailTemplete(Poppel.Order.Order order)
+        {
+            string templete = "Dear " + order.Customer.Name + "\n\nThis is a summary of your order placed on: " + order.DateOrderPlaced.ToShortDateString() + "\nYour order consists of the following:";
+            foreach(OrderItem item in order.Products)
+            {
+                templete += "\n" + item.Quantity + " x " + item.Product.Description + " - " + Product.getFormattedPrice(Decimal.Multiply(item.Quantity, item.Product.Price));
+            }
+            templete += "\n-------------------------------------------------------------";
+            templete += "\nOrder Total: " + Product.getFormattedPrice(order.OrderPrice);
+            templete += "\n\nYour order will be delivered  between: " + order.DeliveryDetails.StartDeliveryTime.ToShortTimeString() + " and " + order.DeliveryDetails.EndDeliveryTime.ToShortTimeString();
+            if(order.DeliveryDetails.AllowedDeliveryDates.Count==1)
+            {
+                templete += " on " +order.DeliveryDetails.AllowedDeliveryDates[0].DayOfWeek +" "+ order.DeliveryDetails.AllowedDeliveryDates[0].ToShortDateString();
+            }
+            else
+            {
+                templete += " on any of the following days:\n" + order.DeliveryDetails.AllowedDeliveryDates[0].DayOfWeek + " " + order.DeliveryDetails.AllowedDeliveryDates[0].ToShortDateString();
+                for(int i=1;i<order.DeliveryDetails.AllowedDeliveryDates.Count;i++)
+                {
+                    templete += "\n" + order.DeliveryDetails.AllowedDeliveryDates[i].DayOfWeek + " " + order.DeliveryDetails.AllowedDeliveryDates[i].ToShortDateString();
+                }
+            }
+            templete += "\n\nYour order will be delivered to:\n" + order.Customer.addressToMulilineString();
+            templete += "\n\nThe Poppel Team";
+            return templete;
+        }
+         
     }
 }
 

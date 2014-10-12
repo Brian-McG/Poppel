@@ -110,6 +110,7 @@ namespace Poppel.PresentationLayer
                     if (createCustomer(customer))
                     {
                         customerManagementController.editCustomer(customer);
+                            customerManagementController.Customer = customer;
                     }
                 }
                 else
@@ -198,7 +199,7 @@ namespace Poppel.PresentationLayer
 
         private bool createCustomer(Customer customer)
         {
-            customerManagementController.Customer = customer;
+
             Boolean correct = true;
             customer.Id = inputTextBox.Text.Trim();
             customer.Name = firstNameTextBox.Text.Trim();
@@ -239,6 +240,7 @@ namespace Poppel.PresentationLayer
             address[4] = zipCodeTextBox.Text.Trim();
 
             customer.Address = address;
+
             return correct;
         }
 
@@ -706,11 +708,17 @@ namespace Poppel.PresentationLayer
 
         private void placeOrderButton_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
+            if (createCustomer(customer))
+            {
+                customerManagementController.Customer = customer;
+            }
             CreateOrder createOrder = new CreateOrder(new OrderController(customerManagementController.Customer, customerManagementController.Employee));
             createOrder.MdiParent = this.MdiParent;
             createOrder.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
             createOrder.Show();
-            this.Dispose();
+           
         }
 
 

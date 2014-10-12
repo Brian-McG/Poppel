@@ -327,6 +327,11 @@ namespace Poppel.PresentationLayer
         private void checkOutButton_Click(object sender, EventArgs e)
         {
             orderController.checkOut();
+            CreateDelivery createDelivery = new CreateDelivery(orderController);
+            createDelivery.MdiParent = this.MdiParent;
+            createDelivery.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
+            createDelivery.Show();
         }
     }
 

@@ -258,6 +258,8 @@ namespace Poppel.Order
            order.CurrentOrderStatus = Order.OrderStatus.open;
            order.Customer = customer;
            order.Employee = employee;
+
+
         }
 
     }
