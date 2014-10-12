@@ -46,9 +46,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(166, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 29);
+            this.label1.Size = new System.Drawing.Size(194, 29);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Customer Created";
+            this.label1.Text = "Customer Added";
             // 
             // sloganLabel
             // 
@@ -83,9 +83,9 @@
             this.messageLabel.AutoSize = true;
             this.messageLabel.Location = new System.Drawing.Point(121, 131);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(153, 13);
+            this.messageLabel.Size = new System.Drawing.Size(147, 13);
             this.messageLabel.TabIndex = 16;
-            this.messageLabel.Text = "Customer successfully created.";
+            this.messageLabel.Text = "Customer successfully added.";
             // 
             // CustomerNumberLabel
             // 

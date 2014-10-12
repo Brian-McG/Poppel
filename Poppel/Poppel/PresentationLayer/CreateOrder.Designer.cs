@@ -48,6 +48,7 @@
             this.creditRemainingTextBox = new System.Windows.Forms.TextBox();
             this.poppelDatabaseDataSet1 = new Poppel.PoppelDatabaseDataSet();
             this.cancelOrderButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poppelDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
@@ -153,10 +154,10 @@
             // 
             this.checkOutButton.AutoSize = true;
             this.checkOutButton.Enabled = false;
-            this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkOutButton.Location = new System.Drawing.Point(793, 844);
+            this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkOutButton.Location = new System.Drawing.Point(786, 844);
             this.checkOutButton.Name = "checkOutButton";
-            this.checkOutButton.Size = new System.Drawing.Size(106, 50);
+            this.checkOutButton.Size = new System.Drawing.Size(113, 50);
             this.checkOutButton.TabIndex = 23;
             this.checkOutButton.Text = "Checkout";
             this.checkOutButton.UseVisualStyleBackColor = true;
@@ -237,13 +238,26 @@
             // cancelOrderButton
             // 
             this.cancelOrderButton.AutoSize = true;
-            this.cancelOrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelOrderButton.Location = new System.Drawing.Point(672, 844);
+            this.cancelOrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelOrderButton.Location = new System.Drawing.Point(671, 844);
             this.cancelOrderButton.Name = "cancelOrderButton";
-            this.cancelOrderButton.Size = new System.Drawing.Size(113, 50);
+            this.cancelOrderButton.Size = new System.Drawing.Size(52, 50);
             this.cancelOrderButton.TabIndex = 31;
             this.cancelOrderButton.Text = "Cancel";
             this.cancelOrderButton.UseVisualStyleBackColor = true;
+            this.cancelOrderButton.Click += new System.EventHandler(this.cancelOrderButton_Click);
+            // 
+            // backButton
+            // 
+            this.backButton.AutoSize = true;
+            this.backButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backButton.Location = new System.Drawing.Point(729, 844);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(51, 50);
+            this.backButton.TabIndex = 32;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // CreateOrder
             // 
@@ -251,6 +265,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(911, 906);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.creditRemainingTextBox);
             this.Controls.Add(this.totalCostTextBox);
@@ -301,5 +316,6 @@
         private System.Windows.Forms.TextBox creditRemainingTextBox;
         private PoppelDatabaseDataSet poppelDatabaseDataSet1;
         private System.Windows.Forms.Button cancelOrderButton;
+        private System.Windows.Forms.Button backButton;
     }
 }

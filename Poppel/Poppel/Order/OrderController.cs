@@ -8,6 +8,7 @@ using Poppel.Domain;
 using Poppel.Database;
 using System.Windows.Forms;
 using Poppel.PresentationLayer;
+using Poppel.CustomerMangement;
 
 namespace Poppel.Order
 {
@@ -23,6 +24,13 @@ namespace Poppel.Order
         private Collection<OrderItem> orderItems;
         private Customer customer;
         private Employee employee;
+        private CustomerManangementController customerManagementController;
+
+        public CustomerManangementController CustomerManagementController
+        {
+            get { return customerManagementController; }
+            set { customerManagementController = value; }
+        }
 
 
         public Order Order

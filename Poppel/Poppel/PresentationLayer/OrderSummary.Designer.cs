@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.orderInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.employee = new System.Windows.Forms.Label();
+            this.employeeLabel = new System.Windows.Forms.Label();
             this.orderTotalTextBox = new System.Windows.Forms.TextBox();
             this.orderTotalLabel = new System.Windows.Forms.Label();
             this.customer = new System.Windows.Forms.Label();
@@ -41,6 +43,9 @@
             this.shoppingCartGroupBox = new System.Windows.Forms.GroupBox();
             this.OrderListView = new System.Windows.Forms.ListView();
             this.deliveryGroupBox = new System.Windows.Forms.GroupBox();
+            this.DateDeliveryTextBox = new System.Windows.Forms.TextBox();
+            this.deliveryDaysTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
             this.addressLabel = new System.Windows.Forms.Label();
             this.deliveryTimeEnd = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -50,11 +55,6 @@
             this.confirm = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.employee = new System.Windows.Forms.Label();
-            this.employeeLabel = new System.Windows.Forms.Label();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.deliveryDaysTextBox = new System.Windows.Forms.TextBox();
-            this.DateDeliveryTextBox = new System.Windows.Forms.TextBox();
             this.orderInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.shoppingCartGroupBox.SuspendLayout();
@@ -77,6 +77,24 @@
             this.orderInfoGroupBox.TabIndex = 0;
             this.orderInfoGroupBox.TabStop = false;
             this.orderInfoGroupBox.Text = "Order Information";
+            // 
+            // employee
+            // 
+            this.employee.AutoSize = true;
+            this.employee.Location = new System.Drawing.Point(102, 45);
+            this.employee.Name = "employee";
+            this.employee.Size = new System.Drawing.Size(98, 13);
+            this.employee.TabIndex = 11;
+            this.employee.Text = "<Sales Consultant>";
+            // 
+            // employeeLabel
+            // 
+            this.employeeLabel.AutoSize = true;
+            this.employeeLabel.Location = new System.Drawing.Point(3, 45);
+            this.employeeLabel.Name = "employeeLabel";
+            this.employeeLabel.Size = new System.Drawing.Size(89, 13);
+            this.employeeLabel.TabIndex = 10;
+            this.employeeLabel.Text = "Sales Consultant:";
             // 
             // orderTotalTextBox
             // 
@@ -197,6 +215,39 @@
             this.deliveryGroupBox.TabStop = false;
             this.deliveryGroupBox.Text = "Delivery";
             // 
+            // DateDeliveryTextBox
+            // 
+            this.DateDeliveryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.DateDeliveryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DateDeliveryTextBox.Location = new System.Drawing.Point(186, 45);
+            this.DateDeliveryTextBox.Multiline = true;
+            this.DateDeliveryTextBox.Name = "DateDeliveryTextBox";
+            this.DateDeliveryTextBox.Size = new System.Drawing.Size(98, 66);
+            this.DateDeliveryTextBox.TabIndex = 14;
+            this.DateDeliveryTextBox.TabStop = false;
+            // 
+            // deliveryDaysTextBox
+            // 
+            this.deliveryDaysTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.deliveryDaysTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.deliveryDaysTextBox.Location = new System.Drawing.Point(128, 45);
+            this.deliveryDaysTextBox.Multiline = true;
+            this.deliveryDaysTextBox.Name = "deliveryDaysTextBox";
+            this.deliveryDaysTextBox.Size = new System.Drawing.Size(75, 66);
+            this.deliveryDaysTextBox.TabIndex = 13;
+            this.deliveryDaysTextBox.TabStop = false;
+            // 
+            // addressTextBox
+            // 
+            this.addressTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.addressTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.addressTextBox.Location = new System.Drawing.Point(128, 117);
+            this.addressTextBox.Multiline = true;
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.Size = new System.Drawing.Size(239, 76);
+            this.addressTextBox.TabIndex = 12;
+            this.addressTextBox.TabStop = false;
+            // 
             // addressLabel
             // 
             this.addressLabel.AutoSize = true;
@@ -269,6 +320,7 @@
             this.backButton.TabIndex = 38;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // cancelButton
             // 
@@ -278,57 +330,7 @@
             this.cancelButton.TabIndex = 39;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // employee
-            // 
-            this.employee.AutoSize = true;
-            this.employee.Location = new System.Drawing.Point(102, 45);
-            this.employee.Name = "employee";
-            this.employee.Size = new System.Drawing.Size(98, 13);
-            this.employee.TabIndex = 11;
-            this.employee.Text = "<Sales Consultant>";
-            // 
-            // employeeLabel
-            // 
-            this.employeeLabel.AutoSize = true;
-            this.employeeLabel.Location = new System.Drawing.Point(3, 45);
-            this.employeeLabel.Name = "employeeLabel";
-            this.employeeLabel.Size = new System.Drawing.Size(89, 13);
-            this.employeeLabel.TabIndex = 10;
-            this.employeeLabel.Text = "Sales Consultant:";
-            // 
-            // addressTextBox
-            // 
-            this.addressTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.addressTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.addressTextBox.Location = new System.Drawing.Point(128, 117);
-            this.addressTextBox.Multiline = true;
-            this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(239, 76);
-            this.addressTextBox.TabIndex = 12;
-            this.addressTextBox.TabStop = false;
-            // 
-            // deliveryDaysTextBox
-            // 
-            this.deliveryDaysTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.deliveryDaysTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.deliveryDaysTextBox.Location = new System.Drawing.Point(128, 45);
-            this.deliveryDaysTextBox.Multiline = true;
-            this.deliveryDaysTextBox.Name = "deliveryDaysTextBox";
-            this.deliveryDaysTextBox.Size = new System.Drawing.Size(75, 66);
-            this.deliveryDaysTextBox.TabIndex = 13;
-            this.deliveryDaysTextBox.TabStop = false;
-            // 
-            // DateDeliveryTextBox
-            // 
-            this.DateDeliveryTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.DateDeliveryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DateDeliveryTextBox.Location = new System.Drawing.Point(186, 45);
-            this.DateDeliveryTextBox.Multiline = true;
-            this.DateDeliveryTextBox.Name = "DateDeliveryTextBox";
-            this.DateDeliveryTextBox.Size = new System.Drawing.Size(98, 66);
-            this.DateDeliveryTextBox.TabIndex = 14;
-            this.DateDeliveryTextBox.TabStop = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // OrderSummary
             // 
