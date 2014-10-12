@@ -65,9 +65,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.createCustomerErrorLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.creditLimitErrorLabel = new System.Windows.Forms.Label();
             this.modifyCreditLimitCheckBox = new System.Windows.Forms.CheckBox();
             this.creditLimitTextBox = new System.Windows.Forms.TextBox();
-            this.creditLimitErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.addressGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
@@ -423,6 +423,7 @@
             this.cancelButton.TabIndex = 28;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label9
             // 
@@ -458,6 +459,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Credit";
             // 
+            // creditLimitErrorLabel
+            // 
+            this.creditLimitErrorLabel.AutoSize = true;
+            this.creditLimitErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.creditLimitErrorLabel.Location = new System.Drawing.Point(209, 42);
+            this.creditLimitErrorLabel.Name = "creditLimitErrorLabel";
+            this.creditLimitErrorLabel.Size = new System.Drawing.Size(70, 13);
+            this.creditLimitErrorLabel.TabIndex = 30;
+            this.creditLimitErrorLabel.Text = "<Error Label>";
+            this.creditLimitErrorLabel.Visible = false;
+            // 
             // modifyCreditLimitCheckBox
             // 
             this.modifyCreditLimitCheckBox.AutoSize = true;
@@ -479,17 +491,6 @@
             this.creditLimitTextBox.Text = "1500";
             this.creditLimitTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.creditLimitTextBox_KeyPress);
             this.creditLimitTextBox.Leave += new System.EventHandler(this.creditLimitTextBox_Leave);
-            // 
-            // creditLimitErrorLabel
-            // 
-            this.creditLimitErrorLabel.AutoSize = true;
-            this.creditLimitErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.creditLimitErrorLabel.Location = new System.Drawing.Point(209, 42);
-            this.creditLimitErrorLabel.Name = "creditLimitErrorLabel";
-            this.creditLimitErrorLabel.Size = new System.Drawing.Size(70, 13);
-            this.creditLimitErrorLabel.TabIndex = 30;
-            this.creditLimitErrorLabel.Text = "<Error Label>";
-            this.creditLimitErrorLabel.Visible = false;
             // 
             // CreateCustomer
             // 

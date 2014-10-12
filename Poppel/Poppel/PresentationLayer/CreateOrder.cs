@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poppel.Order;
 using Poppel.Domain;
+using Poppel.CustomerMangement;
 
 namespace Poppel.PresentationLayer
 {
@@ -22,24 +23,21 @@ namespace Poppel.PresentationLayer
         private OrderController orderController;
         private Collection<OrderItem> products;
 
-
-
-
-
         public CreateOrder(OrderController orderController)
         {
             InitializeComponent();
             this.orderController = orderController;
             setUpForm();
-
-           
         }
 
         private void setUpForm()
         {
             products = orderController.getProducts();
-
-            orderController.DisplayedProducts = new Collection<OrderItemForm>();
+            if(orderController.DisplayedProducts==null)
+            {
+                orderController.DisplayedProducts = new Collection<OrderItemForm>();
+            }
+           
             setUpEmployeeListView();
             setUpOrderFlowPanel();
             basketListView.View = View.Details;
@@ -109,6 +107,24 @@ namespace Poppel.PresentationLayer
 
         }
 
+        public void showAddedItem(OrderItem orderItem)
+        {
+            ListViewItem orderItemDetails;
+            orderItemDetails = new ListViewItem();
+            orderItemDetails.Text = "" + orderItem.Product.Description;
+            orderItemDetails.SubItems.Add("" + orderItem.Quantity);
+            orderItemDetails.SubItems.Add("R " + string.Format("{0:0.00}", (orderItem.Quantity * orderItem.Product.Price)));
+            orderItemDetails.SubItems[0].Tag = orderItem.Product.Id;
+            basketListView.Items.Add(orderItemDetails);
+
+            checkOutButton.Enabled = true;
+
+            orderController.OrderTotal += (orderItem.Quantity * orderItem.Product.Price);
+            totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
+            addButtonPressed(orderItem.Product.Id);
+
+        }
+
         #region Events
         private void orderQuantity_ValueChanged(object sender, EventArgs e)
         {
@@ -127,13 +143,18 @@ namespace Poppel.PresentationLayer
             if (int.TryParse(clickedButton.Tag.ToString(), out id))
             {
                 addToOrder(OrderController.getProduct(id, products));
-                OrderItemForm clickedForm = OrderController.getClickedForm(id, orderController.DisplayedProducts);
-                clickedForm.PlaceOrderButton.Text = "Remove";
-                clickedForm.PlaceOrderButton.Click -= addButton_Click;
-                clickedForm.PlaceOrderButton.Click += removeButton_Click;
-                clickedForm.OrderQuantityNumericUpDown.Enabled = false;
+                addButtonPressed(id);
             }
 
+        }
+
+        public void addButtonPressed(int id)
+        {
+            OrderItemForm clickedForm = OrderController.getClickedForm(id, orderController.DisplayedProducts);
+            clickedForm.PlaceOrderButton.Text = "Remove";
+            clickedForm.PlaceOrderButton.Click -= addButton_Click;
+            clickedForm.PlaceOrderButton.Click += removeButton_Click;
+            clickedForm.OrderQuantityNumericUpDown.Enabled = false;
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -332,6 +353,25 @@ namespace Poppel.PresentationLayer
             createDelivery.StartPosition = FormStartPosition.CenterScreen;
             this.Close();
             createDelivery.Show();
+        }
+
+        private void cancelOrderButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel this order?", "Confirm Cancel Order", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            CustomerManagement customerManagement = new CustomerManagement(orderController.CustomerManagementController);
+            customerManagement.search(orderController.CustomerManagementController.Customer.Id);
+            customerManagement.MdiParent = this.MdiParent;
+            customerManagement.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
+            customerManagement.Show();
         }
     }
 

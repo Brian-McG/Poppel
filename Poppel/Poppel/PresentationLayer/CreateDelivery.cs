@@ -16,15 +16,21 @@ namespace Poppel.PresentationLayer
     {
         //123
         private Poppel.Order.OrderController orderController;
+        private CheckBox[] checkBoxes;
         public CreateDelivery(Poppel.Order.OrderController orderController)
         {
             InitializeComponent();
             startTimeComboBox.SelectedIndex = -1;
             endTimeComboBox.SelectedIndex = -1;
             DateTime deliveryDate = DateTime.Now;
+            checkBoxes = new CheckBox[5];
+            checkBoxes[0] = day1CheckBox;
+            checkBoxes[1] = day2CheckBox;
+            checkBoxes[2] = day3CheckBox;
+            checkBoxes[3] = day4CheckBox;
+            checkBoxes[4] = day5CheckBox;
 
-
-            deliveryDate = deliveryDate.AddDays(1);
+                deliveryDate = deliveryDate.AddDays(1);
             if (DateTime.Now.DayOfWeek != DayOfWeek.Saturday && DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
             {
                 while (deliveryDate.DayOfWeek != DateTime.Now.DayOfWeek)
@@ -192,6 +198,33 @@ namespace Poppel.PresentationLayer
 
         }
 
+        public void setDropDownlists(object start, object end)
+        {
+            startTimeComboBox.SelectedItem = start;
+            endTimeComboBox.SelectedItem = end;
+        }
+
+        public void setCheckBoxes(Collection<DateTime> deliveryDates)
+        {
+            DateTime current = DateTime.Now;
+           
+            for (int i = 0; i < deliveryDates.Count;i++ )
+            {
+                int index = 0;
+                while (current.ToShortDateString().Equals(deliveryDates[i].ToShortDateString())&&index<10)
+                {
+                    current = current.AddDays(1);
+                    index++;
+
+                }
+                checkBoxes[index].Checked = true;
+
+            }
+
+
+
+        }
+
         private void startTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -216,6 +249,32 @@ namespace Poppel.PresentationLayer
                 }
                 index++;
             }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel this order?", "Confirm Cancel Order", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            //Back Button Broken
+            CreateOrder create = new CreateOrder(orderController);
+            //create.Show();
+            orderController.Order = new Order.Order();
+            orderController.OrderItems = null;
+            orderController.AllProducts = null;
+            orderController.DisplayedProducts = null;
+            create.MdiParent = this.MdiParent;
+            create.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
+
+
         }
     }
 }

@@ -53,6 +53,13 @@ namespace Poppel.PresentationLayer
         #region ButtonClickEvents
         private void searchButton_Click(object sender, EventArgs e)
         {
+           search(null);
+
+            
+
+        }
+        public void search(string text)
+        {
             setLabelVisibility(false);
             addressGroupBox.Visible = false;
             creditGroupBox.Visible = false;
@@ -66,8 +73,18 @@ namespace Poppel.PresentationLayer
                 setButtonState(editCustomer.editCustomer);
                 if (customerNumberRadioButton.Checked)
                 {
-                    Customer searchCustomer = customerManagementController.searchCustomerByCustomerNumber(inputTextBox.Text.ToLower());
-                    setCustomerDetails(searchCustomer);
+                    if(text==null)
+                    {
+                        Customer searchCustomer = customerManagementController.searchCustomerByCustomerNumber(inputTextBox.Text.ToLower());
+                        setCustomerDetails(searchCustomer);
+                    }
+                    else
+                    {
+                        inputTextBox.Text = text.ToLower();
+                        Customer searchCustomer = customerManagementController.searchCustomerByCustomerNumber(inputTextBox.Text.ToLower());
+                        setCustomerDetails(searchCustomer);
+                    }
+
                 }
                 else
                 {
@@ -82,7 +99,6 @@ namespace Poppel.PresentationLayer
                 }
 
             }
-
         }
 
 
@@ -713,12 +729,19 @@ namespace Poppel.PresentationLayer
             {
                 customerManagementController.Customer = customer;
             }
-            CreateOrder createOrder = new CreateOrder(new OrderController(customerManagementController.Customer, customerManagementController.Employee));
+            OrderController controller = new OrderController(customerManagementController.Customer, customerManagementController.Employee);
+            controller.CustomerManagementController = customerManagementController;
+            CreateOrder createOrder = new CreateOrder(controller);
             createOrder.MdiParent = this.MdiParent;
             createOrder.StartPosition = FormStartPosition.CenterScreen;
             this.Close();
             createOrder.Show();
            
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 

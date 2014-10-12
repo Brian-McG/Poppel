@@ -86,5 +86,22 @@ namespace Poppel.PresentationLayer
             orderController.submitOrder();
         
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel this order?", "Confirm Cancel Order", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            CreateDelivery delivery = new CreateDelivery(orderController);
+            delivery.setDropDownlists(orderController.Order.DeliveryDetails.StartDeliveryTime, orderController.Order.DeliveryDetails.EndDeliveryTime);
+           
+            
+        }
     }
 }

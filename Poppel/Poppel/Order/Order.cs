@@ -14,7 +14,6 @@ namespace Poppel.Order
     public class Order
     {
         private Collection<OrderItem> products = new Collection<OrderItem>();
-        private DateTime deliveryDate;
         private DateTime dateOrderPlaced;
         private Customer customer;
         private Employee employee;
@@ -58,11 +57,6 @@ namespace Poppel.Order
         {
             get { return products; }
             set { products = value; }
-        }
-        public DateTime DeliveryDate
-        {
-            get { return deliveryDate; }
-            set { deliveryDate = value; }
         }
         public Customer Customer
         {

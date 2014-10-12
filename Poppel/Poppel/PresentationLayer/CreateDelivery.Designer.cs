@@ -59,6 +59,7 @@
             this.cancelButton.TabIndex = 33;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // headerLabel
             // 
@@ -144,6 +145,7 @@
             this.backButton.TabIndex = 38;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // nextButton
             // 
@@ -255,7 +257,7 @@
             this.timeErrorLabel.Text = "<Error Label>";
             this.timeErrorLabel.Visible = false;
             // 
-            // Delivery
+            // CreateDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -280,7 +282,7 @@
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.logoPictureBox);
-            this.Name = "Delivery";
+            this.Name = "CreateDelivery";
             this.Text = "Delivery";
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);

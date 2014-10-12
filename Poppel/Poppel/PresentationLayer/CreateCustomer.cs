@@ -460,6 +460,15 @@ namespace Poppel.PresentationLayer
         }
         #endregion
 
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to stop adding a customer?", "Confirm Stop Adding Customer", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
        
 
 
