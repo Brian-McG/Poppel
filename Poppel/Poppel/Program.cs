@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poppel.CustomerMangement;
+using Poppel.Order;
 using Poppel.PresentationLayer;
 
 namespace Poppel
@@ -19,7 +20,11 @@ namespace Poppel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateOrder());
+           //Application.Run(new CustomerManagement(new CustomerManangementController()));
+            Poppel.PresentationLayer.Login login = new Poppel.PresentationLayer.Login();
+          login.StartPosition = FormStartPosition.CenterScreen;
+           login.Show();
+            Application.Run();
         }
     }
 }
