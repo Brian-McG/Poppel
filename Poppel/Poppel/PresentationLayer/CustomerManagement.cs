@@ -80,8 +80,7 @@ namespace Poppel.PresentationLayer
                     }
 
                 }
-                placeOrderButton.Enabled=true;
-                cancelOrderButton.Enabled=true;
+
             }
 
         }
@@ -189,7 +188,8 @@ namespace Poppel.PresentationLayer
                 zipCodeTextBox.Text = searchCustomer.Address[4];
                 currentCreditTextBox.Text = string.Format("{0:0.00}", searchCustomer.Credit);
                 creditLimitTextBox.Text = string.Format("{0:0.00}", searchCustomer.CreditLimit);
-
+                placeOrderButton.Enabled = true;
+                cancelOrderButton.Enabled = true;
                 creditGroupBox.Visible = true;
                 personalDetailsGroupBox.Visible = true;
                 addressGroupBox.Visible = true;

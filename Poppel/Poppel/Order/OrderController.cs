@@ -262,5 +262,10 @@ namespace Poppel.Order
 
         }
 
+        public void submitOrder()
+        {
+            database.writeOrder(order);
+        }
+
     }
 }

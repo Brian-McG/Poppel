@@ -487,6 +487,80 @@ namespace Poppel.Database
             employee.Position = reader.GetString(12);
             return employee;
         }
+
+
+        public void writeOrder(Poppel.Order.Order order)
+        {
+            string sqlString = "";
+            sqlString = "INSERT INTO [Order](order_datePlaced,customer_id,employee_id) OUTPUT INSERTED.order_id VALUES ('"+order.DateOrderPlaced.ToString()+"','" + order.Customer.Id.Trim() + "','" + order.Employee.Id + "')";
+            //'" + order.DateOrderPlaced.ToString() + "',
+
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                command = new SqlCommand(sqlString, cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();  
+                //Read from table
+                int id = -1;
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                    }
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();
+
+                if(id!=-1)
+                {
+                    for (int i = 0; i < order.Products.Count;i++)
+                    {
+                        sqlString = "INSERT INTO [OrderItem](order_id,product_id,product_quantity) VALUES (" + id + "," +order.Products[i].Product.Id+"," + order.Products[i].Quantity + ")";
+                        UpdateDataSource(new SqlCommand(sqlString, cnMain));
+                    }
+                    sqlString = "INSERT INTO [Delivery](delivery_startTime,delivery_endTime) OUTPUT INSERTED.delivery_id VALUES ('"+order.DeliveryDetails.StartDeliveryTime.ToString()+"','"+order.DeliveryDetails.EndDeliveryTime.ToString()+"')";
+                    cnMain.Open();
+                    command = new SqlCommand(sqlString, cnMain);
+                    command.CommandType = CommandType.Text;
+                    reader = command.ExecuteReader();
+                    //Read from table
+                    int deliveryId = -1;
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            deliveryId = reader.GetInt32(0);
+                        }
+                    }
+                    cnMain.Close();
+                    reader.Close();   //close the reader 
+                    for (int i = 0; i < order.DeliveryDetails.AllowedDeliveryDates.Count; i++)
+                    {
+                        sqlString = "INSERT INTO [DeliveryDate](delivery_id,delivery_date) VALUES (" + deliveryId + ",'" + order.DeliveryDetails.AllowedDeliveryDates[i].ToString() + "')";
+                        UpdateDataSource(new SqlCommand(sqlString, cnMain));
+                    }
+
+                }
+
+
+
+
+                cnMain.Close();  //close the connection
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+
+        }
+
+     
         /*
         //Constructors
         public EmployeeDB()

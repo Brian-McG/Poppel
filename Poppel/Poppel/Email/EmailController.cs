@@ -54,7 +54,7 @@ namespace Poppel.Email
             }
             templete += "\n-------------------------------------------------------------";
             templete += "\nOrder Total: " + Product.getFormattedPrice(order.OrderPrice);
-            templete += "\n\nYour order will be delivered  between: " + order.DeliveryDetails.StartDeliveryTime.ToShortTimeString() + " and " + order.DeliveryDetails.EndDeliveryTime.ToShortTimeString();
+            templete += "\n\nYour order will be delivered between " + order.DeliveryDetails.StartDeliveryTime.ToShortTimeString() + " and " + order.DeliveryDetails.EndDeliveryTime.ToShortTimeString();
             if(order.DeliveryDetails.AllowedDeliveryDates.Count==1)
             {
                 templete += " on " +order.DeliveryDetails.AllowedDeliveryDates[0].DayOfWeek +" "+ order.DeliveryDetails.AllowedDeliveryDates[0].ToShortDateString();
