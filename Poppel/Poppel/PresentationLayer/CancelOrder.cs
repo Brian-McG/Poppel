@@ -48,7 +48,6 @@ namespace Poppel.PresentationLayer
             ListViewItem itemDetails;
             //Set Up Columns of List View
             ordersListView.Columns.Insert(0, "Order Number", 95, HorizontalAlignment.Left);
-            ordersListView.Columns.Insert(1, "Customer ID", 95, HorizontalAlignment.Left);
 
             try
             {
@@ -58,16 +57,13 @@ namespace Poppel.PresentationLayer
                     //Need a way to find out what order this is associated to
                     itemDetails = new ListViewItem();
                     itemDetails.Text = item.orderNumber;
-                    itemDetails.SubItems.Add(item.customerId);
                     ordersListView.Items.Add(itemDetails);
                 }
-
-
                 ordersListView.Refresh();
                 ordersListView.GridLines = true;
             }
             catch(Exception e){
-                errorLabel.Text = "No orders for customer";
+                errorLabel.Text = "No orders for customer!";
                 errorLabel.Visible = true;
             }
         
@@ -75,7 +71,7 @@ namespace Poppel.PresentationLayer
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-
+            removeOrderController.Delete(0);
             
         }
 
