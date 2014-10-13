@@ -233,6 +233,14 @@
     <Content Include="bin\Debug\Assets\fizzerBox.png" />
     <Content Include="bin\Debug\Assets\jellyBabies.png" />
     <Content Include="bin\Debug\Assets\jellyBeans.png" />
+    <Content Include="Resources\astrosBox.png" />
+    <Content Include="Resources\cherryPlum6pack.png" />
+    <Content Include="Resources\creamSoda6Pack.png" />
+    <Content Include="Resources\fizpop.png" />
+    <Content Include="Resources\fizzerBox.png" />
+    <Content Include="Resources\images.jpg" />
+    <Content Include="Resources\jellyBabies.png" />
+    <Content Include="Resources\jellyBeans.png" />
     <Content Include="Resources\poppelLogo.png" />
     <Content Include="bin\Debug\Assets\rasperry6Pack.png" />
     <Content Include="bin\Debug\Assets\sherbet.png" />
@@ -246,6 +254,9 @@
       <DependentUpon>PoppelDatabase.mdf</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\rasperry6Pack.png" />
+    <Content Include="Resources\sherbet.png" />
+    <Content Include="Resources\wineGums.png" />
     <None Include="Resources\Coke6Pack.png" />
   </ItemGroup>
   <ItemGroup>
