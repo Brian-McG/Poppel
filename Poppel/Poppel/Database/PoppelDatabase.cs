@@ -831,8 +831,10 @@ namespace Poppel.Database
                 cnMain.Close();
                 Console.Write(ex.ToString());
             }
+        }
 
-
+        public void deleteOrder(string orderId)
+        {
 
         }
 
