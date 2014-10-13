@@ -686,7 +686,7 @@ namespace Poppel.Database
             Collection<RemoveOrderItem> oItems;
             try
             {
-                command = new SqlCommand("SELECT * FROM Order",cnMain);
+                command = new SqlCommand("SELECT order_id,customer_od FROM Order",cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -697,8 +697,8 @@ namespace Poppel.Database
                     while (reader.Read())
                     {
                         RemoveOrderItem rm = new RemoveOrderItem();
-                        rm.customerId = reader.GetInt32(0)+"";
-                        rm.customerId = reader.GetString(2);
+                        rm.orderNumber = reader.GetInt32(0)+"";
+                        rm.customerId = reader.GetString(1);
                         oItems.Add(rm);
                     }
                 }
@@ -708,6 +708,7 @@ namespace Poppel.Database
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
