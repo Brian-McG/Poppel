@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using Poppel.Order;
 using Poppel.Database;
+using Poppel.CustomerMangement;
 
 namespace Poppel.PresentationLayer
 {
@@ -17,10 +18,10 @@ namespace Poppel.PresentationLayer
     {
         private RemoveOrderController removeOrderController;
         private Collection<RemoveOrderItem> products;
-        public CancelOrder()
+        public CancelOrder(CustomerManangementController customerController)
         {
             InitializeComponent();
-            removeOrderController = new RemoveOrderController();
+            removeOrderController = new RemoveOrderController(customerController);
             ordersListView.View = View.Details;
             products = removeOrderController.getOrders();
             

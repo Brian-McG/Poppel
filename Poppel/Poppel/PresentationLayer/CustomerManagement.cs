@@ -220,6 +220,11 @@ namespace Poppel.PresentationLayer
                 personalDetailsGroupBox.Visible = true;
                 addressGroupBox.Visible = true;
                 editCustomerButton.Enabled = true;
+                Customer customer = new Customer();
+                if (createCustomer(customer))
+                {
+                    customerManagementController.Customer = customer;
+                }
             }
         }
 
@@ -757,7 +762,7 @@ namespace Poppel.PresentationLayer
 
         private void cancelOrderButton_Click(object sender, EventArgs e)
         {
-            CancelOrder cancelOrder = new CancelOrder();
+            CancelOrder cancelOrder = new CancelOrder(customerManagementController);
             cancelOrder.MdiParent = this.MdiParent;
             cancelOrder.StartPosition = FormStartPosition.CenterScreen;
             this.Close();
