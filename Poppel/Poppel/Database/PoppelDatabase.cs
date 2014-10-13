@@ -895,6 +895,8 @@ namespace Poppel.Database
                         }
                         reader.Close();   //close the reader 
                         cnMain.Close();
+                       
+
                     }
                 sqlString = "INSERT INTO [Delivery](delivery_startTime,delivery_endTime,order_id) OUTPUT INSERTED.delivery_id VALUES ('" + order.DeliveryDetails.StartDeliveryTime.ToString() + "','" + order.DeliveryDetails.EndDeliveryTime.ToString() + "'," + id + ")";
                 cnMain.Open();
@@ -918,13 +920,12 @@ namespace Poppel.Database
                     UpdateDataSource(new SqlCommand(sqlString, cnMain));
                 }
 
-
-
-
-
-
                 cnMain.Close();  //close the connection
-
+                 sqlString = "UPDATE CUSTOMER SET customer_credit = customer_credit + "+order.OrderPrice;
+                        command = new SqlCommand(sqlString, cnMain);
+                        cnMain.Open();             //open the connection
+                        command.ExecuteNonQuery();
+                        cnMain.Close();
             }
             catch (Exception ex)
             {
@@ -935,7 +936,8 @@ namespace Poppel.Database
             }
         }
 
-        public void deleteOrder(int orderId)
+        //TODO : GIVE CUSTOMER MONEY BACK
+        public void deleteOrder(int orderId,string customerId)
         {
             string sqlString = "";
           
@@ -951,6 +953,7 @@ namespace Poppel.Database
                 cnMain.Open();
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
+                decimal payBack = 0;
                 //Read from table
 
                 if (reader.HasRows)
@@ -965,7 +968,7 @@ namespace Poppel.Database
                         connection.Open();
                         currentCommand.CommandType = CommandType.Text;
                         SqlDataReader reader2 = currentCommand.ExecuteReader();
-                        int stockItem_id;
+                        int stockItem_id=-1;
                         int item_quantity;
                         if (reader2.HasRows)
                         {
@@ -990,6 +993,29 @@ namespace Poppel.Database
                         currentCommand.ExecuteNonQuery();
                         connection.Close();
 
+                        currentCommand = new SqlCommand("SELECT product_ref FROM StockItem WHERE stockItem_id = " + stockItem_id, connection);
+                        connection.Open();
+                        currentCommand.CommandType = CommandType.Text;
+                        reader2 = currentCommand.ExecuteReader();
+                        int product_ref = -1;
+                        if(reader2.HasRows)
+                        {
+                            reader2.Read();
+                            product_ref = reader2.GetInt32(0);
+                        }
+                        reader2.Close();
+                        connection.Close();
+                        currentCommand = new SqlCommand("SELECT product_price FROM Product WHERE product_id = " + product_ref, connection);
+                        connection.Open();
+                        currentCommand.CommandType = CommandType.Text;
+                        reader2 = currentCommand.ExecuteReader();
+                        if (reader2.HasRows)
+                        {
+                            reader2.Read();
+                            payBack = +reader2.GetDecimal(0);
+                        }
+                        reader2.Close();
+                        connection.Close();
 
 
                     }
@@ -997,6 +1023,15 @@ namespace Poppel.Database
 
                 cnMain.Close();
                 reader.Close();   //close the reader 
+
+                //Give Customer money back
+                sqlString = "UPDATE CUSTOMER SET customer_credit = customer_credit - "+payBack+" Where customer_id = '"+customerId+"'";
+                command = new SqlCommand(sqlString, cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                command.ExecuteNonQuery();
+                cnMain.Close();
+
                 sqlString = "DELETE FROM OrderItem Where order_id = " + orderId;
                 command = new SqlCommand(sqlString, cnMain);
                 cnMain.Open();             //open the connection

@@ -30,7 +30,7 @@ namespace Poppel.Order
         public void Delete(int orderID)
         {
             
-            pd.deleteOrder(orderID);
+            pd.deleteOrder(orderID, customerManagementController.Customer.Id);
         }
     }
 }

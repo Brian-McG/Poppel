@@ -44,26 +44,34 @@ namespace Poppel.PresentationLayer
         public void setUpListView()
         {
             //Clear current List View Control
-            PoppelDatabase pd = new PoppelDatabase();
             ordersListView.Clear();
             ListViewItem itemDetails;
             //Set Up Columns of List View
             ordersListView.Columns.Insert(0, "Order Number", 95, HorizontalAlignment.Left);
-            ordersListView.Columns.Insert(1, "Order Date", 95, HorizontalAlignment.Left);
+            ordersListView.Columns.Insert(1, "Order Date", 180, HorizontalAlignment.Left);
 
             try
             {
                 errorLabel.Visible = false ;
-                foreach (RemoveOrderItem item in products)
+                if (products != null && products.Count != 0)
                 {
-                    //Need a way to find out what order this is associated to
-                    itemDetails = new ListViewItem();
-                    itemDetails.Text = item.orderNumber;
-                    itemDetails.SubItems.Add(item.orderDatePlaced);
-                    ordersListView.Items.Add(itemDetails);
+                    foreach (RemoveOrderItem item in products)
+                    {
+                        //Need a way to find out what order this is associated to
+                        itemDetails = new ListViewItem();
+                        itemDetails.Text = item.orderNumber;
+                        itemDetails.SubItems.Add(item.orderDatePlaced);
+                        ordersListView.Items.Add(itemDetails);
+                    }
+                    ordersListView.Refresh();
+                    ordersListView.GridLines = true;
                 }
-                ordersListView.Refresh();
-                ordersListView.GridLines = true;
+                else
+                {
+                    errorLabel.Text = "No orders for customer!";
+                    errorLabel.Visible = true;
+                }
+
             }
             catch(Exception e){
                 errorLabel.Text = "No orders for customer!";
@@ -74,11 +82,17 @@ namespace Poppel.PresentationLayer
 
         private void removeButton_Click(object sender, EventArgs e)
         {
+            
             string stringId = ordersListView.FocusedItem.SubItems[0].Text;
             int id;
             if(int.TryParse(stringId,out id))
             {
-                removeOrderController.Delete(id);
+                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel this order?", "Confirm Cancel Order", MessageBoxButtons.YesNo);
+                 if (dialogResult == DialogResult.Yes)
+                 {
+                     removeOrderController.Delete(id);
+                     setUpListView();
+                 }
             }
            
         }
