@@ -938,20 +938,17 @@ namespace Poppel.Database
         public void deleteOrder(int orderId)
         {
             string sqlString = "";
-            sqlString = "DELETE FROM [Order] Where order_id = '" + orderId + "')";
+          
             //'" + order.DateOrderPlaced.ToString() + "',
 
             SqlDataReader reader;
             SqlCommand command;
             try
             {
+
+                sqlString = "SELECT product_quantity,orderItem_id FROM OrderItem Where order_id = '" + orderId + "'";
                 command = new SqlCommand(sqlString, cnMain);
-                cnMain.Open();             //open the connection
-                command.CommandType = CommandType.Text;
-                command.ExecuteNonQuery();
-                cnMain.Close();
-                sqlString = "SELECT product_quantity,orderItem_id FROM OrderItem Where order_id = '" + orderId + "')";
-                command = new SqlCommand(sqlString, cnMain);
+                cnMain.Open();
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
                 //Read from table
@@ -967,18 +964,18 @@ namespace Poppel.Database
                         SqlCommand currentCommand = new SqlCommand("SELECT stockItem_id, item_quantity FROM OrderStockItem WHERE orderItem_id = " + orderItem_id, connection);
                         connection.Open();
                         currentCommand.CommandType = CommandType.Text;
-                        SqlDataReader reader2 = command.ExecuteReader();
+                        SqlDataReader reader2 = currentCommand.ExecuteReader();
                         int stockItem_id;
                         int item_quantity;
                         if (reader2.HasRows)
                         {
-                            while (reader.Read())
+                            while (reader2.Read())
                             {
-                                stockItem_id = reader.GetInt32(0);
-                                item_quantity = reader.GetInt32(1);
+                                stockItem_id = reader2.GetInt32(0);
+                                item_quantity = reader2.GetInt32(1);
                                 SqlConnection updateStockConnection = newConnection();
 
-                                SqlCommand updateStockCommand = new SqlCommand("UPDATE StockItem Set stockItem_numberInStock = stockItem_numberInStock + " + item_quantity + " WHERE stockItem_id = " + stockItem_id, connection);
+                                SqlCommand updateStockCommand = new SqlCommand("UPDATE StockItem Set stockItem_numberInStock = stockItem_numberInStock + " + item_quantity + " WHERE stockItem_id = " + stockItem_id, updateStockConnection);
                                 updateStockConnection.Open();
                                 updateStockCommand.CommandType = CommandType.Text;
                                 updateStockCommand.ExecuteNonQuery();
@@ -1006,8 +1003,9 @@ namespace Poppel.Database
                 command.CommandType = CommandType.Text;
                 command.ExecuteNonQuery();
                 cnMain.Close();
-                sqlString = "SELECT delivery_id FROM Delivery Where order_id = '" + orderId + "')";
+                sqlString = "SELECT delivery_id FROM Delivery Where order_id = '" + orderId + "'";
                 command = new SqlCommand(sqlString, cnMain);
+                cnMain.Open();
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
                 //Read from table
@@ -1029,6 +1027,13 @@ namespace Poppel.Database
                 reader.Close();
                 cnMain.Close();
                 sqlString = "DELETE FROM Delivery Where order_id = " + orderId;
+                command = new SqlCommand(sqlString, cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                command.ExecuteNonQuery();
+                cnMain.Close();
+
+                sqlString = "DELETE FROM [Order] Where order_id = '" + orderId + "'";
                 command = new SqlCommand(sqlString, cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
