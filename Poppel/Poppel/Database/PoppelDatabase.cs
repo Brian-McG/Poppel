@@ -679,14 +679,14 @@ namespace Poppel.Database
             return null;
         }
 
-        public Collection<RemoveOrderItem> getOrders()
+        public Collection<RemoveOrderItem> getOrders(string customerId)
         {
             SqlDataReader reader;
             SqlCommand command;
             Collection<RemoveOrderItem> oItems;
             try
             {
-                command = new SqlCommand("SELECT * FROM [Order]",cnMain);
+                command = new SqlCommand("SELECT order_id,order_datePlaced FROM [Order] WHERE customer_id = '"+customerId+"'",cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
