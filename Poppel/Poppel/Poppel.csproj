@@ -222,18 +222,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Assets\Asset Reference.txt" />
-    <Content Include="bin\Debug\Assets\astrosBox.png" />
-    <Content Include="bin\Debug\Assets\cherryPlum6pack.png" />
-    <Content Include="bin\Debug\Assets\coke6Pack.png" />
-    <Content Include="bin\Debug\Assets\creamSoda6Pack.png" />
-    <Content Include="bin\Debug\Assets\fanta6Pack.jpg" />
-    <Content Include="bin\Debug\Assets\fanta6Pack.png" />
-    <Content Include="bin\Debug\Assets\fizpop.png" />
-    <Content Include="bin\Debug\Assets\fizzerBox.png" />
-    <Content Include="bin\Debug\Assets\jellyBabies.png" />
-    <Content Include="bin\Debug\Assets\jellyBeans.png" />
     <Content Include="Resources\astrosBox.png" />
+    <Content Include="Resources\BackupOfAssets\3914.jpg" />
+    <Content Include="Resources\BackupOfAssets\3914.png" />
+    <Content Include="Resources\BackupOfAssets\Asset Reference.txt" />
+    <Content Include="Resources\BackupOfAssets\astrosBox.png" />
+    <Content Include="Resources\BackupOfAssets\cherryPlum6pack.png" />
+    <Content Include="Resources\BackupOfAssets\coke6Pack.png" />
+    <Content Include="Resources\BackupOfAssets\creamSoda6Pack.png" />
+    <Content Include="Resources\BackupOfAssets\fanta6Pack.jpg" />
+    <Content Include="Resources\BackupOfAssets\fanta6Pack.png" />
+    <Content Include="Resources\BackupOfAssets\fizpop.png" />
+    <Content Include="Resources\BackupOfAssets\fizzerBox.png" />
+    <Content Include="Resources\BackupOfAssets\jellyBabies.png" />
+    <Content Include="Resources\BackupOfAssets\jellyBeans.png" />
+    <Content Include="Resources\BackupOfAssets\jellyTotsBox.png" />
+    <Content Include="Resources\BackupOfAssets\marabouChocolate.jpg" />
+    <Content Include="Resources\BackupOfAssets\marabouChocolate.png" />
+    <Content Include="Resources\BackupOfAssets\rasperry6Pack.png" />
+    <Content Include="Resources\BackupOfAssets\sherbet.png" />
+    <Content Include="Resources\BackupOfAssets\sprite6Pack.png" />
+    <Content Include="Resources\BackupOfAssets\sprite_6pk.jpg" />
+    <Content Include="Resources\BackupOfAssets\tWtn470gi2GTAevzRbj1jwaWwtFbmoUDWyzX6XgYbao.png" />
+    <Content Include="Resources\BackupOfAssets\wineGums.png" />
     <Content Include="Resources\cherryPlum6pack.png" />
     <Content Include="Resources\creamSoda6Pack.png" />
     <Content Include="Resources\fizpop.png" />
@@ -242,11 +253,6 @@
     <Content Include="Resources\jellyBabies.png" />
     <Content Include="Resources\jellyBeans.png" />
     <Content Include="Resources\poppelLogo.png" />
-    <Content Include="bin\Debug\Assets\rasperry6Pack.png" />
-    <Content Include="bin\Debug\Assets\sherbet.png" />
-    <Content Include="bin\Debug\Assets\sprite6Pack.png" />
-    <Content Include="bin\Debug\Assets\sprite_6pk.jpg" />
-    <Content Include="bin\Debug\Assets\wineGums.png" />
     <Content Include="PoppelDatabase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -276,7 +282,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
