@@ -14,7 +14,8 @@ namespace Poppel.Report
 {
     public partial class ExpiredProducts : Form
     {
-        public Collection<StockItem> products
+        public Collection<StockItem> products;
+        public Collection<StockItem> Products
         {
             get
             {
@@ -28,8 +29,9 @@ namespace Poppel.Report
         ExpiredProductReport expiredController = new ExpiredProductReport();
         public ExpiredProducts()
         {
-            this.products = expiredController.getStock();
-            InitializeComponent();
+            this.Products = expiredController.getStock();
+            InitializeComponent(); 
+            productListView.View = View.Details;
             populateReport();
             dateLabel.Text = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
         }
@@ -39,12 +41,12 @@ namespace Poppel.Report
 
             productListView.Clear();
             ListViewItem itemDetails;
-
-            productListView.Columns.Insert(0, "Rack Number", 95, HorizontalAlignment.Left);
-            productListView.Columns.Insert(1, "Number In Stock", 55, HorizontalAlignment.Left);
-            productListView.Columns.Insert(2, "Expiry Date", 75, HorizontalAlignment.Left);
-            productListView.Columns.Insert(3, "Product Ref", 50, HorizontalAlignment.Left);
-            productListView.Columns.Insert(4, "Comments", 50, HorizontalAlignment.Left);
+            dateLabel.Visible = true;
+            productListView.Columns.Insert(0, "Rack Number", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(1, "Number In Stock", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(2, "Expiry Date", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(3, "Product Ref", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(4, "Comments", 100, HorizontalAlignment.Left);
 
             foreach (StockItem item in products)
             {
@@ -60,6 +62,11 @@ namespace Poppel.Report
             productListView.Refresh();
             productListView.GridLines = true;
             
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
         
     }

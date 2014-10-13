@@ -9,7 +9,8 @@ namespace Poppel.Report
     public class StockItem
     {
         #region Properties
-        public String expiryDate
+        public String expiryDate;
+        public String ExpiryDate
         {
             get
             {
@@ -20,29 +21,32 @@ namespace Poppel.Report
                 expiryDate = value;
             }
         }
-        public String rackNumber
+        public String rackNumber;
+        public String RackNumber
         {
             get
             {
-                return expiryDate;
+                return rackNumber;
             }
             set
             {
-                expiryDate = value;
+                rackNumber = value;
             }
         }
-        public String numberInStock
+        public String numberInStock;
+        public String NumberInStock
         {
             get
             {
-                return expiryDate;
+                return numberInStock;
             }
             set
             {
-                expiryDate = value;
+                numberInStock = value;
             }
         }
-        public String productRef
+        public String productRef;
+        public String ProductRef
            {
                 get
             {
@@ -56,18 +60,18 @@ namespace Poppel.Report
         #endregion
         public StockItem(String expiryDate, String rackNumber, String numberInStock, String productRef)
         {
-            this.expiryDate = expiryDate;
-            this.rackNumber = rackNumber;
-            this.numberInStock = numberInStock;
-            this.productRef = productRef;
+            this.ExpiryDate = expiryDate;
+            this.RackNumber = rackNumber;
+            this.NumberInStock = numberInStock;
+            this.ProductRef = productRef;
         }
 
         public StockItem()
         {
-            this.expiryDate = "";
-            this.rackNumber = "";
-            this.numberInStock = "";
-            this.productRef = "";
+            this.ExpiryDate = "";
+            this.RackNumber = "";
+            this.NumberInStock = "";
+            this.ProductRef = "";
         }
     }
 }

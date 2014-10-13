@@ -9,53 +9,17 @@ namespace Poppel.Report
     public class Report
     {
         #region Properties
-        public String id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-            }
-        }
+        public String id;
 
-        public String createdBy
-        {
-            get
-            {
-                return createdBy;
-            }
-            set
-            {
-                createdBy = value;
-            }
-        }
 
-        public DateTime date
-        {
-            get
-            {
-                return date;
-            }
-            set
-            {
-                date = value;
-            }
-        }
+        public String createdBy;
 
-        public String title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
+
+        public DateTime date;
+
+
+        public String title;
+        
         #endregion
         public Report(String createdBy, DateTime date, String title, String ID)
         {

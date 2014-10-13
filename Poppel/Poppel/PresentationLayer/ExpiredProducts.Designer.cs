@@ -45,16 +45,17 @@
             this.cancelButton.TabIndex = 46;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // productListView
             // 
+            this.productListView.HoverSelection = true;
             this.productListView.Location = new System.Drawing.Point(29, 107);
             this.productListView.Margin = new System.Windows.Forms.Padding(2);
             this.productListView.Name = "productListView";
             this.productListView.Size = new System.Drawing.Size(719, 312);
             this.productListView.TabIndex = 45;
             this.productListView.UseCompatibleStateImageBehavior = false;
-            this.productListView.Visible = false;
             // 
             // dateLabel
             // 

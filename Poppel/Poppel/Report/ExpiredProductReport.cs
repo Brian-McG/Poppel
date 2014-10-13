@@ -12,7 +12,8 @@ namespace Poppel.Report
     public class ExpiredProductReport : Report
     {
         #region Properties
-        public Collection<StockItem> expiredProducts
+        public Collection<StockItem> expiredProducts;
+        public Collection<StockItem> ExpiredProducts
         {
             get
             {
@@ -26,7 +27,7 @@ namespace Poppel.Report
         #endregion
         public ExpiredProductReport(): base()
         {
-            expiredProducts = new Collection<StockItem>();
+            ExpiredProducts = new Collection<StockItem>();
         }
 
         public Collection<StockItem> getStock()
@@ -34,8 +35,7 @@ namespace Poppel.Report
             String date = "";
             PoppelDatabase pd = new PoppelDatabase();
             date = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
-           //Brian: Use 
-            // this.expiredProducts=pd.readStock(date);
+            this.ExpiredProducts=pd.readStock(date);
             return expiredProducts;
         }
     }

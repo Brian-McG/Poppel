@@ -31,10 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.sloganLabel = new System.Windows.Forms.Label();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.pickNumberLabel = new System.Windows.Forms.Label();
-            this.pickNumLabel = new System.Windows.Forms.Label();
-            this.delNumberLabel = new System.Windows.Forms.Label();
-            this.delNumLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
             this.pickDateCalendar = new System.Windows.Forms.MonthCalendar();
             this.productListView = new System.Windows.Forms.ListView();
@@ -76,46 +72,6 @@
             this.logoPictureBox.TabIndex = 12;
             this.logoPictureBox.TabStop = false;
             // 
-            // pickNumberLabel
-            // 
-            this.pickNumberLabel.AutoSize = true;
-            this.pickNumberLabel.Location = new System.Drawing.Point(476, 13);
-            this.pickNumberLabel.Name = "pickNumberLabel";
-            this.pickNumberLabel.Size = new System.Drawing.Size(82, 13);
-            this.pickNumberLabel.TabIndex = 15;
-            this.pickNumberLabel.Text = "Picking Number";
-            // 
-            // pickNumLabel
-            // 
-            this.pickNumLabel.AutoSize = true;
-            this.pickNumLabel.ForeColor = System.Drawing.Color.Red;
-            this.pickNumLabel.Location = new System.Drawing.Point(564, 13);
-            this.pickNumLabel.Name = "pickNumLabel";
-            this.pickNumLabel.Size = new System.Drawing.Size(94, 13);
-            this.pickNumLabel.TabIndex = 16;
-            this.pickNumLabel.Text = "<Picking Number>";
-            this.pickNumLabel.Visible = false;
-            // 
-            // delNumberLabel
-            // 
-            this.delNumberLabel.AutoSize = true;
-            this.delNumberLabel.Location = new System.Drawing.Point(473, 42);
-            this.delNumberLabel.Name = "delNumberLabel";
-            this.delNumberLabel.Size = new System.Drawing.Size(85, 13);
-            this.delNumberLabel.TabIndex = 17;
-            this.delNumberLabel.Text = "Delivery Number";
-            // 
-            // delNumLabel
-            // 
-            this.delNumLabel.AutoSize = true;
-            this.delNumLabel.ForeColor = System.Drawing.Color.Red;
-            this.delNumLabel.Location = new System.Drawing.Point(564, 42);
-            this.delNumLabel.Name = "delNumLabel";
-            this.delNumLabel.Size = new System.Drawing.Size(97, 13);
-            this.delNumLabel.TabIndex = 18;
-            this.delNumLabel.Text = "<Delivery Number>";
-            this.delNumLabel.Visible = false;
-            // 
             // dateLabel
             // 
             this.dateLabel.AutoSize = true;
@@ -153,6 +109,7 @@
             this.cancelButton.TabIndex = 29;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // pickDateLabel
             // 
@@ -206,10 +163,6 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.productListView);
             this.Controls.Add(this.dateLabel);
-            this.Controls.Add(this.delNumLabel);
-            this.Controls.Add(this.delNumberLabel);
-            this.Controls.Add(this.pickNumLabel);
-            this.Controls.Add(this.pickNumberLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.logoPictureBox);
@@ -226,10 +179,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label sloganLabel;
         private System.Windows.Forms.PictureBox logoPictureBox;
-        private System.Windows.Forms.Label pickNumberLabel;
-        private System.Windows.Forms.Label pickNumLabel;
-        private System.Windows.Forms.Label delNumberLabel;
-        private System.Windows.Forms.Label delNumLabel;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.MonthCalendar pickDateCalendar;
         private System.Windows.Forms.ListView productListView;

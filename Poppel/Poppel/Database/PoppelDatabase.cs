@@ -178,6 +178,45 @@ namespace Poppel.Database
 
         }
 
+        public Collection<ReportItem> readOrderItem()
+        {
+            Collection<ReportItem> products = new Collection<ReportItem>();
+            SqlDataReader reader;
+            SqlCommand command;
+            try
+            {
+                command = new SqlCommand("SELECT * FROM OrderItem", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();                        //Read from table
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ReportItem orderItem = new ReportItem();
+                        orderItem.productID = reader.GetInt32(1);
+                        products.Add(orderItem);
+                    }
+
+
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connectio
+
+                return products;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+                return null;
+            }
+
+
+
+        }
+        
         private void readAlternatives(Collection<OrderItem> products)
         {
             SqlDataReader reader;
