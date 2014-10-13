@@ -708,6 +708,7 @@ namespace Poppel.Database
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
