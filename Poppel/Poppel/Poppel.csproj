@@ -233,6 +233,7 @@
     <Content Include="bin\Debug\Assets\fizzerBox.png" />
     <Content Include="bin\Debug\Assets\jellyBabies.png" />
     <Content Include="bin\Debug\Assets\jellyBeans.png" />
+    <Content Include="Resources\poppelLogo.png" />
     <Content Include="bin\Debug\Assets\rasperry6Pack.png" />
     <Content Include="bin\Debug\Assets\sherbet.png" />
     <Content Include="bin\Debug\Assets\sprite6Pack.png" />
