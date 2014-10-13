@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poppel.Order;
 using Poppel.Domain;
+using System.IO;
 namespace Poppel.Order
 {
    public class OrderItemForm
@@ -124,8 +125,15 @@ namespace Poppel.Order
 
             PictureLabel.Width = 200;
             PictureLabel.Height = 150;
-           // Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
-           // PictureLabel.Image = pictureBitmap;
+            string path = "Assets/" + orderItem.Product.ProductCode + ".png";
+            FileInfo file = new FileInfo(path);
+            if(file.Exists)
+            {
+                Bitmap pictureBitmap = new Bitmap(path);
+                PictureLabel.Image = pictureBitmap;
+
+            }
+
             ProductPanel.Controls.Add(PictureLabel);
 
             ProductDescriptionLabel = new Label();
@@ -181,6 +189,11 @@ namespace Poppel.Order
             ProductPanel.Controls.Add(SpacerLabel);
             ProductPanel.Controls.Add(PlaceOrderButton);
 
+            if(orderItem.Product.NumberInStock<=0)
+            {
+                placeOrderButton.Enabled = false;
+                orderQuantityNumericUpDown.Enabled = false;
+            }
            
         }
 

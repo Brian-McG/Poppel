@@ -48,6 +48,8 @@ namespace Poppel.PresentationLayer
             {
                 categoryComboBox.Items.Add(category);
             }
+            creditRemainingTextBox.Text = Product.getFormattedPrice(orderController.CustomerManagementController.Customer.CreditLimit-orderController.CustomerManagementController.Customer.Credit);
+
         }
 
         private void setUpOrderFlowPanel()
@@ -104,6 +106,7 @@ namespace Poppel.PresentationLayer
 
             orderController.OrderTotal += (orderItem.Quantity * orderItem.Product.Price);
             totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
+            creditRemainingTextBox.Text = Product.getFormattedPrice(orderController.CustomerManagementController.Customer.CreditLimit - orderController.CustomerManagementController.Customer.Credit - orderController.OrderTotal);
 
         }
 
@@ -142,8 +145,24 @@ namespace Poppel.PresentationLayer
             int id = -1;
             if (int.TryParse(clickedButton.Tag.ToString(), out id))
             {
-                addToOrder(OrderController.getProduct(id, products));
-                addButtonPressed(id);
+                OrderItem orderItem = OrderController.getProduct(id, products);
+                if (orderController.CustomerManagementController.Customer.CreditLimit - orderController.CustomerManagementController.Customer.Credit - orderController.OrderTotal - (orderItem.Quantity * orderItem.Product.Price) >= 0)
+                {
+                    addToOrder(orderItem);
+                    addButtonPressed(id);
+                }
+                else
+                {
+                    string message = "Item could not be added.\nCredit limit would be exceeded.";
+                    string caption = "Item cannot be addded";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+
+                    // Displays the MessageBox.
+
+                    result = MessageBox.Show(message, caption, buttons);
+                }
+
             }
 
         }
@@ -372,6 +391,11 @@ namespace Poppel.PresentationLayer
             customerManagement.StartPosition = FormStartPosition.CenterScreen;
             this.Close();
             customerManagement.Show();
+        }
+
+        private void creditRemainingTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
