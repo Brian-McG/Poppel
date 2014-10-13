@@ -73,7 +73,13 @@ namespace Poppel.PresentationLayer
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            
+            string stringId = ordersListView.FocusedItem.SubItems[0].Text;
+            int id;
+            if(int.TryParse(stringId,out id))
+            {
+                removeOrderController.Delete(id);
+            }
+           
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
