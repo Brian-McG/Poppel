@@ -697,8 +697,8 @@ namespace Poppel.Database
                     while (reader.Read())
                     {
                         RemoveOrderItem rm = new RemoveOrderItem();
-                        rm.customerId = reader.GetInt32(0)+"";
-                        rm.customerId = reader.GetString(2);
+                        rm.orderNumber = reader.GetInt32(0)+"";
+                        rm.orderDatePlaced = reader.GetDateTime(1)+"";
                         oItems.Add(rm);
                     }
                 }
