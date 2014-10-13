@@ -178,7 +178,7 @@ namespace Poppel.Database
 
         }
 
-        public Collection<ReportItem> readOrderItem()
+        public Collection<ReportItem> readOrderItem(DateTime date)
         {
             Collection<ReportItem> products = new Collection<ReportItem>();
             SqlDataReader reader;
@@ -195,16 +195,19 @@ namespace Poppel.Database
                     {
                         ReportItem orderItem = new ReportItem();
                         orderItem.ProductID = reader.GetInt32(1);
-                        orderItem.OrderID = this.getOrderNumber(reader.GetInt32(1));
+                        orderItem.OrderID = this.getOrderNumber(reader.GetInt32(1)) + "";
                         orderItem.Quantity = this.getQuantity(reader.GetInt32(1));
                         orderItem.Description = this.getDescription(reader.GetInt32(1));
                         orderItem.RackNumber = this.getRackNumber(reader.GetInt32(1));
-                        products.Add(orderItem);
+                        if (date.Equals(this.getOrderDate(reader.GetInt32(1))))
+                        {
+                            products.Add(orderItem);
+                        }
                     }
 
 
                 }
-                reader.Close();   //close the reader 
+                reader.Close();   //close the reader
                 cnMain.Close();  //close the connectio
 
                 return products;
@@ -221,6 +224,67 @@ namespace Poppel.Database
 
         }
 
+        public int getOrderNumber(int ID)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+
+            try
+            {
+                command = new SqlCommand("SELECT order_id FROM OrderItem WHERE product_id = " + ID + ";", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                int number = 0;
+                //Read from table
+                if (reader.HasRows)
+                {
+                    number = reader.GetInt32(0);
+                }
+                reader.Close();   //close the reader
+                cnMain.Close();  //close the connection
+                return number;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return 0;
+
+        }
+
+        public DateTime getOrderDate(int ID)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+
+            try
+            {
+                command = new SqlCommand("SELECT order_datePlaced FROM Order WHERE order_id = " + ID + ";", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                DateTime date = DateTime.Today;
+                //Read from table
+                if (reader.HasRows)
+                {
+                    date = reader.GetDateTime(1);
+                }
+                reader.Close();   //close the reader
+                cnMain.Close();  //close the connection
+                return date;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return DateTime.Today;
+
+        }
         private void readAlternatives(Collection<OrderItem> products)
         {
             SqlDataReader reader;

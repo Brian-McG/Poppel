@@ -11,7 +11,7 @@ using Poppel.Database;
 namespace Poppel.Report
 {
     public class PickingListReport
-   {
+    {
         #region Properties
         public Collection<ReportItem> productToBePicked;
         public Collection<ReportItem> ProductToBePicked
@@ -27,17 +27,18 @@ namespace Poppel.Report
         }
         #endregion
         private PoppelDatabase pd;
-        public PickingListReport(): base()
+        public PickingListReport()
+            : base()
         {
             this.ProductToBePicked = new Collection<ReportItem>();
             pd = new PoppelDatabase();
         }
 
 
-        public Collection<ReportItem> getOrderProducts(String date)
+        public Collection<ReportItem> getOrderProducts(DateTime date)
         {
-            ProductToBePicked=pd.readOrderItem();
+            ProductToBePicked = pd.readOrderItem(date);
             return ProductToBePicked;
         }
-   }
+    }
 }

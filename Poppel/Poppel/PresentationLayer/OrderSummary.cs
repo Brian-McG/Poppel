@@ -84,6 +84,7 @@ namespace Poppel.PresentationLayer
         {
          //   EmailController.sendEmail(orderController.Order.Customer, "Poppel Order Confimation", EmailController.createEmailTemplete(orderController.Order));
             orderController.submitOrder();
+            this.Close();
         
         }
 

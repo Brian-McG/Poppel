@@ -27,13 +27,13 @@ namespace Poppel.PresentationLayer
             pickReport = new PickingListReport();
             products = new Collection<ReportItem>();
 
-            
+
         }
         private void pickDateCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            pickDate=pickDateCalendar.SelectionRange.Start;
-            dateLabel.Text = pickDate.Year+"-"+pickDate.Month+"-"+pickDate.Day;
-            products = pickReport.getOrderProducts(pickDate.Year + "-" + pickDate.Month + "-" + pickDate.Day);
+            pickDate = pickDateCalendar.SelectionRange.Start;
+            dateLabel.Text = pickDate.Year + "-" + pickDate.Month + "-" + pickDate.Day;
+            products = pickReport.getOrderProducts(pickDate);
             pickNameLabel.Visible = true;
             pickDateLabel.Visible = true;
             pickDateCalendar.Visible = false;
@@ -54,20 +54,29 @@ namespace Poppel.PresentationLayer
             productListView.Columns.Insert(3, "Quantity", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(4, "Order Number", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(5, "Comments", 100, HorizontalAlignment.Left);
-
-            foreach (ReportItem item in products)
+            try
             {
+                errorLabel.Visible = false;
+                foreach (ReportItem item in products)
+                {
                     itemDetails = new ListViewItem();
-                    itemDetails.Text = item.RackNumber ;
-                    itemDetails.SubItems.Add(item.ProductID+"");
+                    itemDetails.Text = item.RackNumber;
+                    itemDetails.SubItems.Add(item.ProductID + "");
                     itemDetails.SubItems.Add(item.Description);
                     itemDetails.SubItems.Add(item.Quantity);
                     itemDetails.SubItems.Add(item.OrderID);
                     itemDetails.SubItems.Add("");
                     productListView.Items.Add(itemDetails);
+                }
+                productListView.Refresh();
+                productListView.GridLines = true;
             }
-            productListView.Refresh();
-            productListView.GridLines = true;
+            catch (Exception e)
+            {
+                errorLabel.Text = "No products to pick on this date";
+                errorLabel.Visible = true;
+
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
