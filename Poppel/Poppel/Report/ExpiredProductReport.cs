@@ -34,7 +34,8 @@ namespace Poppel.Report
             String date = "";
             PoppelDatabase pd = new PoppelDatabase();
             date = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
-            this.expiredProducts=pd.readStock(date);
+           //Brian: Use 
+            // this.expiredProducts=pd.readStock(date);
             return expiredProducts;
         }
     }

@@ -39,6 +39,10 @@ namespace Poppel.Database
                 return;
             }
         }
+        protected SqlConnection newConnection()
+        {
+            return new SqlConnection(strConn);
+        }
 
         protected bool UpdateDataSource(SqlCommand currentCommand)
         {

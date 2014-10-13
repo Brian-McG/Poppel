@@ -11,6 +11,7 @@ using System.Xml;
 using Poppel.Domain;
 using Poppel.Order;
 using Poppel.Report;
+using System.Windows.Forms;
 
 
 namespace Poppel.Database
@@ -26,7 +27,7 @@ namespace Poppel.Database
             bool exists = false;
             try
             {
-                command = new SqlCommand("SELECT TOP 1 customer_id FROM Customer WHERE customer_id = '" + id+"'", cnMain);
+                command = new SqlCommand("SELECT TOP 1 customer_id FROM Customer WHERE customer_id = '" + id + "'", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table
@@ -51,7 +52,7 @@ namespace Poppel.Database
         public void addCustomer(Customer customer)
         {
             string sqlString = "";
-            sqlString = "INSERT INTO Customer(customer_id,customer_name,customer_surname,customer_telephoneNumber,customer_email,customer_credit,customer_creditLimit,customer_street,customer_suburb,customer_town,customer_city,customer_zipCode) VALUES ('"+customer.Id.Trim()+"','"+customer.Name.Trim()+"','"+customer.Surname.Trim()+"','"+customer.PhoneNumber.Trim()+"','"+customer.Email.Trim()+"',"+customer.Credit.ToString()+","+customer.CreditLimit.ToString() + ",'"+customer.Address[0].Trim() + "','" + customer.Address[1] + "','" + customer.Address[2] + "','" + customer.Address[3] + "','" + customer.Address[4]+"')";
+            sqlString = "INSERT INTO Customer(customer_id,customer_name,customer_surname,customer_telephoneNumber,customer_email,customer_credit,customer_creditLimit,customer_street,customer_suburb,customer_town,customer_city,customer_zipCode) VALUES ('" + customer.Id.Trim() + "','" + customer.Name.Trim() + "','" + customer.Surname.Trim() + "','" + customer.PhoneNumber.Trim() + "','" + customer.Email.Trim() + "'," + customer.Credit.ToString() + "," + customer.CreditLimit.ToString() + ",'" + customer.Address[0].Trim() + "','" + customer.Address[1] + "','" + customer.Address[2] + "','" + customer.Address[3] + "','" + customer.Address[4] + "')";
 
             UpdateDataSource(new SqlCommand(sqlString, cnMain));
         }
@@ -69,7 +70,7 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                command = new SqlCommand("SELECT * FROM Customer WHERE customer_telephoneNumber = '" + telephoneNumber+"'", cnMain);
+                command = new SqlCommand("SELECT * FROM Customer WHERE customer_telephoneNumber = '" + telephoneNumber + "'", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table
@@ -129,8 +130,8 @@ namespace Poppel.Database
             }
         }
 
-       
-        
+
+
         public Collection<OrderItem> readProducts()
         {
             Collection<OrderItem> products = new Collection<OrderItem>();
@@ -144,7 +145,7 @@ namespace Poppel.Database
                 reader = command.ExecuteReader();                        //Read from table
                 if (reader.HasRows)
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         OrderItem orderItem = new OrderItem();
                         orderItem.Product = createProduct(reader);
@@ -162,7 +163,7 @@ namespace Poppel.Database
                 {
                     setStockCount(product.Product);
                 }
-                
+
                 return products;
             }
             catch (Exception ex)
@@ -172,7 +173,7 @@ namespace Poppel.Database
                 Console.Write(ex.ToString());
                 return null;
             }
-         
+
 
 
         }
@@ -183,12 +184,12 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                foreach(OrderItem product in products)
+                foreach (OrderItem product in products)
                 {
-                    command = new SqlCommand("SELECT alternative_product_id FROM Alternatives WHERE product_id="+product.Product.Id, cnMain);
+                    command = new SqlCommand("SELECT alternative_product_id FROM Alternatives WHERE product_id=" + product.Product.Id, cnMain);
                     cnMain.Open();             //open the connection
                     command.CommandType = CommandType.Text;
-                    reader = command.ExecuteReader();   
+                    reader = command.ExecuteReader();
                     //Read from table
                     if (reader.HasRows)
                     {
@@ -197,7 +198,7 @@ namespace Poppel.Database
                         {
                             OrderItem alternative = OrderController.getProduct(reader.GetInt32(0), products);
                             Product alternativeProduct = alternative.Product;
-                            product.Product.Alternatives.Add(alternativeProduct) ;
+                            product.Product.Alternatives.Add(alternativeProduct);
                         }
                     }
                     reader.Close();   //close the reader 
@@ -219,7 +220,7 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                if(categories==null)
+                if (categories == null)
                 {
                     readCategories();
                 }
@@ -236,11 +237,11 @@ namespace Poppel.Database
                         while (reader.Read())
                         {
                             int category_id = reader.GetInt32(0);
-                            Boolean added=false;
-                            int index=0;
-                            while(!added&&index<categories.Count)
+                            Boolean added = false;
+                            int index = 0;
+                            while (!added && index < categories.Count)
                             {
-                                if(categories[index].Category_id==category_id)
+                                if (categories[index].Category_id == category_id)
                                 {
                                     product.Product.Categories.Add(categories[index]);
                                     added = true;
@@ -261,7 +262,7 @@ namespace Poppel.Database
                 Console.Write(ex.ToString());
             }
         }
-        
+
         private Product createProduct(SqlDataReader reader)
         {
             Product product = new Product();
@@ -271,7 +272,7 @@ namespace Poppel.Database
             product.ProductCode = reader.GetString(3).Trim();
             return product;
         }
-         
+
 
         private void setStockCount(Product product)
         {
@@ -279,7 +280,8 @@ namespace Poppel.Database
             SqlCommand command;
             try
             {
-                command = new SqlCommand("SELECT SUM(stockItem_numberInStock) AS number_in_stock FROM StockItem WHERE product_ref = " + product.Id, cnMain);
+                DateTime check = DateTime.Now.AddMonths(1);
+                command = new SqlCommand("SELECT SUM(stockItem_numberInStock) AS number_in_stock FROM StockItem WHERE product_ref = " + product.Id + " AND DATEDIFF(day, '" + check.ToString() + "',stockItem_expityDate) >= 0", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table
@@ -287,7 +289,15 @@ namespace Poppel.Database
                 {
                     if (reader.Read())
                     {
-                        product.NumberInStock = reader.GetInt32(0);
+                        if (reader.IsDBNull(0))
+                        {
+                            product.NumberInStock = 0;
+                        }
+                        else
+                        {
+                            product.NumberInStock = reader.GetInt32(0);
+                        }
+
                     }
                 }
                 reader.Close();   //close the reader 
@@ -295,11 +305,14 @@ namespace Poppel.Database
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
             }
         }
+
+
 
 
         public void editCustomer(Customer customer)
@@ -321,7 +334,7 @@ namespace Poppel.Database
             customer.Id = reader.GetString(0).Trim();
             customer.Name = reader.GetString(1).Trim();
             customer.Surname = reader.GetString(2).Trim();
-            if(!reader.IsDBNull(3))
+            if (!reader.IsDBNull(3))
             {
                 customer.PhoneNumber = reader.GetString(3).Trim();
             }
@@ -353,44 +366,44 @@ namespace Poppel.Database
             {
                 address[4] = reader.GetString(11).Trim();
             }
-            for (int i = 0; i < address.Length;i++ )
+            for (int i = 0; i < address.Length; i++)
             {
-                if(address[i]==null)
+                if (address[i] == null)
                 {
                     address[i] = "";
                 }
             }
-                customer.Address = address;
+            customer.Address = address;
             return customer;
         }
 
         public Collection<Category> readCategories()
         {
-             SqlDataReader reader;
+            SqlDataReader reader;
             SqlCommand command;
             Collection<Category> categories;
             try
             {
-                    command = new SqlCommand("SELECT * FROM Category", cnMain);
-                    cnMain.Open();             //open the connection
-                    command.CommandType = CommandType.Text;
-                    reader = command.ExecuteReader();
-                    categories = new Collection<Category>();
-                    //Read from table
-                    if (reader.HasRows)
+                command = new SqlCommand("SELECT * FROM Category", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                categories = new Collection<Category>();
+                //Read from table
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            Category category = new Category();
-                            category.Category_id = reader.GetInt32(0);
-                            category.Category_description = reader.GetString(1);
-                            categories.Add(category);
-                        }
+                        Category category = new Category();
+                        category.Category_id = reader.GetInt32(0);
+                        category.Category_description = reader.GetString(1);
+                        categories.Add(category);
                     }
-                    reader.Close();   //close the reader 
-                    cnMain.Close();  //close the connection
-                    this.categories = categories;
-                    return categories;
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                this.categories = categories;
+                return categories;
             }
             catch (Exception ex)
             {
@@ -405,10 +418,10 @@ namespace Poppel.Database
         {
             SqlDataReader reader;
             SqlCommand command;
-            
+
             try
             {
-                command = new SqlCommand("SELECT order_id FROM OrderItem WHERE product_id = " + ID+";", cnMain);
+                command = new SqlCommand("SELECT order_id FROM OrderItem WHERE product_id = " + ID + ";", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -420,7 +433,7 @@ namespace Poppel.Database
                 }
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
-                return number+"";
+                return number + "";
             }
             catch (Exception ex)
             {
@@ -429,7 +442,7 @@ namespace Poppel.Database
                 Console.Write(ex.ToString());
             }
             return null;
-        
+
         }
 
         public DateTime getOrderDate(String ID)
@@ -447,7 +460,7 @@ namespace Poppel.Database
                 //Read from table
                 if (reader.HasRows)
                 {
-                     date= reader.GetDateTime(1);
+                    date = reader.GetDateTime(1);
                 }
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
@@ -492,10 +505,10 @@ namespace Poppel.Database
         {
             SqlDataReader reader;
             SqlCommand command;
-            
+
             try
             {
-                command = new SqlCommand("SELECT stockItem_rackNumber FROM StockItem WHERE product_ref = "+ID+";", cnMain);
+                command = new SqlCommand("SELECT stockItem_rackNumber FROM StockItem WHERE product_ref = " + ID + ";", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -507,7 +520,7 @@ namespace Poppel.Database
                 }
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
-                return number+"";
+                return number + "";
             }
             catch (Exception ex)
             {
@@ -516,7 +529,7 @@ namespace Poppel.Database
                 Console.Write(ex.ToString());
             }
             return null;
-        
+
         }
 
         public Collection<StockItem> readStock(String Date)
@@ -526,7 +539,9 @@ namespace Poppel.Database
             Collection<StockItem> items;
             try
             {
-                command = new SqlCommand("SELECT * FROM StockItem WHERE stockItem_expityDate <= '" + Date + "';", cnMain);
+                DateTime input;
+                DateTime.TryParse(Date, out input);
+                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0;", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -558,27 +573,27 @@ namespace Poppel.Database
             return null;
         }
 
-        
+
 
         public Employee login(string username, string password)
         {
 
             SqlDataReader reader;
             SqlCommand command;
-           
+
             try
             {
-                Employee employee=null;
-                command = new SqlCommand("SELECT * FROM Employee WHERE employee_id = '" + username+"' AND employee_password ='"+password+"'", cnMain);
+                Employee employee = null;
+                command = new SqlCommand("SELECT * FROM Employee WHERE employee_id = '" + username + "' AND employee_password ='" + password + "'", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();                        //Read from table
                 if (reader.HasRows)
                 {
-                   while(reader.Read())
-                   {
-                       employee = createEmployee(reader);   
-                   }
+                    while (reader.Read())
+                    {
+                        employee = createEmployee(reader);
+                    }
                 }
                 reader.Close();   //close the reader 
                 cnMain.Close();  //close the connection
@@ -592,7 +607,7 @@ namespace Poppel.Database
                 return null;
             }
 
-        
+
         }
 
         private Employee createEmployee(SqlDataReader reader)
@@ -649,7 +664,7 @@ namespace Poppel.Database
         public void writeOrder(Poppel.Order.Order order)
         {
             string sqlString = "";
-            sqlString = "INSERT INTO [Order](order_datePlaced,customer_id,employee_id) OUTPUT INSERTED.order_id VALUES ('"+order.DateOrderPlaced.ToString()+"','" + order.Customer.Id.Trim() + "','" + order.Employee.Id + "')";
+            sqlString = "INSERT INTO [Order](order_datePlaced,customer_id,employee_id) OUTPUT INSERTED.order_id VALUES ('" + order.DateOrderPlaced.ToString() + "','" + order.Customer.Id.Trim() + "','" + order.Employee.Id + "')";
             //'" + order.DateOrderPlaced.ToString() + "',
 
             SqlDataReader reader;
@@ -659,7 +674,7 @@ namespace Poppel.Database
                 command = new SqlCommand(sqlString, cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
-                reader = command.ExecuteReader();  
+                reader = command.ExecuteReader();
                 //Read from table
                 int id = -1;
                 if (reader.HasRows)
@@ -672,44 +687,107 @@ namespace Poppel.Database
                 reader.Close();   //close the reader 
                 cnMain.Close();
 
-                if(id!=-1)
-                {
-                    for (int i = 0; i < order.Products.Count;i++)
+                if (id != -1)
+                    for (int i = 0; i < order.Products.Count; i++)
                     {
-                        sqlString = "INSERT INTO [OrderItem](order_id,product_id,product_quantity) VALUES (" + id + "," +order.Products[i].Product.Id+"," + order.Products[i].Quantity + ")";
-                        UpdateDataSource(new SqlCommand(sqlString, cnMain));
-                    }
-                    sqlString = "INSERT INTO [Delivery](delivery_startTime,delivery_endTime,order_id) OUTPUT INSERTED.delivery_id VALUES ('"+order.DeliveryDetails.StartDeliveryTime.ToString()+"','"+order.DeliveryDetails.EndDeliveryTime.ToString()+"',"+id+")";
-                    cnMain.Open();
-                    command = new SqlCommand(sqlString, cnMain);
-                    command.CommandType = CommandType.Text;
-                    reader = command.ExecuteReader();
-                    //Read from table
-                    int deliveryId = -1;
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
+                        sqlString = "INSERT INTO [OrderItem](order_id,product_quantity) OUTPUT INSERTED.orderItem_id VALUES (" + id + "," + order.Products[i].Quantity + ")";
+                        cnMain.Open();
+                        command = new SqlCommand(sqlString, cnMain);
+                        command.CommandType = CommandType.Text;
+                        reader = command.ExecuteReader();
+                        //Read from table
+                        int orderItemId = -1;
+                        if (reader.HasRows)
                         {
-                            deliveryId = reader.GetInt32(0);
+                            while (reader.Read())
+                            {
+                                orderItemId = reader.GetInt32(0);
+                            }
                         }
-                    }
-                    cnMain.Close();
-                    reader.Close();   //close the reader 
-                    for (int i = 0; i < order.DeliveryDetails.AllowedDeliveryDates.Count; i++)
-                    {
-                        sqlString = "INSERT INTO [DeliveryDate](delivery_id,delivery_date) VALUES (" + deliveryId + ",'" + order.DeliveryDetails.AllowedDeliveryDates[i].ToString() + "')";
-                        UpdateDataSource(new SqlCommand(sqlString, cnMain));
-                    }
+                        cnMain.Close();
+                        reader.Close();   //close the reader 
 
+                        DateTime check = DateTime.Now;
+                        check = check.AddMonths(1);
+                        sqlString = "SELECT stockItem_id,stockItem_numberInStock FROM StockItem WHERE DATEDIFF(day, '" + check.ToString() + "',stockItem_expityDate) >= 0 order by convert(datetime, stockItem_expityDate, 103) ASC";
+                        command = new SqlCommand(sqlString, cnMain);
+                        cnMain.Open();             //open the connection
+                        command.CommandType = CommandType.Text;
+                        reader = command.ExecuteReader();
+                        //Read from table
+                        int stockItemID = -1;
+                        bool done = false;
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read() && !done)
+                            {
+
+                                stockItemID = reader.GetInt32(0);
+                                int numInStock = reader.GetInt32(1);
+                                int reductionAmount;
+                                if (numInStock >= order.Products[i].Quantity)
+                                {
+                                    done = true;
+                                    reductionAmount = order.Products[i].Quantity;
+                                }
+                                else
+                                {
+                                    reductionAmount = numInStock;
+                                }
+                                SqlConnection connection = newConnection();
+
+                                SqlCommand currentCommand = new SqlCommand("INSERT INTO OrderStockItem(orderItem_id,stockItem_id, item_quantity) VALUES(" + orderItemId + "," + stockItemID + "," + reductionAmount + ")", connection);
+                                currentCommand.CommandType = CommandType.Text;
+                                connection.Open();
+                                currentCommand.ExecuteNonQuery();
+                                connection.Close();
+
+                                currentCommand = new SqlCommand("Update StockItem Set stockItem_numberInStock = stockItem_numberInStock - " + reductionAmount + "WHERE stockItem_id = " + stockItemID, connection);
+                                currentCommand.CommandType = CommandType.Text;
+                                connection.Open();
+                                currentCommand.ExecuteNonQuery();
+
+                                connection.Close();
+
+
+                            }
+                        }
+                        reader.Close();   //close the reader 
+                        cnMain.Close();
+                    }
+                sqlString = "INSERT INTO [Delivery](delivery_startTime,delivery_endTime,order_id) OUTPUT INSERTED.delivery_id VALUES ('" + order.DeliveryDetails.StartDeliveryTime.ToString() + "','" + order.DeliveryDetails.EndDeliveryTime.ToString() + "'," + id + ")";
+                cnMain.Open();
+                command = new SqlCommand(sqlString, cnMain);
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                //Read from table
+                int deliveryId = -1;
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        deliveryId = reader.GetInt32(0);
+                    }
+                }
+                cnMain.Close();
+                reader.Close();   //close the reader 
+                for (int i = 0; i < order.DeliveryDetails.AllowedDeliveryDates.Count; i++)
+                {
+                    sqlString = "INSERT INTO [DeliveryDate](delivery_id,delivery_date) VALUES (" + deliveryId + ",'" + order.DeliveryDetails.AllowedDeliveryDates[i].ToString() + "')";
+                    UpdateDataSource(new SqlCommand(sqlString, cnMain));
                 }
 
 
 
 
+
+
                 cnMain.Close();  //close the connection
+
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
@@ -719,7 +797,7 @@ namespace Poppel.Database
 
         }
 
-     
+
         /*
         //Constructors
         public EmployeeDB()

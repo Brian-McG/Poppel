@@ -58,7 +58,7 @@
             this.stockItemsFlowLayoutPanel.AutoScroll = true;
             this.stockItemsFlowLayoutPanel.Location = new System.Drawing.Point(12, 120);
             this.stockItemsFlowLayoutPanel.Name = "stockItemsFlowLayoutPanel";
-            this.stockItemsFlowLayoutPanel.Size = new System.Drawing.Size(654, 774);
+            this.stockItemsFlowLayoutPanel.Size = new System.Drawing.Size(654, 708);
             this.stockItemsFlowLayoutPanel.TabIndex = 0;
             this.stockItemsFlowLayoutPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flowLayoutPanel_MouseClick);
             this.stockItemsFlowLayoutPanel.MouseEnter += new System.EventHandler(this.flowLayoutPanel_MouseEnter);
@@ -134,7 +134,7 @@
             this.basketListView.Location = new System.Drawing.Point(671, 383);
             this.basketListView.MultiSelect = false;
             this.basketListView.Name = "basketListView";
-            this.basketListView.Size = new System.Drawing.Size(228, 455);
+            this.basketListView.Size = new System.Drawing.Size(228, 389);
             this.basketListView.TabIndex = 21;
             this.basketListView.UseCompatibleStateImageBehavior = false;
             this.basketListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.basketListView_ItemSelectionChanged);
@@ -155,7 +155,7 @@
             this.checkOutButton.AutoSize = true;
             this.checkOutButton.Enabled = false;
             this.checkOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkOutButton.Location = new System.Drawing.Point(786, 844);
+            this.checkOutButton.Location = new System.Drawing.Point(785, 778);
             this.checkOutButton.Name = "checkOutButton";
             this.checkOutButton.Size = new System.Drawing.Size(113, 50);
             this.checkOutButton.TabIndex = 23;
@@ -229,6 +229,7 @@
             this.creditRemainingTextBox.ReadOnly = true;
             this.creditRemainingTextBox.Size = new System.Drawing.Size(134, 20);
             this.creditRemainingTextBox.TabIndex = 30;
+            this.creditRemainingTextBox.TextChanged += new System.EventHandler(this.creditRemainingTextBox_TextChanged);
             // 
             // poppelDatabaseDataSet1
             // 
@@ -239,7 +240,7 @@
             // 
             this.cancelOrderButton.AutoSize = true;
             this.cancelOrderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelOrderButton.Location = new System.Drawing.Point(671, 844);
+            this.cancelOrderButton.Location = new System.Drawing.Point(671, 778);
             this.cancelOrderButton.Name = "cancelOrderButton";
             this.cancelOrderButton.Size = new System.Drawing.Size(52, 50);
             this.cancelOrderButton.TabIndex = 31;
@@ -251,7 +252,7 @@
             // 
             this.backButton.AutoSize = true;
             this.backButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backButton.Location = new System.Drawing.Point(729, 844);
+            this.backButton.Location = new System.Drawing.Point(729, 778);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(51, 50);
             this.backButton.TabIndex = 32;
@@ -264,7 +265,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(911, 906);
+            this.ClientSize = new System.Drawing.Size(911, 836);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.creditRemainingTextBox);

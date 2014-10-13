@@ -180,6 +180,7 @@ namespace Poppel.PresentationLayer
         #region Utility
         private void setCustomerDetails(Customer searchCustomer)
         {
+            
             if (searchCustomer == null)
             {
                 userNotFoundErrorLabel.Text = "The customer entered does not exist.";
@@ -202,9 +203,18 @@ namespace Poppel.PresentationLayer
                 townTextBox.Text = searchCustomer.Address[2];
                 cityTextBox.Text = searchCustomer.Address[3];
                 zipCodeTextBox.Text = searchCustomer.Address[4];
-                currentCreditTextBox.Text = string.Format("{0:0.00}", searchCustomer.Credit);
+                currentCreditTextBox.Text = string.Format("{0:0.00}", searchCustomer.CreditLimit - searchCustomer.Credit);
                 creditLimitTextBox.Text = string.Format("{0:0.00}", searchCustomer.CreditLimit);
-                placeOrderButton.Enabled = true;
+                if(searchCustomer.Credit<searchCustomer.CreditLimit)
+                {
+                    placeOrderButton.Enabled = true;
+                }
+                else
+                {
+                    creditErrorLabel.Text = "Credit Limit Exceeded. No new orders can be added.";
+                    creditErrorLabel.Visible = true;
+                }
+
                 cancelOrderButton.Enabled = true;
                 creditGroupBox.Visible = true;
                 personalDetailsGroupBox.Visible = true;
@@ -223,18 +233,7 @@ namespace Poppel.PresentationLayer
             customer.PhoneNumber = Person.unFormatPhoneNumber(phoneNumberMaskBox.Text);
             customer.Email = emailAddressTextBox.Text;
             decimal temp = -1;
-            Decimal.TryParse(currentCreditTextBox.Text.Trim(), out temp);
-            if (temp == -1)
-            {
-                editErrorLabel.Text = "An error occured converting credit.";
-                editErrorLabel.Visible = true;
-                correct = false;
-
-            }
-            else
-            {
-                customer.Credit = temp;
-            }
+           
             temp = -1;
             Decimal.TryParse(creditLimitTextBox.Text.Trim(), out temp);
             if (temp == -1)
@@ -247,7 +246,18 @@ namespace Poppel.PresentationLayer
             {
                 customer.CreditLimit = temp;
             }
+            Decimal.TryParse(currentCreditTextBox.Text.Trim(), out temp);
+            if (temp == -1)
+            {
+                editErrorLabel.Text = "An error occured converting credit.";
+                editErrorLabel.Visible = true;
+                correct = false;
 
+            }
+            else
+            {
+                customer.Credit = customer.CreditLimit-temp;
+            }
             string[] address = new string[Person.ADDRESS_LENGTH];
             address[0] = streetAddressTextBox.Text.Trim();
             address[1] = suburbTextBox.Text.Trim();
@@ -298,6 +308,7 @@ namespace Poppel.PresentationLayer
             suburbErrorMessageLabel.Visible = visible;
             townErrorMessageLabel.Visible = visible;
             cityErrorMessageLabel.Visible = visible;
+            creditErrorLabel.Visible = visible;
         }
 
         private void setReadOnly(bool set)

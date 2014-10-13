@@ -82,6 +82,7 @@
             this.currentCreditTextBox = new System.Windows.Forms.TextBox();
             this.currentCreditLabel = new System.Windows.Forms.Label();
             this.editErrorLabel = new System.Windows.Forms.Label();
+            this.creditErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.customerInputGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
@@ -599,6 +600,7 @@
             // 
             // creditGroupBox
             // 
+            this.creditGroupBox.Controls.Add(this.creditErrorLabel);
             this.creditGroupBox.Controls.Add(this.creditLimitErrorLabel);
             this.creditGroupBox.Controls.Add(this.creditLimitTextBox);
             this.creditGroupBox.Controls.Add(this.creditLimitLabel);
@@ -671,6 +673,17 @@
             this.editErrorLabel.Text = "<Error Label>";
             this.editErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.editErrorLabel.Visible = false;
+            // 
+            // creditErrorLabel
+            // 
+            this.creditErrorLabel.AutoSize = true;
+            this.creditErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.creditErrorLabel.Location = new System.Drawing.Point(466, 16);
+            this.creditErrorLabel.Name = "creditErrorLabel";
+            this.creditErrorLabel.Size = new System.Drawing.Size(70, 13);
+            this.creditErrorLabel.TabIndex = 37;
+            this.creditErrorLabel.Text = "<Error Label>";
+            this.creditErrorLabel.Visible = false;
             // 
             // CustomerManagement
             // 
@@ -764,5 +777,6 @@
         private System.Windows.Forms.TextBox cityTextBox;
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label customerClickInfoLabel;
+        private System.Windows.Forms.Label creditErrorLabel;
     }
 }
