@@ -38,11 +38,6 @@
             this.dateLabel = new System.Windows.Forms.Label();
             this.pickDateCalendar = new System.Windows.Forms.MonthCalendar();
             this.productListView = new System.Windows.Forms.ListView();
-            this.Rack_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Product_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Product_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Order_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Comments = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.pickDateLabel = new System.Windows.Forms.Label();
             this.pickSignLabel = new System.Windows.Forms.Label();
@@ -142,12 +137,6 @@
             // 
             // productListView
             // 
-            this.productListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Rack_Number,
-            this.Product_ID,
-            this.Product_Name,
-            this.Order_Number,
-            this.Comments});
             this.productListView.Location = new System.Drawing.Point(11, 102);
             this.productListView.Margin = new System.Windows.Forms.Padding(2);
             this.productListView.Name = "productListView";
@@ -155,26 +144,6 @@
             this.productListView.TabIndex = 21;
             this.productListView.UseCompatibleStateImageBehavior = false;
             this.productListView.Visible = false;
-            // 
-            // Rack_Number
-            // 
-            this.Rack_Number.Text = "Rack Number";
-            // 
-            // Product_ID
-            // 
-            this.Product_ID.Text = "productID";
-            // 
-            // Product_Name
-            // 
-            this.Product_Name.Text = "Product Name";
-            // 
-            // Order_Number
-            // 
-            this.Order_Number.Text = "Order Number";
-            // 
-            // Comments
-            // 
-            this.Comments.Text = "Comments";
             // 
             // cancelButton
             // 
@@ -265,11 +234,6 @@
         private System.Windows.Forms.MonthCalendar pickDateCalendar;
         private System.Windows.Forms.ListView productListView;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.ColumnHeader Rack_Number;
-        private System.Windows.Forms.ColumnHeader Product_ID;
-        private System.Windows.Forms.ColumnHeader Product_Name;
-        private System.Windows.Forms.ColumnHeader Order_Number;
-        private System.Windows.Forms.ColumnHeader Comments;
         private System.Windows.Forms.Label pickDateLabel;
         private System.Windows.Forms.Label pickSignLabel;
         private System.Windows.Forms.Label pickNameLabel;

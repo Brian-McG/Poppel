@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using Poppel.Order;
+using Poppel.Database;
 
 namespace Poppel.PresentationLayer
 {
@@ -40,26 +41,34 @@ namespace Poppel.PresentationLayer
         public void setUpListView()
         {
             //Clear current List View Control
+            PoppelDatabase pd = new PoppelDatabase();
             ordersListView.Clear();
             ListViewItem itemDetails;
             //Set Up Columns of List View
             ordersListView.Columns.Insert(0, "Order Number", 95, HorizontalAlignment.Left);
+            ordersListView.Columns.Insert(0, "Date Placed", 95, HorizontalAlignment.Left);
             ordersListView.Columns.Insert(1, "Total Cost", 75, HorizontalAlignment.Left);
             ordersListView.Columns.Insert(2, "", 0, HorizontalAlignment.Left);
 
-            //Add employee details to each ListView item 
             foreach (OrderItem item in products)
             {
                 //Need a way to find out what order this is associated to
                     itemDetails = new ListViewItem();
-                    itemDetails.Text = item.Product.Id+"";// Need order item
-                    itemDetails.SubItems.Add(item.Quantity+"");
+                    itemDetails.Text = pd.getOrderNumber(item.Product.Id);// Need order item
+                    itemDetails.SubItems.Add(pd.getOrderDate(pd.getOrderNumber(item.Product.Id))+"");
+                    itemDetails.SubItems.Add(item.Product.Total+"");
                     ordersListView.Items.Add(itemDetails);
             }
 
 
             ordersListView.Refresh();
             ordersListView.GridLines = true;
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            //Ask Brian how to get info off selected item
+            
         }
     }
 }
