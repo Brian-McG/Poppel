@@ -223,11 +223,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\Assets\Asset Reference.txt" />
+    <Content Include="bin\Debug\Assets\astrosBox.png" />
+    <Content Include="bin\Debug\Assets\cherryPlum6pack.png" />
     <Content Include="bin\Debug\Assets\coke6Pack.png" />
+    <Content Include="bin\Debug\Assets\creamSoda6Pack.png" />
     <Content Include="bin\Debug\Assets\fanta6Pack.jpg" />
     <Content Include="bin\Debug\Assets\fanta6Pack.png" />
+    <Content Include="bin\Debug\Assets\fizpop.png" />
+    <Content Include="bin\Debug\Assets\fizzerBox.png" />
+    <Content Include="bin\Debug\Assets\jellyBabies.png" />
+    <Content Include="bin\Debug\Assets\jellyBeans.png" />
+    <Content Include="bin\Debug\Assets\rasperry6Pack.png" />
+    <Content Include="bin\Debug\Assets\sherbet.png" />
     <Content Include="bin\Debug\Assets\sprite6Pack.png" />
     <Content Include="bin\Debug\Assets\sprite_6pk.jpg" />
+    <Content Include="bin\Debug\Assets\wineGums.png" />
     <Content Include="PoppelDatabase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

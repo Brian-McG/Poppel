@@ -48,6 +48,7 @@ namespace Poppel.PresentationLayer
             ListViewItem itemDetails;
             //Set Up Columns of List View
             ordersListView.Columns.Insert(0, "Order Number", 95, HorizontalAlignment.Left);
+            ordersListView.Columns.Insert(1, "Order Date", 95, HorizontalAlignment.Left);
 
             try
             {
@@ -57,6 +58,7 @@ namespace Poppel.PresentationLayer
                     //Need a way to find out what order this is associated to
                     itemDetails = new ListViewItem();
                     itemDetails.Text = item.orderNumber;
+                    itemDetails.SubItems.Add(item.orderDatePlaced);
                     ordersListView.Items.Add(itemDetails);
                 }
                 ordersListView.Refresh();
@@ -71,13 +73,6 @@ namespace Poppel.PresentationLayer
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            string stringId = ordersListView.FocusedItem.SubItems[0].Text;
-            int id;
-            if(int.TryParse(stringId, out id))
-            {
-                removeOrderController.Delete(id);
-            }
-
             
         }
 

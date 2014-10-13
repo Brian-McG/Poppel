@@ -10,12 +10,12 @@ namespace Poppel.Order
     public class RemoveOrderItem
     {
         public String orderNumber;
-        public String customerId;
+        public String orderDatePlaced;
 
         public RemoveOrderItem()
         {
             orderNumber = "";
-            customerId = "";
+            orderDatePlaced = "";
         }
 
         
