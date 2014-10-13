@@ -25,15 +25,15 @@ namespace Poppel.PresentationLayer
             InitializeComponent();
             productListView.View = View.Details;
             pickReport = new PickingListReport();
-            products = pickReport.getOrderProducts();
+            products = new Collection<ReportItem>();
 
             
         }
-        private void pickDateCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        private void pickDateCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             pickDate=pickDateCalendar.SelectionRange.Start;
             dateLabel.Text = pickDate.Year+"-"+pickDate.Month+"-"+pickDate.Day;
-            
+            products = pickReport.getOrderProducts(pickDate.Year + "-" + pickDate.Month + "-" + pickDate.Day);
             pickNameLabel.Visible = true;
             pickDateLabel.Visible = true;
             pickDateCalendar.Visible = false;
@@ -58,16 +58,13 @@ namespace Poppel.PresentationLayer
             foreach (ReportItem item in products)
             {
                     itemDetails = new ListViewItem();
-                    if (pickReport.getOrderDate(pickReport.getOrderNumber(item.productID)).Equals(this.pickDate))
-                    {
-                        itemDetails.Text = pickReport.getRackNumber(item.productID); ;
-                        itemDetails.SubItems.Add(item.productID+"");
-                        itemDetails.SubItems.Add(item.productID+"");
-                        itemDetails.SubItems.Add(item.productID+"");
-                        itemDetails.SubItems.Add(pickReport.getOrderNumber(item.productID));
-                        itemDetails.SubItems.Add("");
-                        productListView.Items.Add(itemDetails);
-                    }
+                    itemDetails.Text = item.RackNumber ;
+                    itemDetails.SubItems.Add(item.ProductID+"");
+                    itemDetails.SubItems.Add(item.Description);
+                    itemDetails.SubItems.Add(item.Quantity);
+                    itemDetails.SubItems.Add(item.OrderID);
+                    itemDetails.SubItems.Add("");
+                    productListView.Items.Add(itemDetails);
             }
             productListView.Refresh();
             productListView.GridLines = true;

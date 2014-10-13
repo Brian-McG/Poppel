@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.sloganLabel = new System.Windows.Forms.Label();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.pickDateCalendar = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             this.productListView.Size = new System.Drawing.Size(719, 312);
             this.productListView.TabIndex = 45;
             this.productListView.UseCompatibleStateImageBehavior = false;
+            this.productListView.Visible = false;
             // 
             // dateLabel
             // 
@@ -98,9 +100,18 @@
             this.logoPictureBox.TabIndex = 36;
             this.logoPictureBox.TabStop = false;
             // 
+            // pickDateCalendar
+            // 
+            this.pickDateCalendar.Location = new System.Drawing.Point(263, 127);
+            this.pickDateCalendar.Margin = new System.Windows.Forms.Padding(7);
+            this.pickDateCalendar.Name = "pickDateCalendar";
+            this.pickDateCalendar.TabIndex = 47;
+            this.pickDateCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.pickDateCalendar_DateChanged);
+            // 
             // ExpiredProducts
             // 
             this.ClientSize = new System.Drawing.Size(772, 532);
+            this.Controls.Add(this.pickDateCalendar);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.productListView);
             this.Controls.Add(this.dateLabel);
@@ -122,5 +133,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label sloganLabel;
         private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.MonthCalendar pickDateCalendar;
     }
 }

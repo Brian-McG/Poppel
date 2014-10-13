@@ -15,6 +15,7 @@ namespace Poppel.Report
     public partial class ExpiredProducts : Form
     {
         public Collection<StockItem> products;
+        public String date;
         public Collection<StockItem> Products
         {
             get
@@ -29,17 +30,18 @@ namespace Poppel.Report
         ExpiredProductReport expiredController = new ExpiredProductReport();
         public ExpiredProducts()
         {
-            this.Products = expiredController.getStock();
+            this.Products = new Collection<StockItem>();
             InitializeComponent(); 
             productListView.View = View.Details;
-            populateReport();
+            
             dateLabel.Text = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
         }
 
-        private void populateReport()
+        private void populateReport(String date)
         {
 
             productListView.Clear();
+            this.Products = expiredController.getStock(date);
             ListViewItem itemDetails;
             dateLabel.Visible = true;
             productListView.Columns.Insert(0, "Rack Number", 100, HorizontalAlignment.Left);
@@ -67,6 +69,17 @@ namespace Poppel.Report
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pickDateCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DateTime Date = pickDateCalendar.SelectionRange.Start;
+            dateLabel.Text = Date.Year + "-" + Date.Month + "-" + Date.Day;
+            pickDateCalendar.Visible = false;
+            date = Date.Year + "-" + Date.Month + "-" + Date.Day; 
+            Console.WriteLine(date);
+            productListView.Visible = true;
+            populateReport(date);
         }
         
     }

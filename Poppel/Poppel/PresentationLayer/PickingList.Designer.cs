@@ -89,7 +89,7 @@
             this.pickDateCalendar.Margin = new System.Windows.Forms.Padding(7);
             this.pickDateCalendar.Name = "pickDateCalendar";
             this.pickDateCalendar.TabIndex = 20;
-            this.pickDateCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.pickDateCalendar_DateChanged);
+            this.pickDateCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.pickDateCalendar_DateSelected);
             // 
             // productListView
             // 
