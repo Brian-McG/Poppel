@@ -61,6 +61,11 @@ namespace Poppel.Report
             productListView.GridLines = true;
             
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }

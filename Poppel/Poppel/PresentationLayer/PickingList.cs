@@ -18,23 +18,22 @@ namespace Poppel.PresentationLayer
     public partial class PickingList : Form
     {
         public PickingListReport pickReport;
-        private Collection<OrderItem> products;
+        private Collection<ReportItem> products;
         private DateTime pickDate = DateTime.Now;
         public PickingList()
         {
             InitializeComponent();
-            products = pickReport.productToBePicked;
-            pickReport=new PickingListReport();
+            pickReport = new PickingListReport();
+            products = pickReport.getOrderProducts();
+            
         }
         private void pickDateCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             pickDate=pickDateCalendar.SelectionRange.Start;
             dateLabel.Text = pickDate+"";
-            pickNumberLabel.Visible = true;
             pickNameLabel.Visible = true;
             pickDateLabel.Visible = true;
             pickDateCalendar.Visible = false;
-            delNumberLabel.Visible = true;
             pickSignLabel.Visible = true;
             selectDateLabel.Visible = false;
             productListView.Visible = true;
@@ -52,16 +51,16 @@ namespace Poppel.PresentationLayer
             productListView.Columns.Insert(4, "Order Number", 75, HorizontalAlignment.Left);
             productListView.Columns.Insert(5, "Comments", 50, HorizontalAlignment.Left);
 
-            foreach (OrderItem item in products)
+            foreach (ReportItem item in products)
             {
                     itemDetails = new ListViewItem();
-                    if (pickReport.getOrderDate(pickReport.getOrderNumber(item.Product.Id)).Equals(this.pickDate))
+                    if (pickReport.getOrderDate(pickReport.getOrderNumber(item.productID)).Equals(this.pickDate))
                     {
-                        itemDetails.Text = pickReport.getRackNumber(item.Product.Id); ;
-                        itemDetails.SubItems.Add(item.Product.Id+"");
-                        itemDetails.SubItems.Add(item.Product.Description);
-                        itemDetails.SubItems.Add(item.Quantity+"");
-                        itemDetails.SubItems.Add(pickReport.getOrderNumber(item.Product.Id));
+                        itemDetails.Text = pickReport.getRackNumber(item.productID); ;
+                        itemDetails.SubItems.Add(item.productID+"");
+                        itemDetails.SubItems.Add(item.productID+"");
+                        itemDetails.SubItems.Add(item.productID+"");
+                        itemDetails.SubItems.Add(pickReport.getOrderNumber(item.productID));
                         itemDetails.SubItems.Add("");
                         productListView.Items.Add(itemDetails);
                     }

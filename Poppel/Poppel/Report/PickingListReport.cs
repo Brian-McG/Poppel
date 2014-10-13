@@ -13,8 +13,7 @@ namespace Poppel.Report
     public class PickingListReport
    {
         #region Properties
-        OrderController orderController = new OrderController(null,null);
-        public Collection<OrderItem> productToBePicked
+        public Collection<ReportItem> productToBePicked
         {
             get
             {
@@ -29,7 +28,7 @@ namespace Poppel.Report
         private PoppelDatabase pd;
         public PickingListReport(): base()
         {
-            this.productToBePicked = orderController.getProducts();
+            this.productToBePicked = new Collection<ReportItem>();
             pd = new PoppelDatabase();
         }
 
@@ -46,6 +45,12 @@ namespace Poppel.Report
         public DateTime getOrderDate(String ID)
         {
             return pd.getOrderDate(ID);
+        }
+
+        public Collection<ReportItem> getOrderProducts()
+        {
+            pd.readOrderItem();
+            return productToBePicked;
         }
    }
 }
