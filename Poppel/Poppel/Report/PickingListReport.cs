@@ -13,7 +13,8 @@ namespace Poppel.Report
     public class PickingListReport
    {
         #region Properties
-        public Collection<ReportItem> productToBePicked
+        public Collection<ReportItem> productToBePicked;
+        public Collection<ReportItem> ProductToBePicked
         {
             get
             {
@@ -28,7 +29,7 @@ namespace Poppel.Report
         private PoppelDatabase pd;
         public PickingListReport(): base()
         {
-            this.productToBePicked = new Collection<ReportItem>();
+            this.ProductToBePicked = new Collection<ReportItem>();
             pd = new PoppelDatabase();
         }
 
@@ -50,7 +51,7 @@ namespace Poppel.Report
         public Collection<ReportItem> getOrderProducts()
         {
             pd.readOrderItem();
-            return productToBePicked;
+            return ProductToBePicked;
         }
    }
 }

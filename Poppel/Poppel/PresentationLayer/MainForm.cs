@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Poppel.PresentationLayer;
 using Poppel.CustomerMangement;
 using Poppel.Domain;
+using Poppel.Report;
 
 namespace Poppel
 {
@@ -19,6 +20,8 @@ namespace Poppel
         private CustomerManagement customerMangement;
         private CustomerManangementController customerManangementController;
         private Employee employeeLoggedIn;
+        private PickingList pickList;
+        private ExpiredProducts expProducts;
         private bool loginClosed;
 
         public MainForm(Employee employee)
@@ -79,6 +82,22 @@ namespace Poppel
             {
                 Application.Exit();
             }
+        }
+
+        private void generatePickingListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pickList = new PickingList();
+            pickList.MdiParent = this;
+            pickList.StartPosition = FormStartPosition.CenterScreen;
+            pickList.Show();
+        }
+
+        private void generateExpiredProductsReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            expProducts = new ExpiredProducts();
+            expProducts.MdiParent = this;
+            expProducts.StartPosition = FormStartPosition.CenterScreen;
+            expProducts.Show();
         }
     }
 }

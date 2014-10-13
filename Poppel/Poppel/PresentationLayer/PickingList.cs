@@ -23,14 +23,17 @@ namespace Poppel.PresentationLayer
         public PickingList()
         {
             InitializeComponent();
+            productListView.View = View.Details;
             pickReport = new PickingListReport();
             products = pickReport.getOrderProducts();
+
             
         }
         private void pickDateCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             pickDate=pickDateCalendar.SelectionRange.Start;
-            dateLabel.Text = pickDate+"";
+            dateLabel.Text = pickDate.Year+"-"+pickDate.Month+"-"+pickDate.Day;
+            
             pickNameLabel.Visible = true;
             pickDateLabel.Visible = true;
             pickDateCalendar.Visible = false;
@@ -42,14 +45,15 @@ namespace Poppel.PresentationLayer
 
         private void populateForm()
         {
+            dateLabel.Visible = true;
             ListViewItem itemDetails;
             PoppelDatabase pd = new PoppelDatabase();
-            productListView.Columns.Insert(0, "Rack Number", 95, HorizontalAlignment.Left);
-            productListView.Columns.Insert(1, "Product ID", 50, HorizontalAlignment.Left);
-            productListView.Columns.Insert(2, "Product Name", 55, HorizontalAlignment.Left);
-            productListView.Columns.Insert(3, "Quantity", 75, HorizontalAlignment.Left);
-            productListView.Columns.Insert(4, "Order Number", 75, HorizontalAlignment.Left);
-            productListView.Columns.Insert(5, "Comments", 50, HorizontalAlignment.Left);
+            productListView.Columns.Insert(0, "Rack Number", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(1, "Product ID", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(2, "Product Name", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(3, "Quantity", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(4, "Order Number", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(5, "Comments", 100, HorizontalAlignment.Left);
 
             foreach (ReportItem item in products)
             {
@@ -67,6 +71,11 @@ namespace Poppel.PresentationLayer
             }
             productListView.Refresh();
             productListView.GridLines = true;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

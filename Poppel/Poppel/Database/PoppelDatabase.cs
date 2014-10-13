@@ -179,7 +179,7 @@ namespace Poppel.Database
 
         public Collection<ReportItem> readOrderItem()
         {
-            Collection<ReportItem> products = new Collection<OrderItem>();
+            Collection<ReportItem> products = new Collection<ReportItem>();
             SqlDataReader reader;
             SqlCommand command;
             try

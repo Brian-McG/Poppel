@@ -91,12 +91,14 @@
             this.generatePickingListToolStripMenuItem.Name = "generatePickingListToolStripMenuItem";
             this.generatePickingListToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.generatePickingListToolStripMenuItem.Text = "Generate Picking List";
+            this.generatePickingListToolStripMenuItem.Click += new System.EventHandler(this.generatePickingListToolStripMenuItem_Click);
             // 
             // generateExpiredProductsReportToolStripMenuItem
             // 
             this.generateExpiredProductsReportToolStripMenuItem.Name = "generateExpiredProductsReportToolStripMenuItem";
             this.generateExpiredProductsReportToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.generateExpiredProductsReportToolStripMenuItem.Text = "Generate Expired Products Report";
+            this.generateExpiredProductsReportToolStripMenuItem.Click += new System.EventHandler(this.generateExpiredProductsReportToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
