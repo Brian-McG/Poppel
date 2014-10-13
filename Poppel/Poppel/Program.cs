@@ -22,9 +22,11 @@ namespace Poppel
             Application.SetCompatibleTextRenderingDefault(false);
            //Application.Run(new CustomerManagement(new CustomerManangementController()));
             Poppel.PresentationLayer.Login login = new Poppel.PresentationLayer.Login();
+            
           login.StartPosition = FormStartPosition.CenterScreen;
            login.Show();
             Application.Run();
+          
         }
     }
 }

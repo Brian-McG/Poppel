@@ -646,7 +646,7 @@ namespace Poppel.Database
             {
                 DateTime input;
                 DateTime.TryParse(Date, out input);
-                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0;", cnMain);
+                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -657,7 +657,7 @@ namespace Poppel.Database
                     while (reader.Read())
                     {
                         StockItem item = new StockItem();
-                        item.expiryDate = reader.GetString(1);
+                        item.expiryDate = reader.GetDateTime(1).ToShortDateString();
                         item.rackNumber = reader.GetString(2);
                         item.numberInStock = reader.GetInt32(3) + "";
                         item.productRef = reader.GetInt32(4) + "";
@@ -671,6 +671,7 @@ namespace Poppel.Database
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());

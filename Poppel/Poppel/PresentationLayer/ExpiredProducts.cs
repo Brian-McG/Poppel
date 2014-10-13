@@ -49,9 +49,10 @@ namespace Poppel.Report
             productListView.Columns.Insert(2, "Expiry Date", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(3, "Product Ref", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(4, "Comments", 100, HorizontalAlignment.Left);
-
-            foreach (StockItem item in products)
+            if(products!=null&&products.Count!=0)
             {
+                foreach (StockItem item in products)
+                {
                     itemDetails = new ListViewItem();
                     itemDetails.Text = item.rackNumber;
                     itemDetails.SubItems.Add(item.numberInStock);
@@ -59,7 +60,9 @@ namespace Poppel.Report
                     itemDetails.SubItems.Add(item.productRef);
                     itemDetails.SubItems.Add("");
                     productListView.Items.Add(itemDetails);
+                }
             }
+
 
             productListView.Refresh();
             productListView.GridLines = true;
