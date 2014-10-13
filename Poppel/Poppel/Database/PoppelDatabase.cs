@@ -686,7 +686,7 @@ namespace Poppel.Database
             Collection<RemoveOrderItem> oItems;
             try
             {
-                command = new SqlCommand("SELECT * FROM Order",cnMain);
+                command = new SqlCommand("SELECT * FROM [Order]",cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -708,6 +708,7 @@ namespace Poppel.Database
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
