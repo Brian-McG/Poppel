@@ -679,7 +679,41 @@ namespace Poppel.Database
             return null;
         }
 
-
+        public Collection<RemoveOrderItem> getOrders()
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+            Collection<RemoveOrderItem> oItems;
+            try
+            {
+                command = new SqlCommand("SELECT * FROM Order",cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                oItems = new Collection<RemoveOrderItem>();
+                //Read from table
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        RemoveOrderItem rm = new RemoveOrderItem();
+                        rm.customerId = reader.GetInt32(0)+"";
+                        rm.customerId = reader.GetString(2);
+                        oItems.Add(rm);
+                    }
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                return oItems;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return null;
+        }
 
         public Employee login(string username, string password)
         {
