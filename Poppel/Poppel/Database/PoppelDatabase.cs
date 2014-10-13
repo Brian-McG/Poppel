@@ -686,7 +686,7 @@ namespace Poppel.Database
             Collection<RemoveOrderItem> oItems;
             try
             {
-                command = new SqlCommand("SELECT order_id,order_datePlaced FROM [Order] WHERE customer_id = '"+customerId+"'",cnMain);
+                command = new SqlCommand("SELECT order_id,order_datePlaced FROM [Order] WHERE customer_id = '"+customerId+"' AND order_status = 'Open'",cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
