@@ -24,9 +24,9 @@ namespace Poppel.Order
             return products;
         }
 
-        public void Delete(String orderID)
+        public void Delete(int orderID)
         {
-
+            pd.deleteOrder(orderID);
         }
     }
 }

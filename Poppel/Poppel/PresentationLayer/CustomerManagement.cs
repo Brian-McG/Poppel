@@ -755,6 +755,15 @@ namespace Poppel.PresentationLayer
             this.Close();
         }
 
+        private void cancelOrderButton_Click(object sender, EventArgs e)
+        {
+            CancelOrder cancelOrder = new CancelOrder();
+            cancelOrder.MdiParent = this.MdiParent;
+            cancelOrder.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
+            cancelOrder.Show();
+        }
+
 
 
 
