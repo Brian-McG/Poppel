@@ -521,36 +521,7 @@ namespace Poppel.Database
             return null;
         }
 
-        public String getOrderNumber(int ID)
-        {
-            SqlDataReader reader;
-            SqlCommand command;
-
-            try
-            {
-                command = new SqlCommand("SELECT order_id FROM OrderItem WHERE product_id = " + ID + ";", cnMain);
-                cnMain.Open();             //open the connection
-                command.CommandType = CommandType.Text;
-                reader = command.ExecuteReader();
-                int number = 0;
-                //Read from table
-                if (reader.HasRows)
-                {
-                    number = reader.GetInt32(0);
-                }
-                reader.Close();   //close the reader 
-                cnMain.Close();  //close the connection
-                return number + "";
-            }
-            catch (Exception ex)
-            {
-                //ADD EVENT IF EXCEPTION OCCURS?
-                cnMain.Close();
-                Console.Write(ex.ToString());
-            }
-            return null;
-
-        }
+       
 
         public DateTime getOrderDate(String ID)
         {

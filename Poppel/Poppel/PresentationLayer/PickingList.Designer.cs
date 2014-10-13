@@ -39,6 +39,7 @@
             this.pickSignLabel = new System.Windows.Forms.Label();
             this.pickNameLabel = new System.Windows.Forms.Label();
             this.selectDateLabel = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,11 +151,23 @@
             this.selectDateLabel.TabIndex = 35;
             this.selectDateLabel.Text = "Select Date:";
             // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(302, 70);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(40, 13);
+            this.errorLabel.TabIndex = 36;
+            this.errorLabel.Text = "<error>";
+            this.errorLabel.Visible = false;
+            // 
             // PickingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 539);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.selectDateLabel);
             this.Controls.Add(this.pickDateCalendar);
             this.Controls.Add(this.pickNameLabel);
@@ -187,5 +200,6 @@
         private System.Windows.Forms.Label pickSignLabel;
         private System.Windows.Forms.Label pickNameLabel;
         private System.Windows.Forms.Label selectDateLabel;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
