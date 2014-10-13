@@ -30,11 +30,10 @@ namespace Poppel.Report
             ExpiredProducts = new Collection<StockItem>();
         }
 
-        public Collection<StockItem> getStock()
+        public Collection<StockItem> getStock(String date)
         {
-            String date = "";
+
             PoppelDatabase pd = new PoppelDatabase();
-            date = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
             this.ExpiredProducts=pd.readStock(date);
             return expiredProducts;
         }

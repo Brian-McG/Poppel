@@ -33,24 +33,10 @@ namespace Poppel.Report
             pd = new PoppelDatabase();
         }
 
-        public String getRackNumber(int ID)
-        {
-            return pd.getRackNumber(ID);
-        }
 
-        public String getOrderNumber(int ID)
+        public Collection<ReportItem> getOrderProducts(String date)
         {
-            return pd.getOrderNumber(ID);
-        }
-
-        public DateTime getOrderDate(String ID)
-        {
-            return pd.getOrderDate(ID);
-        }
-
-        public Collection<ReportItem> getOrderProducts()
-        {
-            pd.readOrderItem();
+            ProductToBePicked=pd.readOrderItem();
             return ProductToBePicked;
         }
    }

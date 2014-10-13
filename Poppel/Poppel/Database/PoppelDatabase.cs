@@ -193,7 +193,11 @@ namespace Poppel.Database
                     while (reader.Read())
                     {
                         ReportItem orderItem = new ReportItem();
-                        orderItem.productID = reader.GetInt32(1);
+                        orderItem.ProductID = reader.GetInt32(1);
+                        orderItem.OrderID = this.getOrderNumber(reader.GetInt32(1));
+                        orderItem.Quantity = this.getQuantity(reader.GetInt32(1));
+                        orderItem.Description = this.getDescription(reader.GetInt32(1));
+                        orderItem.RackNumber = this.getRackNumber(reader.GetInt32(1));
                         products.Add(orderItem);
                     }
 
@@ -556,6 +560,68 @@ namespace Poppel.Database
             }
             return null;
         
+        }
+
+        public String getQuantity(int ID)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+
+            try
+            {
+                command = new SqlCommand("SELECT product_quantity FROM OrderItem WHERE product_id = " + ID + ";", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                int number = 0;
+                //Read from table
+                if (reader.HasRows)
+                {
+                    number = reader.GetInt32(1);
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                return number + "";
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return null;
+
+        }
+
+        public String getDescription(int ID)
+        {
+            SqlDataReader reader;
+            SqlCommand command;
+
+            try
+            {
+                command = new SqlCommand("SELECT product_description FROM Product WHERE product_id = " + ID + ";", cnMain);
+                cnMain.Open();             //open the connection
+                command.CommandType = CommandType.Text;
+                reader = command.ExecuteReader();
+                String descritpion = "";
+                //Read from table
+                if (reader.HasRows)
+                {
+                    descritpion = reader.GetString(1);
+                }
+                reader.Close();   //close the reader 
+                cnMain.Close();  //close the connection
+                return descritpion;
+            }
+            catch (Exception ex)
+            {
+                //ADD EVENT IF EXCEPTION OCCURS?
+                cnMain.Close();
+                Console.Write(ex.ToString());
+            }
+            return null;
+
         }
 
         public Collection<StockItem> readStock(String Date)

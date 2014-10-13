@@ -124,8 +124,8 @@ namespace Poppel.Order
 
             PictureLabel.Width = 200;
             PictureLabel.Height = 150;
-            Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
-            PictureLabel.Image = pictureBitmap;
+           // Bitmap pictureBitmap = new Bitmap("Assets/" + orderItem.Product.ProductCode + ".png");
+           // PictureLabel.Image = pictureBitmap;
             ProductPanel.Controls.Add(PictureLabel);
 
             ProductDescriptionLabel = new Label();
