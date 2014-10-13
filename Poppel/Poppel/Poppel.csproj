@@ -73,6 +73,8 @@
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\OrderController.cs" />
     <Compile Include="Order\OrderItem.cs" />
+    <Compile Include="Order\RemoveOrderController.cs" />
+    <Compile Include="Order\RemoveOrderItem.cs" />
     <Compile Include="PoppelDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

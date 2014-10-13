@@ -15,14 +15,16 @@ namespace Poppel.PresentationLayer
 {
     public partial class CancelOrder : Form
     {
-        private OrderController orderController;
-        private Collection<OrderItem> products;
-        private Collection<OrderItem> orderItems;
+        private RemoveOrderController removeOrderController;
+        private Collection<RemoveOrderItem> products;
         public CancelOrder()
         {
-            products = orderController.getProducts();
-            removeButton.Enabled = false;
             InitializeComponent();
+            removeOrderController = new RemoveOrderController();
+            ordersListView.View = View.Details;
+            products = removeOrderController.getOrders();
+            
+
             setUpListView();
         }
 
@@ -46,29 +48,40 @@ namespace Poppel.PresentationLayer
             ListViewItem itemDetails;
             //Set Up Columns of List View
             ordersListView.Columns.Insert(0, "Order Number", 95, HorizontalAlignment.Left);
-            ordersListView.Columns.Insert(0, "Date Placed", 95, HorizontalAlignment.Left);
-            ordersListView.Columns.Insert(1, "Total Cost", 75, HorizontalAlignment.Left);
-            ordersListView.Columns.Insert(2, "", 0, HorizontalAlignment.Left);
+            ordersListView.Columns.Insert(1, "Customer ID", 95, HorizontalAlignment.Left);
 
-            foreach (OrderItem item in products)
+            try
             {
-                //Need a way to find out what order this is associated to
+                errorLabel.Visible = false ;
+                foreach (RemoveOrderItem item in products)
+                {
+                    //Need a way to find out what order this is associated to
                     itemDetails = new ListViewItem();
-                    itemDetails.Text = pd.getOrderNumber(item.Product.Id);// Need order item
-                    itemDetails.SubItems.Add(pd.getOrderDate(pd.getOrderNumber(item.Product.Id))+"");
-                    itemDetails.SubItems.Add(item.Product.Total+"");
+                    itemDetails.Text = item.orderNumber;
+                    itemDetails.SubItems.Add(item.customerId);
                     ordersListView.Items.Add(itemDetails);
+                }
+
+
+                ordersListView.Refresh();
+                ordersListView.GridLines = true;
             }
-
-
-            ordersListView.Refresh();
-            ordersListView.GridLines = true;
+            catch(Exception e){
+                errorLabel.Text = "No orders for customer";
+                errorLabel.Visible = true;
+            }
+        
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            //Ask Brian how to get info off selected item
+
             
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
