@@ -667,11 +667,11 @@
             // currentCreditLabel
             // 
             this.currentCreditLabel.AutoSize = true;
-            this.currentCreditLabel.Location = new System.Drawing.Point(2, 20);
+            this.currentCreditLabel.Location = new System.Drawing.Point(20, 20);
             this.currentCreditLabel.Name = "currentCreditLabel";
-            this.currentCreditLabel.Size = new System.Drawing.Size(114, 13);
+            this.currentCreditLabel.Size = new System.Drawing.Size(93, 13);
             this.currentCreditLabel.TabIndex = 0;
-            this.currentCreditLabel.Text = "Current Credit (Rands):";
+            this.currentCreditLabel.Text = " Credit Remaining:";
             // 
             // editErrorLabel
             // 
