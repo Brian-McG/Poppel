@@ -222,6 +222,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Assets\3914.jpg" />
+    <Content Include="bin\Debug\Assets\3914.png" />
+    <Content Include="bin\Debug\Assets\Asset Reference.txt" />
+    <Content Include="bin\Debug\Assets\astrosBox.png" />
+    <Content Include="bin\Debug\Assets\cherryPlum6pack.png" />
+    <Content Include="bin\Debug\Assets\coke6Pack.png" />
+    <Content Include="bin\Debug\Assets\creamSoda6Pack.png" />
+    <Content Include="bin\Debug\Assets\fanta6Pack.jpg" />
+    <Content Include="bin\Debug\Assets\fanta6Pack.png" />
+    <Content Include="bin\Debug\Assets\fizpop.png" />
+    <Content Include="bin\Debug\Assets\fizzerBox.png" />
+    <Content Include="bin\Debug\Assets\jellyBabies.png" />
+    <Content Include="bin\Debug\Assets\jellyBeans.png" />
+    <Content Include="bin\Debug\Assets\jellyTotsBox.png" />
+    <Content Include="bin\Debug\Assets\marabouChocolate.jpg" />
+    <Content Include="bin\Debug\Assets\marabouChocolate.png" />
+    <Content Include="bin\Debug\Assets\rasperry6Pack.png" />
+    <Content Include="bin\Debug\Assets\sherbet.png" />
+    <Content Include="bin\Debug\Assets\sprite6Pack.png" />
+    <Content Include="bin\Debug\Assets\sprite_6pk.jpg" />
+    <Content Include="bin\Debug\Assets\tWtn470gi2GTAevzRbj1jwaWwtFbmoUDWyzX6XgYbao.png" />
+    <Content Include="bin\Debug\Assets\wineGums.png" />
     <Content Include="Resources\astrosBox.png" />
     <Content Include="Resources\BackupOfAssets\3914.jpg" />
     <Content Include="Resources\BackupOfAssets\3914.png" />
@@ -282,9 +304,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
