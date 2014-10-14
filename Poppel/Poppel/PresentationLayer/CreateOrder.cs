@@ -33,10 +33,8 @@ namespace Poppel.PresentationLayer
         private void setUpForm()
         {
             products = orderController.getProducts();
-            if(orderController.DisplayedProducts==null)
-            {
                 orderController.DisplayedProducts = new Collection<OrderItemForm>();
-            }
+                orderController.AllProducts = new Collection<OrderItemForm>();
            
             setUpEmployeeListView();
             setUpOrderFlowPanel();
@@ -107,7 +105,12 @@ namespace Poppel.PresentationLayer
             orderController.OrderTotal += (orderItem.Quantity * orderItem.Product.Price);
             totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
             creditRemainingTextBox.Text = Product.getFormattedPrice(orderController.CustomerManagementController.Customer.CreditLimit - orderController.CustomerManagementController.Customer.Credit - orderController.OrderTotal);
-
+            
+        }
+        public void updateVisibleQuantity(OrderItem item)
+        {
+            OrderItemForm form = OrderController.getClickedForm(item.Product.Id, orderController.DisplayedProducts);
+            form.OrderQuantityNumericUpDown.Value = item.Quantity;
         }
 
         public void showAddedItem(OrderItem orderItem)
@@ -299,7 +302,10 @@ namespace Poppel.PresentationLayer
                 }
             }
             orderController.OrderTotal -= (removalItem.Product.Price * removalItem.Quantity);
+            
             totalCostTextBox.Text = "R " + string.Format("{0:0.00}", (orderController.OrderTotal));
+            creditRemainingTextBox.Text = Product.getFormattedPrice(orderController.CustomerManagementController.Customer.CreditLimit - orderController.CustomerManagementController.Customer.Credit - orderController.OrderTotal);
+
             OrderItemForm clickedForm = OrderController.getClickedForm(parseInt, orderController.DisplayedProducts);
             clickedForm.PlaceOrderButton.Enabled = true;
             if (orderController.OrderItems.Count == 0)

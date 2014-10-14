@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.addressGroupBox = new System.Windows.Forms.GroupBox();
             this.townErrorMessageLabel = new System.Windows.Forms.Label();
@@ -68,29 +66,12 @@
             this.creditLimitErrorLabel = new System.Windows.Forms.Label();
             this.modifyCreditLimitCheckBox = new System.Windows.Forms.CheckBox();
             this.creditLimitTextBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.addressGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(8, 75);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 10;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(34, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 9;
-            this.logoPictureBox.TabStop = false;
             // 
             // label1
             // 
@@ -492,11 +473,31 @@
             this.creditLimitTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.creditLimitTextBox_KeyPress);
             this.creditLimitTextBox.Leave += new System.EventHandler(this.creditLimitTextBox_Leave);
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 32;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(3, 77);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 31;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // CreateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 588);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.createCustomerErrorLabel);
@@ -504,12 +505,9 @@
             this.Controls.Add(this.personalDetailsGroupBox);
             this.Controls.Add(this.addressGroupBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CreateCustomer";
             this.Text = "CreateCustomer";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.addressGroupBox.ResumeLayout(false);
             this.addressGroupBox.PerformLayout();
             this.personalDetailsGroupBox.ResumeLayout(false);
@@ -523,8 +521,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox addressGroupBox;
         private System.Windows.Forms.Label zipCodeLabel;
@@ -563,5 +559,7 @@
         private System.Windows.Forms.Label townErrorMessageLabel;
         private System.Windows.Forms.TextBox townTextBox;
         private System.Windows.Forms.Label townLabel;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.headerLabel = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.ordersListView = new System.Windows.Forms.ListView();
             this.cancelButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -48,24 +47,6 @@
             this.headerLabel.Size = new System.Drawing.Size(157, 29);
             this.headerLabel.TabIndex = 20;
             this.headerLabel.Text = "Cancel Order";
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(9, 75);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 19;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(35, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 18;
-            this.logoPictureBox.TabStop = false;
             // 
             // ordersListView
             // 
@@ -108,21 +89,38 @@
             this.errorLabel.Text = "<error>";
             this.errorLabel.Visible = false;
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 33;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(3, 77);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 32;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // CancelOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 644);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.ordersListView);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Name = "CancelOrder";
             this.Text = "Cancel Order";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,11 +129,11 @@
         #endregion
 
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.ListView ordersListView;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

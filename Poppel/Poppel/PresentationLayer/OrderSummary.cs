@@ -100,8 +100,32 @@ namespace Poppel.PresentationLayer
         private void backButton_Click(object sender, EventArgs e)
         {
             CreateDelivery delivery = new CreateDelivery(orderController);
-            delivery.setDropDownlists(orderController.Order.DeliveryDetails.StartDeliveryTime, orderController.Order.DeliveryDetails.EndDeliveryTime);
-           
+            int startTime = -1;
+            int endTime = -1;
+            int hour=8;
+            for (int i = 0; i <= orderController.Order.DeliveryDetails.EndDeliveryTime.Hour;i++,hour++ )
+            {
+                if(hour==orderController.Order.DeliveryDetails.StartDeliveryTime.Hour)
+                {
+                    startTime = i;
+                }
+
+            }
+            hour = 9;
+            for (int i = 0; i <= orderController.Order.DeliveryDetails.EndDeliveryTime.Hour; i++, hour++)
+            {
+                if (hour == orderController.Order.DeliveryDetails.EndDeliveryTime.Hour)
+                {
+                    endTime = i-1;
+                }
+            }
+            
+                 delivery.setDropDownlists(startTime, endTime);
+                delivery.setCheckBoxes(orderController.Order.DeliveryDetails.AllowedDeliveryDates);
+            delivery.MdiParent = this.MdiParent;
+            delivery.StartPosition = FormStartPosition.CenterScreen;
+            delivery.Show();
+            this.Close();
             
         }
     }
