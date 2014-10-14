@@ -32,15 +32,15 @@
             this.productListView = new System.Windows.Forms.ListView();
             this.dateLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.pickDateCalendar = new System.Windows.Forms.MonthCalendar();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(618, 480);
+            this.cancelButton.Location = new System.Drawing.Point(592, 480);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(81, 40);
             this.cancelButton.TabIndex = 46;
@@ -82,24 +82,6 @@
             this.label1.TabIndex = 38;
             this.label1.Text = "Expired Products";
             // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(12, 75);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 37;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(38, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 36;
-            this.logoPictureBox.TabStop = false;
-            // 
             // pickDateCalendar
             // 
             this.pickDateCalendar.Location = new System.Drawing.Point(263, 127);
@@ -108,18 +90,46 @@
             this.pickDateCalendar.TabIndex = 47;
             this.pickDateCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.pickDateCalendar_DateChanged);
             // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(679, 480);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(81, 40);
+            this.resetButton.TabIndex = 48;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(26, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 50;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(26, 66);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 49;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // ExpiredProducts
             // 
             this.ClientSize = new System.Drawing.Size(772, 532);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.pickDateCalendar);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.productListView);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Name = "ExpiredProducts";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,8 +141,9 @@
         private System.Windows.Forms.ListView productListView;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.MonthCalendar pickDateCalendar;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

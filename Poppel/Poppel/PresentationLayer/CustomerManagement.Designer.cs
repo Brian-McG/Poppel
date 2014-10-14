@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.headerLabel = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.inputLabel = new System.Windows.Forms.Label();
             this.customerInputGroupBox = new System.Windows.Forms.GroupBox();
             this.formatLabel = new System.Windows.Forms.Label();
@@ -83,7 +81,8 @@
             this.currentCreditTextBox = new System.Windows.Forms.TextBox();
             this.currentCreditLabel = new System.Windows.Forms.Label();
             this.editErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.customerInputGroupBox.SuspendLayout();
             this.personalDetailsGroupBox.SuspendLayout();
             this.addressGroupBox.SuspendLayout();
@@ -101,24 +100,6 @@
             this.headerLabel.Size = new System.Drawing.Size(167, 29);
             this.headerLabel.TabIndex = 14;
             this.headerLabel.Text = "Customer Hub";
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(13, 75);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 13;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(39, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
             // 
             // inputLabel
             // 
@@ -686,11 +667,31 @@
             this.editErrorLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.editErrorLabel.Visible = false;
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 38;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(12, 66);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 37;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // CustomerManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(697, 678);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.editErrorLabel);
             this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.placeOrderButton);
@@ -698,15 +699,12 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.customerInputGroupBox);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Controls.Add(this.personalDetailsGroupBox);
             this.Controls.Add(this.creditGroupBox);
             this.Controls.Add(this.addressGroupBox);
             this.Controls.Add(this.customersGroupBox);
             this.Name = "CustomerManagement";
             this.Text = "Customer Hub";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.customerInputGroupBox.ResumeLayout(false);
             this.customerInputGroupBox.PerformLayout();
             this.personalDetailsGroupBox.ResumeLayout(false);
@@ -725,8 +723,6 @@
         #endregion
 
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label inputLabel;
         private System.Windows.Forms.GroupBox customerInputGroupBox;
         private System.Windows.Forms.RadioButton telephoneRadioButton;
@@ -779,5 +775,7 @@
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label customerClickInfoLabel;
         private System.Windows.Forms.Label creditErrorLabel;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

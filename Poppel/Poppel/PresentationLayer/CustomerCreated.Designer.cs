@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.closeButton = new System.Windows.Forms.Button();
             this.messageLabel = new System.Windows.Forms.Label();
             this.CustomerNumberLabel = new System.Windows.Forms.Label();
             this.messageLabel2 = new System.Windows.Forms.Label();
             this.customerNumberTextBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -44,29 +43,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(166, 41);
+            this.label1.Location = new System.Drawing.Point(154, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 29);
             this.label1.TabIndex = 14;
             this.label1.Text = "Customer Added";
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(1, 83);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 13;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(27, 20);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
             // 
             // closeButton
             // 
@@ -113,11 +94,30 @@
             this.customerNumberTextBox.Size = new System.Drawing.Size(168, 20);
             this.customerNumberTextBox.TabIndex = 19;
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 20;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(3, 77);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 13;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // CustomerCreated
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 307);
+            this.Controls.Add(this.poppelLogo);
             this.Controls.Add(this.customerNumberTextBox);
             this.Controls.Add(this.messageLabel2);
             this.Controls.Add(this.CustomerNumberLabel);
@@ -125,10 +125,8 @@
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Name = "CustomerCreated";
             this.Text = "CustomerCreated";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,12 +135,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.Label CustomerNumberLabel;
         private System.Windows.Forms.Label messageLabel2;
         private System.Windows.Forms.TextBox customerNumberTextBox;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

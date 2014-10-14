@@ -198,26 +198,48 @@ namespace Poppel.PresentationLayer
 
         }
 
-        public void setDropDownlists(object start, object end)
+        public void setDropDownlists(int  start, int end)
         {
-            startTimeComboBox.SelectedItem = start;
-            endTimeComboBox.SelectedItem = end;
+            
+            startTimeComboBox.SelectedIndex = start;
+            endTimeComboBox.SelectedIndex = end;
         }
 
         public void setCheckBoxes(Collection<DateTime> deliveryDates)
         {
             DateTime current = DateTime.Now;
-           
+            current = current.AddDays(1);
             for (int i = 0; i < deliveryDates.Count;i++ )
             {
+                current = DateTime.Now;
+                current = current.AddDays(1);
                 int index = 0;
-                while (current.ToShortDateString().Equals(deliveryDates[i].ToShortDateString())&&index<10)
+                int counter = 0;
+                bool found = false;
+                while (!found&&index<5&&counter<10)
                 {
-                    current = current.AddDays(1);
-                    index++;
+                    if (!current.ToShortDateString().Equals(deliveryDates[i].ToShortDateString()))
+                    {
+                        current = current.AddDays(1);
+                        if(current.DayOfWeek!=DayOfWeek.Saturday&&current.DayOfWeek!=DayOfWeek.Sunday)
+                        {
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        found = true;
+                       
+                    }
+                    counter++;
 
                 }
-                checkBoxes[index].Checked = true;
+                if(index<5)
+                {
+                    checkBoxes[index].Checked = true;
+                    index++;
+                }
+                
 
             }
 
@@ -265,13 +287,29 @@ namespace Poppel.PresentationLayer
         {
             //Back Button Broken
             CreateOrder create = new CreateOrder(orderController);
-            //create.Show();
-            orderController.Order = new Order.Order();
-            orderController.OrderItems = null;
-            orderController.AllProducts = null;
-            orderController.DisplayedProducts = null;
+            Collection<OrderItem> orderItemCopy = new Collection<OrderItem>();
+                 foreach (OrderItem item in orderController.Order.Products)
+   {
+                     OrderItem orderItem = new OrderItem();
+                     orderItem.Product = item.Product;
+                     orderItem.Quantity = item.Quantity;
+                     orderItemCopy.Add(orderItem);
+
+   }
+                 orderController.OrderTotal = 0;
+                 orderController.OrderItems = new Collection<OrderItem>();
+                 foreach (OrderItem item in orderItemCopy)
+                 {
+                     create.addToOrder(item);
+                     create.addButtonPressed(item.Product.Id);
+                     create.updateVisibleQuantity(item);
+                 }
+
+
+                 
             create.MdiParent = this.MdiParent;
             create.StartPosition = FormStartPosition.CenterScreen;
+            create.Show();
             this.Close();
 
 

@@ -30,8 +30,6 @@
         {
             this.cancelButton = new System.Windows.Forms.Button();
             this.headerLabel = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.deliveryTimeLabel = new System.Windows.Forms.Label();
             this.startTimeComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,7 +46,8 @@
             this.dateOfWeekOfDelivery = new System.Windows.Forms.Label();
             this.allowedDaysLabel = new System.Windows.Forms.Label();
             this.timeErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -71,24 +70,6 @@
             this.headerLabel.Size = new System.Drawing.Size(100, 29);
             this.headerLabel.TabIndex = 32;
             this.headerLabel.Text = "Delivery";
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(8, 80);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 31;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(34, 17);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 30;
-            this.logoPictureBox.TabStop = false;
             // 
             // deliveryTimeLabel
             // 
@@ -257,11 +238,31 @@
             this.timeErrorLabel.Text = "<Error Label>";
             this.timeErrorLabel.Visible = false;
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 52;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(3, 77);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 51;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // CreateDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 414);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.timeErrorLabel);
             this.Controls.Add(this.allowedDaysLabel);
             this.Controls.Add(this.dateOfWeekOfDelivery);
@@ -280,11 +281,8 @@
             this.Controls.Add(this.deliveryTimeLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Name = "CreateDelivery";
             this.Text = "Delivery";
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,8 +292,6 @@
 
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label deliveryTimeLabel;
         private System.Windows.Forms.ComboBox startTimeComboBox;
         private System.Windows.Forms.Label label1;
@@ -312,5 +308,7 @@
         private System.Windows.Forms.Label dateOfWeekOfDelivery;
         private System.Windows.Forms.Label allowedDaysLabel;
         private System.Windows.Forms.Label timeErrorLabel;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

@@ -84,6 +84,15 @@ namespace Poppel.Report
             productListView.Visible = true;
             populateReport(date);
         }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            ExpiredProducts expiredList = new ExpiredProducts();
+            expiredList.MdiParent = this.MdiParent;
+            expiredList.StartPosition = FormStartPosition.CenterScreen;
+            expiredList.Show();
+            this.Close();
+        }
         
     }
 }

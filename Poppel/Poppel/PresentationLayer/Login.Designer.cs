@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.loginHeaderLabel = new System.Windows.Forms.Label();
             this.forgotPasswordLinkLabel = new System.Windows.Forms.LinkLabel();
             this.usernameLabel = new System.Windows.Forms.Label();
@@ -36,18 +35,10 @@
             this.loginButton = new System.Windows.Forms.Button();
             this.usernameTexBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.sloganLabel = new System.Windows.Forms.Label();
             this.loginErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(48, 39);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 0;
-            this.logoPictureBox.TabStop = false;
             // 
             // loginHeaderLabel
             // 
@@ -113,16 +104,6 @@
             this.passwordTextBox.TabIndex = 7;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Viner Hand ITC", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(22, 102);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(171, 19);
-            this.sloganLabel.TabIndex = 8;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
             // loginErrorLabel
             // 
             this.loginErrorLabel.AutoSize = true;
@@ -134,13 +115,32 @@
             this.loginErrorLabel.Text = "<Error Label>";
             this.loginErrorLabel.Visible = false;
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 38;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(12, 66);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 37;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 361);
-            this.Controls.Add(this.loginErrorLabel);
+            this.Controls.Add(this.poppelLogo);
             this.Controls.Add(this.sloganLabel);
+            this.Controls.Add(this.loginErrorLabel);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTexBox);
             this.Controls.Add(this.loginButton);
@@ -148,11 +148,9 @@
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.forgotPasswordLinkLabel);
             this.Controls.Add(this.loginHeaderLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Name = "Login";
             this.Text = "Login";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,7 +158,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label loginHeaderLabel;
         private System.Windows.Forms.LinkLabel forgotPasswordLinkLabel;
         private System.Windows.Forms.Label usernameLabel;
@@ -168,7 +165,8 @@
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.TextBox usernameTexBox;
         private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.Label sloganLabel;
         private System.Windows.Forms.Label loginErrorLabel;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }

@@ -83,5 +83,14 @@ namespace Poppel.PresentationLayer
         {
             this.Close();
         }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            PickingList pickList = new PickingList();
+            pickList.MdiParent = this.MdiParent;
+            pickList.StartPosition = FormStartPosition.CenterScreen;
+            pickList.Show();
+            this.Close();
+        }
     }
 }

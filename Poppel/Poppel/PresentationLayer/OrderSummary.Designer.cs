@@ -38,8 +38,6 @@
             this.orderDateLabel = new System.Windows.Forms.Label();
             this.customerLabel = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Label();
-            this.sloganLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.shoppingCartGroupBox = new System.Windows.Forms.GroupBox();
             this.OrderListView = new System.Windows.Forms.ListView();
             this.deliveryGroupBox = new System.Windows.Forms.GroupBox();
@@ -55,8 +53,9 @@
             this.confirm = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.poppelLogo = new System.Windows.Forms.Label();
+            this.sloganLabel = new System.Windows.Forms.Label();
             this.orderInfoGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.shoppingCartGroupBox.SuspendLayout();
             this.deliveryGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -159,24 +158,6 @@
             this.headerLabel.Size = new System.Drawing.Size(183, 29);
             this.headerLabel.TabIndex = 35;
             this.headerLabel.Text = "Order Summary";
-            // 
-            // sloganLabel
-            // 
-            this.sloganLabel.AutoSize = true;
-            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.sloganLabel.Location = new System.Drawing.Point(20, 75);
-            this.sloganLabel.Name = "sloganLabel";
-            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
-            this.sloganLabel.TabIndex = 34;
-            this.sloganLabel.Text = "Adding sweetness to your life!";
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Location = new System.Drawing.Point(46, 12);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.logoPictureBox.TabIndex = 33;
-            this.logoPictureBox.TabStop = false;
             // 
             // shoppingCartGroupBox
             // 
@@ -332,25 +313,42 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // poppelLogo
+            // 
+            this.poppelLogo.Image = global::Poppel.Properties.Resources.poppelLogo;
+            this.poppelLogo.Location = new System.Drawing.Point(12, 9);
+            this.poppelLogo.Name = "poppelLogo";
+            this.poppelLogo.Size = new System.Drawing.Size(100, 57);
+            this.poppelLogo.TabIndex = 41;
+            // 
+            // sloganLabel
+            // 
+            this.sloganLabel.AutoSize = true;
+            this.sloganLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.sloganLabel.Location = new System.Drawing.Point(12, 66);
+            this.sloganLabel.Name = "sloganLabel";
+            this.sloganLabel.Size = new System.Drawing.Size(167, 15);
+            this.sloganLabel.TabIndex = 40;
+            this.sloganLabel.Text = "Adding sweetness to your life!";
+            // 
             // OrderSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 607);
+            this.Controls.Add(this.poppelLogo);
+            this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.confirm);
             this.Controls.Add(this.deliveryGroupBox);
             this.Controls.Add(this.shoppingCartGroupBox);
             this.Controls.Add(this.headerLabel);
-            this.Controls.Add(this.sloganLabel);
-            this.Controls.Add(this.logoPictureBox);
             this.Controls.Add(this.orderInfoGroupBox);
             this.Name = "OrderSummary";
             this.Text = "Order Summary";
             this.orderInfoGroupBox.ResumeLayout(false);
             this.orderInfoGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.shoppingCartGroupBox.ResumeLayout(false);
             this.deliveryGroupBox.ResumeLayout(false);
             this.deliveryGroupBox.PerformLayout();
@@ -363,8 +361,6 @@
 
         private System.Windows.Forms.GroupBox orderInfoGroupBox;
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.Label sloganLabel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label customer;
         private System.Windows.Forms.Label orderDate;
         private System.Windows.Forms.Label orderDateLabel;
@@ -388,5 +384,7 @@
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.TextBox deliveryDaysTextBox;
         private System.Windows.Forms.TextBox DateDeliveryTextBox;
+        private System.Windows.Forms.Label poppelLogo;
+        private System.Windows.Forms.Label sloganLabel;
     }
 }
