@@ -276,11 +276,11 @@
     <Content Include="Resources\jellyBeans.png" />
     <Content Include="Resources\poppelLogo.png" />
     <Content Include="PoppelDatabase.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PoppelDatabase_log.ldf">
       <DependentUpon>PoppelDatabase.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\rasperry6Pack.png" />
     <Content Include="Resources\sherbet.png" />
