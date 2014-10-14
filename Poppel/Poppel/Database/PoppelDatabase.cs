@@ -199,7 +199,7 @@ namespace Poppel.Database
                         orderItem.Quantity = this.getQuantity(reader.GetInt32(1));
                         orderItem.Description = this.getDescription(reader.GetInt32(1));
                         orderItem.RackNumber = this.getRackNumber(reader.GetInt32(1));
-                        if (date.Equals(this.getOrderDate(reader.GetInt32(1))))
+                        if (this.getOrderDate(reader.GetInt32(1),date))
                         {
                             products.Add(orderItem);
                         }
@@ -255,34 +255,54 @@ namespace Poppel.Database
 
         }
 
-        public DateTime getOrderDate(int ID)
+        public bool getOrderDate(int ID, DateTime checkDate)
         {
             SqlDataReader reader;
             SqlCommand command;
 
             try
             {
-                command = new SqlCommand("SELECT order_datePlaced FROM Order WHERE order_id = " + ID + ";", cnMain);
+                command = new SqlCommand("SELECT delivery_id FROM Delivery WHERE order_id = '" + ID + "'", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
-                DateTime date = DateTime.Today;
+                bool found = false;
                 //Read from table
                 if (reader.HasRows)
                 {
-                    date = reader.GetDateTime(1);
+                    int delivery_id =reader.GetInt32(0);
+                    SqlConnection connection = newConnection();
+                    SqlCommand currentCommand = new SqlCommand("SELECT delivery_date FROM DeliveryDate WHERE delivery_id = " + delivery_id, connection);
+                    connection.Open();
+                    currentCommand.CommandType = CommandType.Text;
+                    SqlDataReader reader2 = command.ExecuteReader();
+                    
+                    if(reader2.HasRows)
+                    {
+                        while (!found && reader2.Read())
+                        {
+                            DateTime date = reader2.GetDateTime(0);
+                            if(date.ToShortDateString().Equals(checkDate.ToShortDateString()))
+                            {
+                                found = true;
+                            }
+                        }
+                    }
+                    reader2.Close();
+                    connection.Close();
                 }
                 reader.Close();   //close the reader
                 cnMain.Close();  //close the connection
-                return date;
+                return found;
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 //ADD EVENT IF EXCEPTION OCCURS?
                 cnMain.Close();
                 Console.Write(ex.ToString());
             }
-            return DateTime.Today;
+            return false;
 
         }
         private void readAlternatives(Collection<OrderItem> products)
@@ -1121,245 +1141,7 @@ namespace Poppel.Database
         }
 
 
-        /*
-        //Constructors
-        public EmployeeDB()
-            : base()
-        {
-            ReadDataFromTable(sql_SELECT1, table1);   //Get the data from ALL 3 tables
-            //same for other two Tables 
-            ReadDataFromTable(sql_SELECT2, table2);
-            ReadDataFromTable(sql_SELECT3, table3);
-        }
-
-        public Collection<Employee> AllEmployees
-        {
-            get
-            {
-                return employees;
-            }
-        }
-
-        #region Data reader
-
-        private string ReadDataFromTable(string selectString, string table)
-        {
-            SqlDataReader reader;
-            SqlCommand command;
-            try
-            {
-                command = new SqlCommand(selectString, cnMain);
-                cnMain.Open();             //open the connection
-                command.CommandType = CommandType.Text;
-                reader = command.ExecuteReader();                        //Read from table
-                if (reader.HasRows)
-                {
-                    // Call the FillEmployeeByRole method see step 2.4
-                    FillEmployeesByRole(reader, table, employees);       //Fill the collection – 
-                }
-                reader.Close();   //close the reader 
-                cnMain.Close();  //close the connection
-                return "success";
-            }
-            catch (Exception ex)
-            {
-                cnMain.Close();
-                return (ex.ToString());
-
-            }
-        }
-
-        private Role GetRoleInfo(SqlDataReader reader, Employee anEmp)
-        {
-            //to "see" specialised   functionality of a Role – refer VIA correct class
-            Waitron waitron;
-            Runner runner;
-            HeadWaitron headWaitron;
-            switch (anEmp.Role.roleDescription)
-            {
-                case Role.RoleType.HeadWaitron:
-                    headWaitron = (HeadWaitron)(anEmp.Role);
-                    headWaitron.Salary = reader.GetDecimal(4);  //See Retrieving Data 
-                    return headWaitron;
-                //Do the same for the other roles
-                case Role.RoleType.Waitron:
-                    waitron = (Waitron)(anEmp.Role);
-                    waitron.Rate = reader.GetDecimal(4);
-                    waitron.NumberOfShifts = reader.GetInt32(5);
-                    return waitron;
-                case Role.RoleType.Runner:
-                    runner = (Runner)(anEmp.Role);
-                    runner.Rate = reader.GetDecimal(4);
-                    runner.NumberOfShifts = reader.GetInt32(5);
-                    return runner;
-                default:
-                    return null;
-            }
-        }
-
-        private void FillEmployeesByRole(SqlDataReader reader, string dataTable,
-                                                                      Collection<Employee> employees)
-        {
-            Employee employee;
-            Role.RoleType employeeRole = Role.RoleType.NoRole;
-
-            switch (dataTable)                                //Determine the role from table name
-            {
-                case "HeadWaitron":
-                    employeeRole = Role.RoleType.HeadWaitron;
-                    break;
-                //same for other two roles & the default Role
-                case "Waitron":
-                    employeeRole = Role.RoleType.Waitron;
-                    break;
-                case "Runner":
-                    employeeRole = Role.RoleType.Runner;
-                    break;
-                default:
-                    employeeRole = Role.RoleType.NoRole;
-                    break;
-            }
-            while (reader.Read())                          //While you still have stuff to read
-            {
-                employee = new Employee((byte)employeeRole);
-                //Same for EmpID, Name  & Phone, all strings with indices 1, 2, & 3 respectively
-                employee.ID = reader.GetString(0).Trim();
-                employee.EmpID = reader.GetString(1).Trim();
-                employee.Name = reader.GetString(2).Trim();
-                employee.Phone = reader.GetString(3).Trim();
-                //call the GetRoleInfo method to obtain role specific data from the database
-                employee.Role = GetRoleInfo(reader, employee);
-                employees.Add(employee);             //add to the collection
-            }
-        }
-
-        #endregion
-
-        #region Database Operations --- Add, Edit & Delete
-        public void DatabaseAdd(Employee TempEmp)
-        {
-            string strSQL = "";
-
-            //Build SQL string for the command
-
-            switch (TempEmp.Role.roleDescription)
-            {
-                case Role.RoleType.HeadWaitron:
-                    strSQL = "INSERT into HeadWaitron(ID, EmpID, Name, Phone, Salary)" +
-                         "VALUES ('" + GetValueString(TempEmp) + ")";
-                    break;
-                case Role.RoleType.Waitron:
-                    strSQL = "INSERT into Waitron(ID, EmpID, Name, Phone, Rate, Shifts)" +
-                                          "VALUES ('" + GetValueString(TempEmp) + ")";
-                    break;
-                case Role.RoleType.Runner:
-                    strSQL = "INSERT into Runner(ID, EmpID, Name, Phone, Rate, Shifts)" +
-                                                         "VALUES ('" + GetValueString(TempEmp) + ")";
-                    break;
-            }
-
-            //Create & execute the insert command 
-            UpdateDataSource(new SqlCommand(strSQL, cnMain));
-        }
-
-
-        public void DatabaseEdit(Employee tempEmp)
-        {
-            string sqlString = "";
-            HeadWaitron headWaitron;
-            Waitron waitron;
-            Runner runner;
-            //Build SQL string for the Update command
-
-            switch (tempEmp.Role.roleDescription)
-            {
-                case Role.RoleType.HeadWaitron:
-                    headWaitron = (HeadWaitron)tempEmp.Role;
-                    sqlString = "Update HeadWaitron Set Name = '" + tempEmp.Name.Trim() + "'," +
-                              "Phone = '" + tempEmp.Phone.Trim() + "'," +
-                              "Salary =" + headWaitron.Salary.ToString() + " " +
-                              "WHERE (ID = '" + tempEmp.ID.Trim() + "')";
-                    break;
-                case Role.RoleType.Waitron:
-                    waitron = (Waitron)tempEmp.Role;
-                    sqlString = "Update Waitron Set Name = '" + tempEmp.Name.Trim() + "'," +
-                             "Phone = '" + tempEmp.Phone.Trim() + "'," +
-                             "Rate =" + waitron.Rate.ToString() + ", " +
-                             "Shifts =" + waitron.NumberOfShifts.ToString() + " " +
-                             "WHERE (ID = '" + tempEmp.ID.Trim() + "')";
-                    break;
-                case Role.RoleType.Runner:
-                    runner = (Runner)tempEmp.Role;
-                    sqlString = "Update Waitron Set Name = '" + tempEmp.Name.Trim() + "'," +
-                             "Phone = '" + tempEmp.Phone.Trim() + "'," +
-                             "Rate =" + runner.Rate.ToString() + " ," +
-                             "Shifts =" + runner.NumberOfShifts.ToString() + " " +
-                             "WHERE (ID = '" + tempEmp.ID.Trim() + "')";
-                    break;
-            }
-            //Create & execute the update command 
-            UpdateDataSource(new SqlCommand(sqlString, cnMain));
-        }
-        public bool DatabaseDelete(Employee employee)
-        {
-            string SQLstring = "";
-            bool success = false;
-            //Build SQL string for the DELETE command
-            switch (employee.Role.roleDescription)
-            {
-                case Role.RoleType.HeadWaitron:
-                    SQLstring = "DELETE FROM  HeadWaitron WHERE ID = '" + employee.ID + "'";
-                    break;
-                case Role.RoleType.Waitron:
-                    SQLstring = "DELETE FROM  Waitron WHERE ID = '" + employee.ID + "'";
-                    break;
-                case Role.RoleType.Runner:
-                    SQLstring = "DELETE FROM  Runner WHERE ID = '" + employee.ID + "'";
-                    break;
-            }
-            //Update database by executing new SQL statement--customer table
-            success = UpdateDataSource(new SqlCommand(SQLstring, cnMain));
-            return true;
-        }
-
-        private string GetValueString(Employee TempEmp)
-        {
-            string aStr;
-            decimal pay = 0;
-            string additional = "";
-
-            HeadWaitron headW;
-            Waitron waitron;
-            Runner runner;
-
-            switch (TempEmp.Role.roleDescription)
-            {
-                case Role.RoleType.HeadWaitron:
-                    headW = (HeadWaitron)(TempEmp.Role);
-                    pay = headW.Salary;
-                    break;
-                case Role.RoleType.Waitron:
-                    waitron = (Waitron)(TempEmp.Role);
-                    pay = waitron.Rate;
-                    additional = "," + waitron.NumberOfShifts.ToString();
-                    break;
-                case Role.RoleType.Runner:
-                    runner = (Runner)(TempEmp.Role);
-                    pay = runner.Rate;
-                    additional = "," + runner.NumberOfShifts.ToString();
-                    break;
-            }
-
-            aStr = TempEmp.ID + "' , '" + TempEmp.EmpID + "' ," +
-                  "'" + TempEmp.Name + "' ," +
-                  " '" + (TempEmp.Phone).Trim() + "' , " +
-                                   Convert.ToString(pay) + additional;
-
-            return aStr;
-        }
-
-        #endregion
-           */
+    
     }
 
 }
