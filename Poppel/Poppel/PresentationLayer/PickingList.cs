@@ -50,10 +50,10 @@ namespace Poppel.PresentationLayer
             PoppelDatabase pd = new PoppelDatabase();
             productListView.Columns.Insert(0, "Rack Number", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(1, "Product ID", 100, HorizontalAlignment.Left);
-            productListView.Columns.Insert(2, "Product Name", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(2, "Product Name", 150, HorizontalAlignment.Left);
             productListView.Columns.Insert(3, "Quantity", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(4, "Order Number", 100, HorizontalAlignment.Left);
-            productListView.Columns.Insert(5, "Comments", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(5, "Comments", 150, HorizontalAlignment.Left);
             try
             {
                 errorLabel.Visible = false;

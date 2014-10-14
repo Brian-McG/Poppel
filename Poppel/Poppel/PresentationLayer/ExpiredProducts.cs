@@ -47,7 +47,7 @@ namespace Poppel.Report
             productListView.Columns.Insert(0, "Rack Number", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(1, "Number In Stock", 100, HorizontalAlignment.Left);
             productListView.Columns.Insert(2, "Expiry Date", 100, HorizontalAlignment.Left);
-            productListView.Columns.Insert(3, "Product Ref", 100, HorizontalAlignment.Left);
+            productListView.Columns.Insert(3, "Product Description", 150, HorizontalAlignment.Left);
             productListView.Columns.Insert(4, "Comments", 100, HorizontalAlignment.Left);
             if(products!=null&&products.Count!=0)
             {

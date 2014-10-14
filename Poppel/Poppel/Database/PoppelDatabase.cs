@@ -215,7 +215,7 @@ namespace Poppel.Database
                                 int quantity = reader2.GetInt32(1);
 
                                 SqlConnection connection2 = newConnection();
-                                SqlCommand currentCommand2 = new SqlCommand("SELECT product_ref FROM StockItem WHERE stockItem_id = " + stockItem_id, connection2);
+                                SqlCommand currentCommand2 = new SqlCommand("SELECT product_ref FROM StockItem WHERE stockItem_id = " + stockItem_id , connection2);
                                 connection2.Open();
                                 currentCommand2.CommandType = CommandType.Text;
                                 SqlDataReader reader3 = currentCommand2.ExecuteReader();
@@ -764,7 +764,7 @@ namespace Poppel.Database
             {
                 DateTime input;
                 DateTime.TryParse(Date, out input);
-                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0", cnMain);
+                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0 ORDER BY stockItem_rackNumber ASC", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -779,6 +779,21 @@ namespace Poppel.Database
                         item.rackNumber = reader.GetString(2);
                         item.numberInStock = reader.GetInt32(3) + "";
                         item.productRef = reader.GetInt32(4) + "";
+                        SqlConnection connection = newConnection();
+                        SqlCommand command2 = new SqlCommand("SELECT product_description FROM Product WHERE product_id = " + item.productRef + ";", connection);
+                        connection.Open();             //open the connection
+                        command2.CommandType = CommandType.Text;
+                        SqlDataReader reader2 = command2.ExecuteReader();
+                        String descritpion = "";
+                        //Read from table
+                        if (reader2.HasRows)
+                        {
+                            reader2.Read();
+                            descritpion = reader2.GetString(0);
+                        }
+                        reader2.Close();   //close the reader 
+                        connection.Close();  //close the connection
+                        item.productRef = descritpion;
                         items.Add(item);
                     }
                 }
@@ -1054,7 +1069,7 @@ namespace Poppel.Database
             }
         }
 
-        //TODO : GIVE CUSTOMER MONEY BACK
+       
         public void deleteOrder(int orderId,string customerId)
         {
             string sqlString = "";
