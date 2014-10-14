@@ -764,7 +764,7 @@ namespace Poppel.Database
             {
                 DateTime input;
                 DateTime.TryParse(Date, out input);
-                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0 ORDER BY stockItem_rackNumber ASC", cnMain);
+                command = new SqlCommand("SELECT * FROM StockItem WHERE DATEDIFF(day, stockItem_expityDate,'" + input.ToString() + "') >= 0 ORDER BY stockItem_rackNumber", cnMain);
                 cnMain.Open();             //open the connection
                 command.CommandType = CommandType.Text;
                 reader = command.ExecuteReader();
@@ -983,7 +983,7 @@ namespace Poppel.Database
 
                         DateTime check = DateTime.Now;
                         check = check.AddMonths(1);
-                        sqlString = "SELECT stockItem_id,stockItem_numberInStock FROM StockItem WHERE DATEDIFF(day, '" + check.ToString() + "',stockItem_expityDate) >= 0 AND product_ref = "+order.Products[i].Product.Id+" order by convert(datetime, stockItem_expityDate, 103) ASC";
+                        sqlString = "SELECT stockItem_id,stockItem_numberInStock FROM StockItem WHERE DATEDIFF(day, '" + check.ToString() + "',stockItem_expityDate) >= 0 AND product_ref = " + order.Products[i].Product.Id + " AND stockItem_numberInStock>0 order by convert(datetime, stockItem_expityDate, 103) ASC";
                         command = new SqlCommand(sqlString, cnMain);
                         cnMain.Open();             //open the connection
                         command.CommandType = CommandType.Text;
@@ -993,20 +993,24 @@ namespace Poppel.Database
                         bool done = false;
                         if (reader.HasRows)
                         {
-                            while (reader.Read() && !done)
+                            int reduceCounter = order.Products[i].Quantity;
+                            while (reader.Read() &&reduceCounter!=0)
                             {
 
                                 stockItemID = reader.GetInt32(0);
                                 int numInStock = reader.GetInt32(1);
                                 int reductionAmount;
-                                if (numInStock >= order.Products[i].Quantity)
+                                if (numInStock >= reduceCounter)
                                 {
                                     done = true;
-                                    reductionAmount = order.Products[i].Quantity;
+                                    reductionAmount = reduceCounter;
+                                    reduceCounter -= reductionAmount;
                                 }
                                 else
                                 {
                                     reductionAmount = numInStock;
+                                    reduceCounter -= reductionAmount;
+                                   
                                 }
                                 SqlConnection connection = newConnection();
 
@@ -1145,7 +1149,7 @@ namespace Poppel.Database
                         if (reader2.HasRows)
                         {
                             reader2.Read();
-                            payBack = +reader2.GetDecimal(0);
+                            payBack = payBack + (reader2.GetDecimal(0)*product_quantity);
                         }
                         reader2.Close();
                         connection.Close();

@@ -91,15 +91,27 @@ namespace Poppel.PresentationLayer
                  if (dialogResult == DialogResult.Yes)
                  {
                      removeOrderController.Delete(id);
+                     products = removeOrderController.getOrders();
                      setUpListView();
                  }
             }
+
            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            CustomerManagement customerManagement = new CustomerManagement(removeOrderController.CustomerManagementController);
+            customerManagement.search(removeOrderController.CustomerManagementController.Customer.Id);
+            customerManagement.MdiParent = this.MdiParent;
+            customerManagement.StartPosition = FormStartPosition.CenterScreen;
+            this.Close();
+            customerManagement.Show();
         }
     }
 }

@@ -15,6 +15,12 @@ namespace Poppel.Order
         public Collection<RemoveOrderItem> products;
         PoppelDatabase pd = new PoppelDatabase();
         private CustomerManangementController customerManagementController;
+
+        public CustomerManangementController CustomerManagementController
+        {
+            get { return customerManagementController; }
+            set { customerManagementController = value; }
+        }
         public RemoveOrderController(CustomerManangementController customerManagementController)
         {
             this.customerManagementController = customerManagementController;
@@ -23,14 +29,14 @@ namespace Poppel.Order
 
         public Collection<RemoveOrderItem> getOrders()
         {
-            products = pd.getOrders(customerManagementController.Customer.Id);
+            products = pd.getOrders(CustomerManagementController.Customer.Id);
             return products;
         }
 
         public void Delete(int orderID)
         {
             
-            pd.deleteOrder(orderID, customerManagementController.Customer.Id);
+            pd.deleteOrder(orderID, CustomerManagementController.Customer.Id);
         }
     }
 }

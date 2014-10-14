@@ -35,6 +35,7 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.poppelLogo = new System.Windows.Forms.Label();
             this.sloganLabel = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -59,7 +60,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(825, 592);
+            this.cancelButton.Location = new System.Drawing.Point(738, 592);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(81, 40);
             this.cancelButton.TabIndex = 29;
@@ -107,11 +108,22 @@
             this.sloganLabel.TabIndex = 32;
             this.sloganLabel.Text = "Adding sweetness to your life!";
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(825, 592);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(81, 40);
+            this.backButton.TabIndex = 34;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // CancelOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 644);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.poppelLogo);
             this.Controls.Add(this.sloganLabel);
             this.Controls.Add(this.errorLabel);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Label poppelLogo;
         private System.Windows.Forms.Label sloganLabel;
+        private System.Windows.Forms.Button backButton;
     }
 }
