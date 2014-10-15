@@ -82,7 +82,7 @@ namespace Poppel.PresentationLayer
 
         private void confirm_Click(object sender, EventArgs e)
         {
-         //   EmailController.sendEmail(orderController.Order.Customer, "Poppel Order Confimation", EmailController.createEmailTemplete(orderController.Order));
+            EmailController.sendEmail(orderController.Order.Customer, "Poppel Order Confimation", EmailController.createEmailTemplete(orderController.Order));
             orderController.submitOrder();
             this.Close();
         

@@ -47,7 +47,7 @@ namespace Poppel.Email
 
         public static string createEmailTemplete(Poppel.Order.Order order)
         {
-            string templete = "Dear " + order.Customer.Name + "\n\nThis is a summary of your order placed on: " + order.DateOrderPlaced.ToShortDateString() + "\nYour order consists of the following:";
+            string templete = "Dear " + order.Customer.Name + "\n\nThis is a summary of your order placed on: " + order.DateOrderPlaced.ToString() + "\nYour order consists of the following:";
             foreach(OrderItem item in order.Products)
             {
                 templete += "\n" + item.Quantity + " x " + item.Product.Description + " - " + Product.getFormattedPrice(Decimal.Multiply(item.Quantity, item.Product.Price));

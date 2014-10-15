@@ -59,6 +59,7 @@
             this.forgotPasswordLinkLabel.TabIndex = 2;
             this.forgotPasswordLinkLabel.TabStop = true;
             this.forgotPasswordLinkLabel.Text = "forgot password?";
+            this.forgotPasswordLinkLabel.Visible = false;
             // 
             // usernameLabel
             // 

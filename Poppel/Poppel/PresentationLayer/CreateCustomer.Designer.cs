@@ -267,7 +267,7 @@
             this.personalDetailsGroupBox.Location = new System.Drawing.Point(12, 115);
             this.personalDetailsGroupBox.Name = "personalDetailsGroupBox";
             this.personalDetailsGroupBox.Size = new System.Drawing.Size(674, 129);
-            this.personalDetailsGroupBox.TabIndex = 26;
+            this.personalDetailsGroupBox.TabIndex = 24;
             this.personalDetailsGroupBox.TabStop = false;
             this.personalDetailsGroupBox.Text = "Personal Details";
             // 
@@ -373,7 +373,7 @@
             this.firstNameTextBox.Location = new System.Drawing.Point(93, 25);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(367, 20);
-            this.firstNameTextBox.TabIndex = 17;
+            this.firstNameTextBox.TabIndex = 1;
             this.firstNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstNameTestBox_KeyPress);
             this.firstNameTextBox.Leave += new System.EventHandler(this.firstNameTestBox_Leave);
             // 

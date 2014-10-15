@@ -24,6 +24,7 @@ namespace Poppel.PresentationLayer
         {
             InitializeComponent();
             customerManagementController = custController;
+            firstNameTextBox.Focus();
         }
 
         private void modifyCreditLimitCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -81,8 +82,20 @@ namespace Poppel.PresentationLayer
             customer.Name = firstNameTextBox.Text.Trim();
             customer.Surname = lastNameTextBox.Text.Trim();
             customer.Id = customerManagementController.generateId(customer.Name, customer.Surname);
-            customer.PhoneNumber = Person.unFormatPhoneNumber(phoneNumberMaskBox.Text);
+            if (Person.unFormatPhoneNumber(phoneNumberMaskBox.Text)==null)
+            {
+                customer.PhoneNumber = "";
+            }
+            else
+            {
+                customer.PhoneNumber = Person.unFormatPhoneNumber(phoneNumberMaskBox.Text);
+            }
             customer.Email = emailAddressTextBox.Text;
+            if((phoneNumberMaskBox.Text==null ||phoneNumberMaskBox.Text=="") &&(emailAddressTextBox.Text==null ||emailAddressTextBox.Text==""))
+            {
+                correct = false;
+            }
+
             decimal temp = -1;
                 customer.Credit = 0;
             Decimal.TryParse(creditLimitTextBox.Text.Trim(), out temp);
@@ -244,8 +257,8 @@ namespace Poppel.PresentationLayer
             else if (lastNameTextBox.Text.Length == 0)
             {
 
-                firstNameErrorMessageLabel.Text = "Last Name is a required field.";
-                firstNameErrorMessageLabel.Visible = true;
+                lastNameErrorMessageLabel.Text = "Last Name is a required field.";
+                lastNameErrorMessageLabel.Visible = true;
                 stop = true;
             }
             while (i < lastNameTextBox.Text.Length && !stop)

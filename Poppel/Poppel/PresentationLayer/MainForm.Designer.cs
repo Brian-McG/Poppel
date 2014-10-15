@@ -35,8 +35,6 @@
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatePickingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateExpiredProductsReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggedInAsLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,8 +43,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customersToolStripMenuItem,
-            this.reportToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.reportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(970, 24);
@@ -100,20 +97,6 @@
             this.generateExpiredProductsReportToolStripMenuItem.Text = "Generate Expired Products Report";
             this.generateExpiredProductsReportToolStripMenuItem.Click += new System.EventHandler(this.generateExpiredProductsReportToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.getHelpToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // getHelpToolStripMenuItem
-            // 
-            this.getHelpToolStripMenuItem.Name = "getHelpToolStripMenuItem";
-            this.getHelpToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.getHelpToolStripMenuItem.Text = "Get Help";
-            // 
             // loggedInAsLabel
             // 
             this.loggedInAsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -152,8 +135,6 @@
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generatePickingListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateExpiredProductsReportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem getHelpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewCustomerToolStripMenuItem;
         private System.Windows.Forms.Label loggedInAsLabel;
     }
