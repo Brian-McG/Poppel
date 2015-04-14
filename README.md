@@ -1,4 +1,4 @@
 Poppel
 ======
 
-Poppel Project
+INF2011S 2014 - Poppel Project
